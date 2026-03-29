@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diploma Students - APSITS</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f7f6;
+            margin: 0;
+            color: #333;
+        }
+        .header {
+            background: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .container {
+            padding: 30px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .search-box {
+            padding: 10px;
+            width: 60%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .add-btn {
+            background: #238636;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            background: #fff;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th { background: #1f6feb; color: white; }
+        .status-active { color: green; font-weight: bold; }
+        .back-link { margin-top: 20px; display: inline-block; color: #1f6feb; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2 style="margin:0; color:#1f6feb;">Diploma - Student Records</h2>
+    <a href="diploma.html" style="text-decoration:none; color:#666;">← Back</a>
+</div>
+
+<div class="container">
+    <div class="actions">
+        <input type="text" class="search-box" placeholder="Search by Student Name or ID...">
+        <a href="registration.html" class="add-btn">+ Register New</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Semester</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>DIP-2026-001</td>
+                <td>Siva Kumar</td>
+                <td>2nd Year</td>
+                <td>3rd Sem</td>
+                <td class="status-active">Active</td>
+            </tr>
+            <tr>
+                <td>DIP-2026-045</td>
+                <td>Ravi Teja</td>
+                <td>3rd Year</td>
+                <td>5th Sem</td>
+                <td class="status-active">Active</td>
+            </tr>
+            </tbody>
+    </table>
+
+    <a href="admindashboard.html" class="back-link">Return to Admin Dashboard</a>
+</div>
+
+</body>
+</html
