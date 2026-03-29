@@ -3,92 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS - Diploma Management</title>
+    <title>APSITS Diploma - Proddatur</title>
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #0d1117;
-            color: white;
             margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #ff7722; /* Saffron Background */
+            color: #fff;
+        }
+
+        /* --- Navigation & Menu --- */
+        .navbar {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            padding: 15px 25px;
+            background: rgba(0,0,0,0.1);
         }
-
-        .container {
-            text-align: center;
-            width: 90%;
-            max-width: 600px;
-        }
-
-        h1 { color: #58a6ff; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
-
-        .selection-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .box {
-            background: #161b22;
-            border: 1px solid #30363d;
-            padding: 40px 20px;
-            border-radius: 20px;
+        .logo { font-size: 24px; font-weight: bold; }
+        .menu-icon {
+            font-size: 30px;
             cursor: pointer;
+            z-index: 1001;
+        }
+        .side-menu {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            right: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .side-menu a {
+            padding: 15px 32px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
             transition: 0.3s;
-            text-decoration: none;
-            color: white;
+        }
+        .side-menu a:hover { color: #f1f1f1; }
+
+        /* --- Flash News --- */
+        .flash-news {
+            background: #fff;
+            color: #d32f2f;
+            padding: 10px;
+            font-weight: bold;
             display: flex;
-            flex-direction: column;
-            align-items: center;
         }
+        .flash-news marquee { flex: 1; }
 
-        .box:hover {
-            border-color: #58a6ff;
-            background: #1c2128;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        .container { padding: 20px; max-width: 1100px; margin: auto; }
+
+        /* --- Grid Sections --- */
+        .section-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
-        .icon { font-size: 50px; margin-bottom: 15px; }
-        .label { font-size: 18px; font-weight: bold; }
-
-        .back-btn {
-            margin-top: 40px;
-            color: #8b949e;
+        h2 { border-left: 5px solid #fff; padding-left: 10px; margin-bottom: 15px; }
+        
+        .info-link {
+            display: block;
+            background: #fff;
+            color: #ff7722;
+            padding: 12px;
+            margin: 8px 0;
             text-decoration: none;
-            font-size: 14px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
         }
 
-        .back-btn:hover { color: white; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .gallery-item {
+            background: #ddd;
+            height: 100px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0,0,0,0.2);
+            font-size: 13px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Diploma Division</h1>
-    <p style="color: #8b949e; margin-bottom: 40px;">Select a category to manage records</p>
-
-    <<div class="box" onclick="window.location.href='diploma-student.html'">
-    <div class="icon">👨‍🎓</div>
-    <div class="label">Students</div>
-    <p style="font-size: 12px; color: #484f58; margin-top: 10px;">Data & Attendance</p>
+<div id="mySideMenu" class="side-menu">
+    <a href="javascript:void(0)" onclick="closeMenu()" style="font-size:36px; position:absolute; top:10px; left:25px;">&times;</a>
+    <a href="index.html">Home</a>
+    <a href="#">About</a>
+    <a href="#">Courses</a>
+    <a href="#">Gallery</a>
+    <a href="diploma-student.html">Staff</a>
+    <a href="#">Contact</a>
 </div>
 
-        </a>
+<div class="navbar">
+    <div class="logo">APSITS DIPLOMA</div>
+    <div class="menu-icon" onclick="openMenu()">☰</div>
+</div>
 
-        <a href="#" class="box">
-            <div class="icon">👨‍🏫</div>
-            <div class="label">Faculty</div>
-            <p style="font-size: 12px; color: #484f58; margin-top: 10px;">Staff Management</p>
-        </a>
+<div class="flash-news">
+    <span>FLASH NEWS: </span>
+    <marquee>Admissions for 2026 are now open! | AICTE Extension of Approvals updated. | New Robotics Workshop starts next week.</marquee>
+</div>
+
+<div class="container">
+    
+    <div class="section-box">
+        <h2>Admissions – 2026</h2>
+        <p>Join the premier institute in Proddatur. Specializations available in Civil, Mechanical, and EEE.</p>
+        <a href="#" class="info-link">Apply Now for Admission</a>
     </div>
 
-    <a href="dashboard.html" class="back-btn">← Back to Admin Dashboard</a>
+    <div class="section-box">
+        <h2>Mandatory Information</h2>
+        <a href="#" class="info-link">AICTE - Extension of Approvals</a>
+        <a href="#" class="info-link">AICTE - Feedback (Students & Faculty)</a>
+        <a href="#" class="info-link">Online Grievance Redressal</a>
+    </div>
+
+    <div class="section-box">
+        <h2>About Us</h2>
+        <p>APSITS Diploma wing is committed to providing hands-on technical skills to rural youth, aligning with rural development and industrial needs.</p>
+    </div>
+
+    <div class="section-box">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">Lab View</div>
+            <div class="gallery-item">Library</div>
+            <div class="gallery-item">Classroom</div>
+            <div class="gallery-item">Campus</div>
+        </div>
+    </div>
+
 </div>
+
+<footer>
+    © 2026 APSITS PRODDATUR. ALL RIGHTS RESERVED. <br>
+    Vision 2047 | Powered by APSITS IT Cell
+</footer>
+
+<script>
+    function openMenu() { document.getElementById("mySideMenu").style.width = "250px"; }
+    function closeMenu() { document.getElementById("mySideMenu").style.width = "0"; }
+</script>
 
 </body>
 </html>
-
