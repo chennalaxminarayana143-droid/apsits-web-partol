@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS - Diploma Management</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 { color: #58a6ff; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
+
+        .selection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .box {
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 40px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box:hover {
+            border-color: #58a6ff;
+            background: #1c2128;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .icon { font-size: 50px; margin-bottom: 15px; }
+        .label { font-size: 18px; font-weight: bold; }
+
+        .back-btn {
+            margin-top: 40px;
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-btn:hover { color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Diploma Division</h1>
+    <p style="color: #8b949e; margin-bottom: 40px;">Select a category to manage records</p>
+
+    <div class="selection-grid">
+        <a href="registration.html" class="box">
+            <div class="icon">👨‍🎓</div>
+            <div class="label">Students</div>
+            <p style="font-size: 12px; color: #484f58; margin-top: 10px;">Data & Attendance</p>
+        </a>
+
+        <a href="#" class="box">
+            <div class="icon">👨‍🏫</div>
+            <div class="label">Faculty</div>
+            <p style="font-size: 12px; color: #484f58; margin-top: 10px;">Staff Management</p>
+        </a>
+    </div>
+
+    <a href="dashboard.html" class="back-btn">← Back to Admin Dashboard</a>
+</div>
+
+</body>
+</html>
+
