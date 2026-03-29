@@ -121,10 +121,10 @@
         <label>Select Your Role</label>
         <select id="role" required>
             <option value="">-- Choose Role --</option>
-            <option value="student">STUDENT (A123...)</option>
-            <option value="faculty">FACULTY (F456...)</option>
-            <option value="admin">ADMIN (SUPERVISOR)</option>
-            <option value="security">SECURITY (GATE)</option>
+            <option value="student">STUDENT </option>
+            <option value="faculty">FACULTY </option>
+            <option value="admin">ADMIN </option>
+            <option value="security">SECURITY </option>
         </select>
 
         <label>Password</label>
@@ -135,7 +135,7 @@
 
     <div class="footer-info">
         APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science <br>
-        Vision 2047 | 2-Factor Authentication Ready
+        Vision 2047 | 2-Factor Authentication Process 
     </div>
 </div>
 
@@ -152,7 +152,7 @@
 
         // నిన్న మనం అనుకున్న టెస్టింగ్ లాగిన్ క్రెడెన్షియల్స్
         if (role === "admin" && user === "admin" && pass === "apsits2047") {
-            window.location.href = "dashboard.html";
+            window.location.href = "admindashboard.html";
         } else if (role === "student" && user === "student" && pass === "apsits") {
             window.location.href = "student-dashboard.html";
         } else {
