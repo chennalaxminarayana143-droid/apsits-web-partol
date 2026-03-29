@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS B.Tech - Proddatur</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #ff7722; /* Saffron Background */
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #fff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area { font-size: 22px; font-weight: 800; color: #ff7722; }
+        .menu-btn { font-size: 28px; cursor: pointer; color: #333; }
+
+        /* Side Menu Overlay */
+        .overlay {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; right: 0; background-color: rgba(0,0,0, 0.95);
+            overflow-x: hidden; transition: 0.5s;
+        }
+        .overlay-content { position: relative; top: 10%; width: 100%; text-align: center; }
+        .overlay a { padding: 12px; text-decoration: none; font-size: 22px; color: #fff; display: block; transition: 0.3s; }
+        .overlay a:hover { color: #ff7722; }
+        .closebtn { position: absolute; top: 15px; right: 35px; font-size: 45px; color: #fff; cursor: pointer; }
+
+        /* Flash News Ticker */
+        .flash-news {
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        /* Content Container */
+        .container { padding: 20px; text-align: center; color: #fff; }
+        .campus-img {
+            width: 100%; max-width: 900px; border-radius: 12px;
+            margin: 20px 0; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Section Cards */
+        .info-card {
+            background: #fff; color: #333; margin: 20px auto;
+            padding: 25px; border-radius: 15px; max-width: 900px;
+            text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .info-card h2 { color: #ff7722; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        
+        /* Links List */
+        .link-list { list-style: none; padding: 0; }
+        .link-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .link-list li a { text-decoration: none; color: #1f6feb; font-weight: 600; font-size: 15px; }
+
+        /* Footer */
+        footer {
+            background: #222; color: rgba(255,255,255,0.8);
+            padding: 30px 20px; text-align: center; font-size: 12px; line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-area">APSITS B.TECH</div>
+    <div class="menu-btn" onclick="openNav()">☰</div>
+</header>
+
+<div class="flash-news">
+    <marquee scrollamount="5">⚡ Admissions 2026 - Registration Started for B.Tech CSE, ECE, & CIVIL | 🎓 Affiliated to JNTUA, Anantapur | 🚀 Upcoming Tech Fest "Vision 2047" on April 15th.</marquee>
+</div>
+
+<div id="sideMenu" class="overlay">
+    <span class="closebtn" onclick="closeNav()">&times;</span>
+    <div class="overlay-content">
+        <a href="index.html">Home</a>
+        <a href="#">About B.Tech</a>
+        <a href="#">Academic Calendar</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#">Faculty List</a>
+        <a href="#">Contact Us</a>
+    </div>
+</div>
+
+<div class="container">
+    <h1 style="margin-bottom: 5px;">Admissions – 2026</h1>
+    <p style="opacity: 0.9;">Shaping the Engineers of Tomorrow</p>
+    
+    <img src="college-campus.jpg" alt="APSITS B.Tech Campus" class="campus-img">
+
+    <div class="info-card">
+        <h2>About B.Tech @ APSITS</h2>
+        <p>APSITS offers premier undergraduate engineering programs with a focus on practical knowledge and industry readiness. Being <b>Affiliated to JNTUA</b>, we follow a curriculum that balances core fundamentals with emerging technologies.</p>
+    </div>
+
+    <div class="info-card">
+        <h2>Mandatory Information</h2>
+        <ul class="link-list">
+            <li><a href="#">📑 AICTE - Extension of Approvals (EoA)</a></li>
+            <li><a href="#">💬 AICTE - Feedback (Students & Faculty)</a></li>
+            <li><a href="#">⚖️ Online Grievance Redressal Portal</a></li>
+            <li><a href="#">📜 RTI Policy & Mandatory Disclosures</a></li>
+            <li><a href="gallery.html">🖼️ Campus Gallery & Labs</a></li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    © 2026 APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science<br>
+    Proddatur, Andhra Pradesh | Affiliated to JNTUA | Approved by AICTE<br>
+    <b>VISION 2047</b>
+</footer>
+
+<script>
+    function openNav() { document.getElementById("sideMenu").style.width = "100%"; }
+    function closeNav() { document.getElementById("sideMenu").style.width = "0%"; }
+</script>
+
+</body>
+</html>
+
