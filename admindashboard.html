@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS Admin - Management Hub</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0d1117;
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: #161b22;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .logo-text { font-size: 24px; font-weight: bold; color: #58a6ff; letter-spacing: 1px; }
+
+        /* Dashboard Container */
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h1 { margin-bottom: 10px; font-weight: 300; }
+        .sub-title { color: #8b949e; margin-bottom: 40px; }
+
+        /* Square Button Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .menu-btn {
+            background: rgba(22, 27, 34, 1);
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            aspect-ratio: 1 / 1; /* పక్కా స్క్వేర్ షేప్ కోసం */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-8px);
+            border-color: #58a6ff;
+            background: linear-gradient(145deg, #161b22, #1f6feb);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
+        }
+
+        .icon { font-size: 40px; margin-bottom: 15px; }
+        .label { font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        .logout-btn {
+            background: transparent;
+            color: #f85149;
+            border: 1px solid #f85149;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .icon { font-size: 30px; }
+            .label { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-nav">
+    <div class="logo-text">APSITS ADMIN</div>
+    <button class="logout-btn" onclick="window.location.href='index.html'">LOGOUT</button>
+</div>
+
+<div class="container">
+    <h1>Management Hub</h1>
+    <p class="sub-title">APSITS Institutional Control Panel - Proddatur</p>
+
+    <div class="grid">
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">🎓</div>
+            <div class="label">Diploma</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">🛡️</div>
+            <div class="label">B.Tech</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">💼</div>
+            <div class="label">AO Employees</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">🏦</div>
+            <div class="label">Accounts</div>
+        </div>
+
+        <div class="menu-btn" onclick="window.location.href='registration.html'">
+            <div class="icon">📝</div>
+            <div class="label">Admissions</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">📄</div>
+            <div class="label">Exam Cell</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">🔒</div>
+            <div class="label">Security</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">🍔</div>
+            <div class="label">Canteen</div>
+        </div>
+
+        <div class="menu-btn" onclick="location.href='#'">
+            <div class="icon">💰</div>
+            <div class="label">Revenue</div>
+        </div>
+    </div>
+</div>
+
+<footer style="text-align: center; padding: 20px; color: #484f58; font-size: 12px;">
+    APSITS Vision 2047 | Integrated Campus Management System
+</footer>
+
+</body>
+</html>
