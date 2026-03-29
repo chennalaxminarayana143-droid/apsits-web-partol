@@ -3,110 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS Portal - Proddatur</title>
+    <title>APSITS - Proddatur</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* మీ కాలేజీ ఇమేజ్ పేరు ఇక్కడ ఇవ్వండి */
-            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('login-bg.jpg') no-repeat center center fixed;
-            background-size: cover;
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: #333; }
+        
+        /* Main Header */
+        .header { text-align: center; padding: 20px 0; border-bottom: 1px solid #eee; }
+        .logo { font-size: 32px; font-weight: 800; color: #000; letter-spacing: 2px; }
+
+        /* Orange Hero Section */
+        .hero { background-color: #f15a24; color: #fff; padding: 40px 20px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin: 0 0 10px 0; line-height: 1.2; }
+        .hero p { font-size: 14px; color: rgba(255,255,255,0.9); margin-bottom: 30px; line-height: 1.6; }
+        .hero b { color: #fff; }
+
+        /* Navigation Buttons */
+        .btn-container { display: flex; gap: 15px; margin-bottom: 20px; }
+        .nav-card { 
+            background: #000; color: #fff; padding: 15px; border-radius: 12px; flex: 1; 
+            text-decoration: none; border: 1px solid transparent; transition: 0.3s;
         }
+        .nav-card:hover { transform: translateY(-3px); border-color: #fff; }
+        .nav-card h3 { font-size: 16px; font-weight: bold; color: #f15a24; margin: 0 0 5px 0; }
+        .nav-card p { font-size: 11px; color: #bbb; margin: 0; line-height: 1.4; }
 
-        .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            border-top: 5px solid #1f6feb;
-        }
+        /* Building Image */
+        .image-box { width: 100%; display: block; }
+        .image-box img { width: 100%; height: auto; display: block; }
 
-        .logo {
-            width: 100px;
-            margin-bottom: 15px;
-        }
+        /* Footer Links Section */
+        .links-bar { background-color: #f15a24; padding: 25px 20px; text-align: center; }
+        .links-bar a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; margin: 0 5px; opacity: 0.9; }
+        .links-bar a:hover { opacity: 1; text-decoration: underline; }
 
-        h2 { color: #333; margin-bottom: 5px; font-size: 22px; }
-        p { color: #666; margin-bottom: 25px; font-size: 14px; }
-
-        /* Hidden Login Fields */
-        #loginFields { display: none; margin-top: 20px; }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: #f9f9f9;
-            font-size: 16px;
-        }
-
-        .main-btn {
-            width: 100%;
-            padding: 14px;
-            background: #1f6feb;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .main-btn:hover { background: #1557b5; }
-
-        .footer { margin-top: 20px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
+        /* Bottom Footer */
+        .footer { background: #e6511e; color: #fff; text-align: center; padding: 20px; font-size: 12px; }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <img src="login-bg.jpg" alt="APSITS Logo" class="logo">
-    <h2>APSITS - Proddatur</h2>
-    <p>Smart Campus Management System</p>
+    <div class="header">
+        <div class="logo">APSITS</div>
+    </div>
 
-    <button id="showLoginBtn" class="main-btn" onclick="toggleFields()">LOGIN TO PORTAL</button>
+    <div class="hero">
+        <h1>From Vision to Reality.<br>We are APSITS.</h1>
+        <p>
+            Built on Legacy. Proddatur's Premier Engineering Hub.<br>
+            Approved by <b>AICTE</b>, Affiliated to <b>JNTUA</b>.
+        </p>
 
-    <div id="loginFields">
-        <input type="text" id="userId" placeholder="Enter User ID (User ID)">
-        <input type="password" id="password" placeholder="Password">
-        <button class="main-btn" style="margin-top:10px;" onclick="handleLogin()">GO</button>
+        <div class="btn-container">
+            <a href="dashboard.html" class="nav-card">
+                <h3>APSITS B.TECH</h3>
+                <p>Affiliated to JNTUA |<br>Advanced Specializations</p>
+            </a>
+            <a href="diploma.html" class="nav-card">
+                <h3>APSITS DIPLOMA</h3>
+                <p>State Board Approved |<br>Technical Skills</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="image-box">
+        <img src="college-campus.jpg" alt="APSITS Campus Building">
+    </div>
+
+    <div class="links-bar">
+        <a href="#">Integrated Master Plan & Robotics Lab</a> | 
+        <a href="#">Canteen Orders</a> | 
+        <a href="#">Student Portals</a>
     </div>
 
     <div class="footer">
         APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science <br>
-        Vision 2047 | Secure Login
+        Proddatur, Andhra Pradesh | © 2026 Vision 2047
     </div>
-</div>
 
-<script>
-    function toggleFields() {
-        document.getElementById('showLoginBtn').style.display = 'none';
-        document.getElementById('loginFields').style.display = 'block';
-    }
-
-    function handleLogin() {
-        const id = document.getElementById('userId').value.toLowerCase();
-        const pass = document.getElementById('password').value;
-
-        // Smart Login Logic
-        if (id === "admin" && pass === "apsits2047") {
-            window.location.href = "admindashboard.html";
-        } 
-        else if (id === "student" && pass === "apsits") {
-            window.location.href = "student-dashboard.html";
-        } 
-        else {
-            alert("Invalid ID or Password!");
+</body>
+</html>
         }
     }
 </script>
