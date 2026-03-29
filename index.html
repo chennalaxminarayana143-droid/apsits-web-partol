@@ -3,160 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS - Secure Campus Portal</title>
+    <title>APSITS Portal - Proddatur</title>
     <style>
-        * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            /* ఇక్కడ మీ ఇమేజ్ ఫైల్ పేరు 'login-bg.png' అయితే అది ఇవ్వండి */
-            background: url('login-bg.png') no-repeat center center fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* మీ కాలేజీ ఇమేజ్ పేరు ఇక్కడ ఇవ్వండి */
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('login-bg.jpg') no-repeat center center fixed;
             background-size: cover;
             height: 100vh;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            overflow: hidden;
         }
 
-        /* లాగిన్ కార్డ్ పారదర్శకంగా (Glass Effect) కనిపించడానికి */
-        .login-overlay {
-            background: rgba(13, 17, 23, 0.85);
-            backdrop-filter: blur(10px);
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
-            border: 1px solid rgba(88, 166, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             width: 90%;
-            max-width: 450px;
+            max-width: 400px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            border-top: 5px solid #1f6feb;
         }
 
-        .header-logo {
-            font-size: 32px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #ffffff;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px #58a6ff;
+        .logo {
+            width: 100px;
+            margin-bottom: 15px;
         }
 
-        .sub-text {
-            color: #8b949e;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
+        h2 { color: #333; margin-bottom: 5px; font-size: 22px; }
+        p { color: #666; margin-bottom: 25px; font-size: 14px; }
 
-        label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-            font-size: 12px;
-            color: #58a6ff;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
+        /* Hidden Login Fields */
+        #loginFields { display: none; margin-top: 20px; }
 
-        input, select {
+        input {
             width: 100%;
             padding: 12px;
-            margin-bottom: 20px;
-            background: rgba(22, 27, 34, 0.8);
-            border: 1px solid #30363d;
+            margin: 10px 0;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            color: white;
+            background: #f9f9f9;
             font-size: 16px;
         }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #58a6ff;
-            box-shadow: 0 0 8px rgba(88, 166, 255, 0.4);
-        }
-
-        .login-btn {
+        .main-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(90deg, #1f6feb, #58a6ff);
+            background: #1f6feb;
+            color: white;
             border: none;
             border-radius: 8px;
-            color: white;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            text-transform: uppercase;
         }
 
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(88, 166, 255, 0.4);
-        }
+        .main-btn:hover { background: #1557b5; }
 
-        .footer-info {
-            margin-top: 25px;
-            font-size: 11px;
-            color: #484f58;
-            border-top: 1px solid #30363d;
-            padding-top: 15px;
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .login-overlay { padding: 25px; }
-        }
+        .footer { margin-top: 20px; font-size: 11px; color: #888; border-top: 1px solid #eee; padding-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="login-overlay">
-    <div class="header-logo">APSITS</div>
-    <div class="sub-text">SECURE CAMPUS PORTAL | PRODDATUR</div>
+<div class="login-card">
+    <img src="login-bg.jpg" alt="APSITS Logo" class="logo">
+    <h2>APSITS - Proddatur</h2>
+    <p>Smart Campus Management System</p>
 
-    <form id="loginForm">
-        <label>Username / ID</label>
-        <input type="text" id="userId" placeholder="Enter your ID" required>
+    <button id="showLoginBtn" class="main-btn" onclick="toggleFields()">LOGIN TO PORTAL</button>
 
-        <label>Select Your Role</label>
-        <select id="role" required>
-            <option value="">-- Choose Role --</option>
-            <option value="student">STUDENT (A123...)</option>
-            <option value="faculty">FACULTY (F456...)</option>
-            <option value="admin">ADMIN (SUPERVISOR)</option>
-            <option value="security">SECURITY (GATE)</option>
-        </select>
+    <div id="loginFields">
+        <input type="text" id="userId" placeholder="Enter User ID (admin/student)">
+        <input type="password" id="password" placeholder="Password">
+        <button class="main-btn" style="margin-top:10px;" onclick="handleLogin()">GO</button>
+    </div>
 
-        <label>Password</label>
-        <input type="password" id="password" placeholder="••••••••" required>
-
-        <button type="button" class="login-btn" onclick="handleLogin()">Login</button>
-    </form>
-
-    <div class="footer-info">
+    <div class="footer">
         APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science <br>
-        Vision 2047 | 2-Factor Authentication Process
+        Vision 2047 | Secure Login Process 
     </div>
 </div>
 
 <script>
+    function toggleFields() {
+        document.getElementById('showLoginBtn').style.display = 'none';
+        document.getElementById('loginFields').style.display = 'block';
+    }
+
     function handleLogin() {
-        const role = document.getElementById('role').value;
-        const user = document.getElementById('userId').value;
+        const id = document.getElementById('userId').value.toLowerCase();
         const pass = document.getElementById('password').value;
 
-        if (!role || !user || !pass) {
-            alert("Please Enter Details!");
-            return;
-        }
-
-        // నిన్న మనం అనుకున్న టెస్టింగ్ లాగిన్ క్రెడెన్షియల్స్
-        if (role === "admin" && user === "admin" && pass === "apsits2047") {
-            window.location.href = "admindashboard.html";
-        } else if (role === "student" && user === "student" && pass === "apsits") {
+        // Smart Login Logic
+        if (id === "admin" && pass === "apsits2047") {
+            window.location.href = "dashboard.html";
+        } 
+        else if (id === "student" && pass === "apsits") {
             window.location.href = "student-dashboard.html";
-        } else {
-            alert("Wrong Details! Try Again.");
+        } 
+        else {
+            alert("Invalid ID or Password!");
         }
     }
 </script>
