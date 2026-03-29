@@ -3,172 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS Diploma - Proddatur</title>
+    <title>APSITS - Diploma Section</title>
     <style>
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
             background-color: #ff7722; /* Saffron Background */
-            color: #fff;
-        }
-
-        /* --- Navigation & Menu --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 25px;
-            background: rgba(0,0,0,0.1);
-        }
-        .logo { font-size: 24px; font-weight: bold; }
-        .menu-icon {
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        .side-menu {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            right: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-        .side-menu a {
-            padding: 15px 32px;
-            text-decoration: none;
-            font-size: 20px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-        .side-menu a:hover { color: #f1f1f1; }
-
-        /* --- Flash News --- */
-        .flash-news {
-            background: #fff;
-            color: #d32f2f;
-            padding: 10px;
-            font-weight: bold;
-            display: flex;
-        }
-        .flash-news marquee { flex: 1; }
-
-        .container { padding: 20px; max-width: 1100px; margin: auto; }
-
-        /* --- Grid Sections --- */
-        .section-box {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        h2 { border-left: 5px solid #fff; padding-left: 10px; margin-bottom: 15px; }
-        
-        .info-link {
-            display: block;
-            background: #fff;
-            color: #ff7722;
-            padding: 12px;
-            margin: 8px 0;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-        }
-        .gallery-item {
-            background: #ddd;
-            height: 100px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             color: #333;
         }
 
-        /* --- Footer --- */
-        footer {
+        /* White Header */
+        header {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area { font-size: 24px; font-weight: bold; color: #ff7722; }
+
+        /* Menu Button */
+        .menu-btn {
+            font-size: 30px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Overlay Menu */
+        .overlay {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            right: 0;
+            background-color: rgba(0,0,0, 0.9);
+            overflow-x: hidden;
+            transition: 0.5s;
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 15%;
+            width: 100%;
             text-align: center;
-            padding: 30px;
-            background: rgba(0,0,0,0.2);
+        }
+
+        .overlay a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 24px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay a:hover { color: #ff7722; }
+        .closebtn { position: absolute; top: 20px; right: 45px; font-size: 50px; color: #fff; cursor: pointer; }
+
+        /* Flash News Scrolling */
+        .news-ticker {
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .news-ticker marquee { font-weight: bold; }
+
+        /* Main Content */
+        .container { padding: 20px; text-align: center; color: #fff; }
+
+        .campus-img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 5px solid #fff;
+        }
+
+        /* Mandatory Info Section */
+        .info-section {
+            background: #fff;
+            color: #333;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .info-section h3 { border-bottom: 2px solid #ff7722; padding-bottom: 5px; }
+        .info-section ul { list-style: none; padding: 0; }
+        .info-section li { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .info-section li a { text-decoration: none; color: #1f6feb; font-weight: bold; }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            margin-top: 40px;
             font-size: 13px;
-            border-top: 1px solid rgba(255,255,255,0.2);
         }
     </style>
 </head>
 <body>
 
-<div id="mySideMenu" class="side-menu">
-    <a href="javascript:void(0)" onclick="closeMenu()" style="font-size:36px; position:absolute; top:10px; left:25px;">&times;</a>
-    <a href="index.html">Home</a>
-    <a href="#">About</a>
-    <a href="#">Courses</a>
-    <a href="#">Gallery</a>
-    <a href="diploma-student.html">Staff</a>
-    <a href="#">Contact</a>
+<header>
+    <div class="logo-area">APSITS DIPLOMA</div>
+    <div class="menu-btn" onclick="openNav()">☰</div>
+</header>
+
+<div class="news-ticker">
+    <marquee>📢 Admissions Open for 2026! | AICTE Feedback Portal is now live for Students & Faculty. | Upcoming Robotics Workshop in Lab 3.</marquee>
 </div>
 
-<div class="navbar">
-    <div class="logo">APSITS DIPLOMA</div>
-    <div class="menu-icon" onclick="openMenu()">☰</div>
-</div>
-
-<div class="flash-news">
-    <span>FLASH NEWS: </span>
-    <marquee>Admissions for 2026 are now open! | AICTE Extension of Approvals updated. | New Robotics Workshop starts next week.</marquee>
+<div id="myNav" class="overlay">
+    <span class="closebtn" onclick="closeNav()">&times;</span>
+    <div class="overlay-content">
+        <a href="index.html">Home</a>
+        <a href="#">About</a>
+        <a href="#">Courses</a>
+        <a href="#">Gallery</a>
+        <a href="#">Staff</a>
+        <a href="#">Contact</a>
+    </div>
 </div>
 
 <div class="container">
+    <h1>Admissions – 2026</h1>
+    <p>Join the future of Engineering with APSITS Proddatur</p>
     
-    <div class="section-box">
-        <h2>Admissions – 2026</h2>
-        <p>Join the premier institute in Proddatur. Specializations available in Civil, Mechanical, and EEE.</p>
-        <a href="#" class="info-link">Apply Now for Admission</a>
+    <img src="college-campus.jpg" alt="APSITS Campus" class="campus-img">
+
+    <div class="info-section">
+        <h3>About Us</h3>
+        <p>APSITS Diploma division is committed to providing hands-on technical skills and state-of-the-art infrastructure for budding engineers in Proddatur.</p>
     </div>
 
-    <div class="section-box">
-        <h2>Mandatory Information</h2>
-        <a href="#" class="info-link">AICTE - Extension of Approvals</a>
-        <a href="#" class="info-link">AICTE - Feedback (Students & Faculty)</a>
-        <a href="#" class="info-link">Online Grievance Redressal</a>
+    <div class="info-section">
+        <h3>Mandatory Information</h3>
+        <ul>
+            <li><a href="#">🔗 AICTE - Extension of Approvals</a></li>
+            <li><a href="#">🔗 AICTE - Feedback (Students & Faculty)</a></li>
+            <li><a href="#">🔗 Online Grievance Redressal</a></li>
+            <li><a href="gallery.html">🖼️ Gallery</a></li>
+        </ul>
     </div>
-
-    <div class="section-box">
-        <h2>About Us</h2>
-        <p>APSITS Diploma wing is committed to providing hands-on technical skills to rural youth, aligning with rural development and industrial needs.</p>
-    </div>
-
-    <div class="section-box">
-        <h2>Gallery</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">Lab View</div>
-            <div class="gallery-item">Library</div>
-            <div class="gallery-item">Classroom</div>
-            <div class="gallery-item">Campus</div>
-        </div>
-    </div>
-
 </div>
 
 <footer>
-    © 2026 APSITS PRODDATUR. ALL RIGHTS RESERVED. <br>
-    Vision 2047 | Powered by APSITS IT Cell
+    © 2026 APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science <br>
+    Proddatur, Andhra Pradesh | Vision 2047
 </footer>
 
 <script>
-    function openMenu() { document.getElementById("mySideMenu").style.width = "250px"; }
-    function closeMenu() { document.getElementById("mySideMenu").style.width = "0"; }
+    function openNav() { document.getElementById("myNav").style.width = "100%"; }
+    function closeNav() { document.getElementById("myNav").style.width = "0%"; }
 </script>
 
 </body>
