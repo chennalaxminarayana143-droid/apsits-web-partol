@@ -47,14 +47,25 @@
 <script>
     function login() {
         const role = document.getElementById('role').value;
+        const userId = document.querySelector('input[type="text"]').value;
+        const password = document.querySelector('input[type="password"]').value;
+
         if(role === "") {
-            alert("Pleas Select Your Role!");
+            alert("Please Select Your Role!");
             return;
         }
-        alert("Welcome to APSITS " + role.toUpperCase() + " Dashboard!");
-        // Future: Redirect to specific dashboard based on role
+
+        // Simple Login Logic for Testing
+        if(userId === "admin" && password === "apsits2047") {
+            alert("Welcome to APSITS " + role.toUpperCase() + " Dashboard!");
+            // ఇక్కడ మనం నెక్స్ట్ క్రియేట్ చేయబోయే డాష్‌బోర్డ్ పేజీకి వెళ్తుంది
+            window.location.href = "dashboard.html"; 
+        } else {
+            alert("wrong user id or password! Try again.");
+        }
     }
 </script>
+
 
 </body>
 </html>
