@@ -3,89 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS - Proddatur</title>
+    <title>APSITS - Proddatur | From Vision to Reality</title>
     <style>
-        body { margin: 0; font-family: 'Arial', sans-serif; background: #fff; }
-        
-        /* Header Section */
-        .header { text-align: center; padding: 20px 0; background: #ff7722; }
-        .logo { font-size: 32px; font-weight: bold; color: #fff; letter-spacing: 2px; }
-
-        /* Hero Section with Saffron Background */
-        .hero-section { 
-            background-color: #ff7722; /* మీ కలర్ కోడ్ ఇక్కడ ఉంది */
-            color: #fff; 
-            padding: 40px 20px; 
-            text-align: left; 
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ff7722; /* Saffron Background for the entire page */
+            color: #fff;
+            overflow-x: hidden;
         }
-        .hero-title { font-size: 32px; font-weight: bold; margin: 0 0 10px 0; }
-        .hero-subtitle { font-size: 16px; margin-bottom: 30px; line-height: 1.5; }
 
-        /* Program Buttons */
-        .btn-container { display: flex; gap: 15px; margin-bottom: 20px; }
-        .btn { 
-            background: #000; 
-            color: #fff; 
-            padding: 15px; 
-            border-radius: 10px; 
-            flex: 1; 
-            text-decoration: none; 
+        /* Container to center and limit width for better desktop fit */
+        .container {
+            max-width: 1200px; /* Optional limit for very wide screens */
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Mobile simulated address bar area (can be removed/ignored for real use) */
+        .status-sim {
+            background-color: #fff;
+            color: #000;
+            padding: 5px 15px;
+            font-size: 12px;
+            text-align: right;
+            border-bottom: 1px solid #ccc;
+        }
+        .address-sim {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 10px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Website Logo Area */
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* Hero Text Section */
+        .hero-section {
+            padding: 40px 20px;
             text-align: left;
         }
-        .btn-title { font-size: 16px; font-weight: bold; color: #ff7722; margin-bottom: 5px; }
-        .btn-desc { font-size: 12px; color: #ccc; }
-
-        /* Campus Building Image */
-        .campus-img-container { width: 100%; border-bottom: 15px solid #ff7722; }
-        .campus-img { width: 100%; display: block; height: auto; }
-
-        /* Footer Section */
-        .footer { 
-            background-color: #ff7722; 
-            text-align: center; 
-            padding: 30px 20px; 
-            color: #fff; 
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 15px 0;
         }
-        .footer-links { font-size: 13px; font-weight: bold; text-decoration: none; color: #fff; }
-        .copyright { font-size: 11px; margin-top: 15px; color: rgba(255,255,255,0.8); }
+        .hero-subtitle {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+        }
+        .hero-subtitle b { color: #fff; }
+
+        /* Program Selection Boxes (Black) */
+        .programs-container {
+            display: flex;
+            gap: 15px;
+        }
+        .program-card {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            flex: 1;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .program-card:hover {
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff7722; /* Card titles use saffron color */
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .card-desc {
+            font-size: 11px;
+            color: #bbb;
+            line-height: 1.4;
+        }
+
+        /* Campus Image Section */
+        .image-section {
+            width: 100%;
+            margin-top: auto; /* Pushes to bottom */
+            border-bottom: 15px solid #ff7722; /* Matches saffron background */
+            overflow: hidden;
+        }
+        .campus-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Added Real Footer */
+        .footer {
+            background-color: #ff7722; /* Same saffron as background */
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .footer-links {
+            font-size: 12px;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tablet/Desktop Responsive Adjustments */
+        @media (min-width: 601px) {
+            .hero-section {
+                padding: 60px 40px;
+            }
+            .hero-title {
+                font-size: 40px;
+            }
+            .programs-container {
+                max-width: 800px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <div class="logo">APSITS</div>
+        <div class="logo-text">APSITS</div>
     </div>
 
     <div class="hero-section">
         <h1 class="hero-title">From Vision to Reality.<br>We are APSITS.</h1>
         <p class="hero-subtitle">
             Built on Legacy. Proddatur's Premier Engineering Hub.<br>
-            Approved by AICTE, Affiliated to JNTUA.
+            Approved by <b>AICTE</b>, Affiliated to <b>JNTUA</b>.
         </p>
 
-        <div class="btn-container">
-            <a href="dashboard.html" class="btn">
-                <div class="btn-title">APSITS B.TECH</div>
-                <div class="btn-desc">Affiliated to JNTUA | Advanced Specializations</div>
+        <div class="programs-container">
+            <a href="dashboard.html" class="program-card">
+                <div class="card-title">APSITS B.TECH</div>
+                <div class="card-desc">Affiliated to JNTUA |<br>Advanced Specializations</div>
             </a>
-            <a href="diploma.html" class="btn">
-                <div class="btn-title">APSITS DIPLOMA</div>
-                <div class="btn-desc">State Board Approved | Technical Skills</div>
+            
+            <a href="diploma.html" class="program-card">
+                <div class="card-title">APSITS DIPLOMA</div>
+                <div class="card-desc">State Board Approved |<br>Technical Skills</div>
             </a>
         </div>
     </div>
 
-    <div class="campus-img-container">
-        <img src="college-campus.jpg" alt="APSITS Building" class="campus-img">
+    <div class="image-section">
+        <img src="college-campus.jpg" alt="APSITS Campus Building" class="campus-img">
     </div>
 
-    <footer class="footer">
-        </div>
-        <div class="copyright">
-            APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science<br>
-            Proddatur, Andhra Pradesh | © 2026 Vision 2047
-        </div>
-    </footer>
+    <div class="copyright"> &copy; 2026 APSITS
 
+              PRODDATUR. ALL RIGHTS RESERVED. |
+
+               VISION 2047
+
+      </div>
+
+     </div>
+
+     </footer>
 </body>
 </html>
