@@ -5,39 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APSITS - Proddatur</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #fff; color: #ff7722; }
+        body { margin: 0; font-family: 'Arial', sans-serif; background: #fff; }
         
-        /* Main Header */
-        .header { text-align: center; padding: 20px 0; border-bottom: 1px solid #eee; }
-        .logo { font-size: 32px; font-weight: 800; color: #ff7722; letter-spacing: 2px; }
+        /* Header Section */
+        .header { text-align: center; padding: 20px 0; background: #ff7722; }
+        .logo { font-size: 32px; font-weight: bold; color: #000; letter-spacing: 2px; }
 
-        /* Orange Hero Section */
-        .hero { background-color: #f15a24; color: #fff; padding: 40px 20px; }
-        .hero h1 { font-size: 32px; font-weight: 700; margin: 0 0 10px 0; line-height: 1.2; }
-        .hero p { font-size: 14px; color: rgba(255,255,255,0.9); margin-bottom: 30px; line-height: 1.6; }
-        .hero b { color: #fff; }
-
-        /* Navigation Buttons */
-        .btn-container { display: flex; gap: 15px; margin-bottom: 20px; }
-        .nav-card { 
-            background: #ff7722; color: #fff; padding: 15px; border-radius: 12px; flex: 1; 
-            text-decoration: none; border: 1px solid transparent; transition: 0.3s;
+        /* Hero Section with Saffron Background */
+        .hero-section { 
+            background-color: #ff7722; /* మీ కలర్ కోడ్ ఇక్కడ ఉంది */
+            color: #fff; 
+            padding: 40px 20px; 
+            text-align: left; 
         }
-        .nav-card:hover { transform: translateY(-3px); border-color: #fff; }
-        .nav-card h3 { font-size: 16px; font-weight: bold; color: #f15a24; margin: 0 0 5px 0; }
-        .nav-card p { font-size: 11px; color: #bbb; margin: 0; line-height: 1.4; }
+        .hero-title { font-size: 32px; font-weight: bold; margin: 0 0 10px 0; }
+        .hero-subtitle { font-size: 16px; margin-bottom: 30px; line-height: 1.5; }
 
-        /* Building Image */
-        .image-box { width: 100%; display: block; }
-        .image-box img { width: 100%; height: auto; display: block; }
+        /* Program Buttons */
+        .btn-container { display: flex; gap: 15px; margin-bottom: 20px; }
+        .btn { 
+            background: #000; 
+            color: #fff; 
+            padding: 15px; 
+            border-radius: 10px; 
+            flex: 1; 
+            text-decoration: none; 
+            text-align: left;
+        }
+        .btn-title { font-size: 16px; font-weight: bold; color: #ff7722; margin-bottom: 5px; }
+        .btn-desc { font-size: 12px; color: #ccc; }
 
-        /* Footer Links Section */
-        .links-bar { background-color: #f15a24; padding: 25px 20px; text-align: center; }
-        .links-bar a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 500; margin: 0 5px; opacity: 0.9; }
-        .links-bar a:hover { opacity: 1; text-decoration: underline; }
+        /* Campus Building Image */
+        .campus-img-container { width: 100%; border-bottom: 15px solid #ff7722; }
+        .campus-img { width: 100%; display: block; height: auto; }
 
-        /* Bottom Footer */
-        .footer { background: #e6511e; color: #fff; text-align: center; padding: 20px; font-size: 12px; }
+        /* Footer Section */
+        .footer { 
+            background-color: #ff7722; 
+            text-align: center; 
+            padding: 30px 20px; 
+            color: #fff; 
+        }
+        .footer-links { font-size: 13px; font-weight: bold; text-decoration: none; color: #fff; }
+        .copyright { font-size: 11px; margin-top: 15px; color: rgba(255,255,255,0.8); }
     </style>
 </head>
 <body>
@@ -46,39 +56,36 @@
         <div class="logo">APSITS</div>
     </div>
 
-    <div class="hero">
-        <h1>From Vision to Reality.<br>We are APSITS.</h1>
-        <p>
+    <div class="hero-section">
+        <h1 class="hero-title">From Vision to Reality.<br>We are APSITS.</h1>
+        <p class="hero-subtitle">
             Built on Legacy. Proddatur's Premier Engineering Hub.<br>
-            Approved by <b>AICTE</b>, Affiliated to <b>JNTUA</b>.
+            Approved by AICTE, Affiliated to JNTUA.
         </p>
 
         <div class="btn-container">
-            <a href="dashboard.html" class="nav-card">
-                <h3>APSITS B.TECH</h3>
-                <p>Affiliated to JNTUA |<br>Advanced Specializations</p>
+            <a href="dashboard.html" class="btn">
+                <div class="btn-title">APSITS B.TECH</div>
+                <div class="btn-desc">Affiliated to JNTUA | Advanced Specializations</div>
             </a>
-            <a href="diploma.html" class="nav-card">
-                <h3>APSITS DIPLOMA</h3>
-                <p>State Board Approved |<br>Technical Skills</p>
+            <a href="diploma.html" class="btn">
+                <div class="btn-title">APSITS DIPLOMA</div>
+                <div class="btn-desc">State Board Approved | Technical Skills</div>
             </a>
         </div>
     </div>
 
-    <div class="image-box">
-        <img src="college-campus.jpg" alt="APSITS Campus Building">
+    <div class="campus-img-container">
+        <img src="college-campus.jpg" alt="APSITS Building" class="campus-img">
     </div>
 
-    <div class="footer">
-        APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science <br>
-        Proddatur, Andhra Pradesh | © 2026 Vision 2047
-    </div>
-
-</body>
-</html>
-        }
-    }
-</script>
+    <footer class="footer">
+        </div>
+        <div class="copyright">
+            APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science<br>
+            Proddatur, Andhra Pradesh | © 2026 Vision 2047
+        </div>
+    </footer>
 
 </body>
 </html>
