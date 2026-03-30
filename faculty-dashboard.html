@@ -9,226 +9,183 @@
             --saffron: #ff7722;
             --dark: #1a1a1a;
             --white: #ffffff;
-            --light-bg: #f8f9fa;
+            --bg: #f8f9fa;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
             overflow-x: hidden;
         }
 
-        /* 1. 🎬 Initial Animation (Splash Screen) */
-        #splash-screen {
+        /* 🎬 Opening Animation (Dell Style) */
+        #loader {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--white);
+            width: 100%;
+            height: 100vh;
+            background: var(--dark);
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10000;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            z-index: 9999;
+            transition: 0.8s ease-in-out;
         }
 
-        #splash-text {
-            font-size: 60px;
-            font-weight: 900;
+        #loader h1 {
             color: var(--saffron);
-            letter-spacing: 5px;
-            animation: zoomInOut 2s infinite alternate;
+            font-size: 5rem;
+            letter-spacing: 10px;
+            animation: dellAnimate 2s forwards;
         }
 
-        @keyframes zoomInOut {
-            from { transform: scale(1); opacity: 0.5; }
-            to { transform: scale(1.2); opacity: 1; }
+        @keyframes dellAnimate {
+            0% { transform: scale(0.5); opacity: 0; filter: blur(10px); }
+            50% { transform: scale(1.2); opacity: 1; filter: blur(0); }
+            100% { transform: scale(1); opacity: 1; margin-top: -80vh; font-size: 1.5rem; }
         }
 
-        /* 2. 🟠 Header Section */
+        /* Header Area */
         header {
-            background-color: var(--saffron);
+            background: var(--saffron);
             color: white;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             position: relative;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .header-title { font-size: 26px; font-weight: bold; margin: 0; }
-        .dept-name { font-size: 16px; opacity: 0.9; margin-top: 5px; }
-        .greeting { font-size: 18px; margin-top: 10px; font-weight: 500; color: #fff; }
+        .header-title { font-size: 24px; font-weight: 800; margin: 0; }
+        .dept-title { font-size: 14px; opacity: 0.9; margin-top: 5px; }
+        .wish-text { font-size: 16px; margin-top: 10px; font-weight: 600; }
 
-        .menu-btn {
-            position: absolute; right: 20px; top: 25px;
-            font-size: 30px; cursor: pointer;
-        }
-
-        /* 3. 📱 Dashboard Content */
-        .content-wrapper {
+        /* Menu Grid Buttons */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            padding: 30px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 1s ease-out;
-            padding: 20px;
+            transition: 1s ease-out 1.5s;
         }
 
-        .content-wrapper.show { opacity: 1; transform: translateY(0); }
+        .menu-grid.show { opacity: 1; transform: translateY(0); }
 
-        /* 4. 🎴 Dashboard Buttons Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 15px;
-            max-width: 900px;
-            margin: 20px auto;
-        }
-
-        .dash-card {
+        .menu-card {
             background: white;
-            padding: 20px 10px;
+            padding: 20px;
             border-radius: 15px;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--saffron);
             transition: 0.3s;
+            border-bottom: 4px solid var(--saffron);
         }
 
-        .dash-card:hover { transform: translateY(-8px); background: #fff5ee; }
-        .dash-card span { display: block; font-size: 30px; margin-bottom: 10px; }
-        .dash-card p { font-size: 13px; font-weight: bold; color: var(--dark); margin: 0; }
+        .menu-card:hover { transform: scale(1.05); background: var(--saffron); color: white; }
+        .menu-card i { font-size: 30px; display: block; margin-bottom: 10px; }
+        .menu-card h4 { margin: 0; font-size: 14px; }
 
-        /* 5. 📊 Status Bar & Stats */
-        .status-bar {
+        /* Current Status Section */
+        .status-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .status-header {
             background: var(--dark);
             color: white;
-            padding: 12px;
+            padding: 10px;
             text-align: center;
+            border-radius: 8px;
             font-weight: bold;
-            margin: 30px auto 15px;
-            width: 90%;
-            border-radius: 10px;
-            text-transform: uppercase;
+            margin-bottom: 20px;
         }
 
-        .stats-middle {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .stat-item {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             text-align: center;
-            min-width: 120px;
         }
 
-        .stat-item b { display: block; font-size: 22px; color: var(--saffron); }
-        .stat-item small { color: #666; font-weight: 600; }
-
-        /* 6. ℹ️ Function Overview Box */
-        #function-display {
+        .stat-box {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            max-width: 900px;
-            margin: 20px auto;
-            border: 1px solid #ddd;
-            display: none;
-            animation: fadeIn 0.5s ease;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .stat-box h3 { margin: 0; color: var(--saffron); font-size: 24px; }
+        .stat-box p { margin: 5px 0 0; font-size: 12px; color: #666; }
 
-        footer { text-align: center; padding: 20px; font-size: 12px; color: #888; }
+        footer {
+            background: #eee;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
 
-    <div id="splash-screen">
-        <div id="splash-text">APSITS</div>
-    </div>
+    <div id="loader"><h1>APSITS</h1></div>
 
     <header>
-        <div class="menu-btn">☰</div>
         <div class="header-title">APSITS FACULTY DASHBOARD</div>
-        <div class="dept-name">Department of Engineering</div>
-        <div class="greeting" id="wishText">Loading...</div>
+        <div class="dept-title">Department of Engineering</div>
+        <div class="wish-text" id="greeting">Loading wishes...</div>
     </header>
 
-    <div class="content-wrapper" id="mainContent">
-        
-        <div class="grid-container">
-            <div class="dash-card" onclick="showFunction('profile')"><span>👤</span><p>Profile</p></div>
-            <div class="dash-card" onclick="showFunction('myAttendance')"><span>📅</span><p>Attendance</p></div>
-            <div class="dash-card" onclick="showFunction('stuAttendance')"><span>🧑‍🎓</span><p>Students</p></div>
-            <div class="dash-card" onclick="showFunction('timetable')"><span>🕒</span><p>Time Table</p></div>
-            <div class="dash-card" onclick="showFunction('results')"><span>📊</span><p>Results</p></div>
-            <div class="dash-card" onclick="showFunction('assignments')"><span>📝</span><p>Assignments</p></div>
-            <div class="dash-card" onclick="showFunction('announcements')"><span>📢</span><p>Notices</p></div>
-            <div class="dash-card" onclick="showFunction('calendar')"><span>📆</span><p>Calendar</p></div>
-            <div class="dash-card" onclick="showFunction('reports')"><span>📈</span><p>Reports</p></div>
-        </div>
-
-        <div class="status-bar">CURRENT STATUS</div>
-
-        <div class="stats-middle">
-            <div class="stat-item"><b>04</b><small>Today's Classes</small></div>
-            <div class="stat-item"><b>120</b><small>Total Students</small></div>
-            <div class="stat-item"><b>12</b><small>Pending Tasks</small></div>
-            <div class="stat-item"><b>88%</b><small>Attendance Avg</small></div>
-        </div>
-
-        <div id="function-display">
-            <h3 id="func-title" style="color: var(--saffron);"></h3>
-            <p id="func-desc" style="color: #444; line-height: 1.6;"></p>
-        </div>
-
-        <footer>
-            © 2026 APSITS PRODDATUR | Empowering Education
-        </footer>
+    <div class="menu-grid" id="menuGrid">
+        <div class="menu-card" onclick="alert('Profile Overview: Name, Exp, Subjects...')"><i>👤</i><h4>Profile</h4></div>
+        <div class="menu-card" onclick="alert('Faculty Attendance: Login/Working Days...')"><i>📅</i><h4>My Attendance</h4></div>
+        <div class="menu-card" onclick="alert('Student Attendance: Mark/Daily records...')"><i>🧑‍🎓</i><h4>Student Attendance</h4></div>
+        <div class="menu-card" onclick="alert('Time Table: Weekly class schedule...')"><i>🕒</i><h4>Time Table</h4></div>
+        <div class="menu-card" onclick="alert('Results: Update/Analyze marks...')"><i>📊</i><h4>Results</h4></div>
+        <div class="menu-card" onclick="alert('Assignments: Upload/Review...')"><i>📝</i><h4>Assignments</h4></div>
+        <div class="menu-card" onclick="alert('Announcements: Post notices...')"><i>📢</i><h4>Announcements</h4></div>
+        <div class="menu-card" onclick="alert('Calendar: Academic holidays/exams...')"><i>📆</i><h4>Calendar</h4></div>
+        <div class="menu-card" onclick="alert('Reports: PDF/Excel exports...')"><i>📈</i><h4>Reports</h4></div>
     </div>
 
+    <div class="status-container">
+        <div class="status-header">CURRENT STATUS</div>
+        <div class="stats-grid">
+            <div class="stat-box"><h3>04</h3><p>Today's Classes</p></div>
+            <div class="stat-box"><h3>120</h3><p>Total Students</p></div>
+            <div class="stat-box"><h3>12</h3><p>Pending Assignments</p></div>
+            <div class="stat-box"><h3>88%</h3><p>Attendance Avg</p></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 APSITS PRODDATUR | Empowering Education
+    </footer>
+
     <script>
-        // 1. Splash Screen & Content Animation
-        window.onload = () => {
+        // Animation Control
+        window.onload = function() {
             setTimeout(() => {
-                document.getElementById('splash-screen').style.opacity = '0';
-                document.getElementById('splash-screen').style.visibility = 'hidden';
-                document.getElementById('mainContent').classList.add('show');
-            }, 3000); // 3 సెకన్ల తర్వాత మెయిన్ స్క్రీన్ వస్తుంది
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('menuGrid').classList.add('show');
+                }, 800);
+            }, 2000);
         };
 
-        // 2. Time-based Greeting
-        const now = new Date();
-        const hrs = now.getHours();
-        let greet = hrs < 12 ? "Good Morning" : hrs < 16 ? "Good Afternoon" : "Good Evening";
-        document.getElementById('wishText').innerText = `Hi Chenna Laxminarayana, ${greet}!`;
-
-        // 3. Function Click Logic
-        const details = {
-            profile: { t: "👤 Profile Overview", d: "Displays faculty personal information, department, qualification, and subjects handled. Allows updating profile details." },
-            myAttendance: { t: "📅 My Attendance", d: "Shows your own login time, working days, leave history, and monthly percentage." },
-            stuAttendance: { t: "🧑‍🎓 Student Attendance", d: "Used to mark and manage daily subject-wise student attendance and monitor percentages." },
-            timetable: { t: "🕒 Time Table", d: "Displays your weekly class schedule with subject, time, and classroom details." },
-            results: { t: "📊 Results", d: "Allows entering and updating internal marks and analyzing student exam performance." },
-            assignments: { t: "📝 Assignments", d: "Upload assignments, set deadlines, and review student submissions with feedback." },
-            announcements: { t: "📢 Announcements", d: "Post important notices like class changes, exam updates, or college events." },
-            calendar: { t: "📆 Academic Calendar", d: "Shows holidays, exams, events, and important academic dates for planning." },
-            reports: { t: "📈 Reports", d: "Generates detailed attendance reports and result analysis for official use." }
-        };
-
-        function showFunction(key) {
-            const display = document.getElementById('function-display');
-            document.getElementById('func-title').innerText = details[key].t;
-            document.getElementById('func-desc').innerText = details[key].d;
-            display.style.display = 'block';
-            window.scrollTo({ top: display.offsetTop - 100, behavior: 'smooth' });
-        }
+        // Time-based Greeting
+        const hours = new Date().getHours();
+        const facultyName = "Chenna Laxminarayana";
+        let wish = hours < 12 ? "Good Morning" : hours < 16 ? "Good Afternoon" : "Good Evening";
+        document.getElementById('greeting').innerText = `Hi ${facultyName}, ${wish}!`;
     </script>
 </body>
 </html>
