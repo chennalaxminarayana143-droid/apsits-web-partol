@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Management | APSITS</title>
+    <style>
+        :root {
+            --saffron: #ff7722;
+            --dark-gray: #333;
+            --success: #28a745;
+            --danger: #dc3545;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('IMG_20260330_172904.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--dark-gray);
+        }
+
+        /* 🎬 Dell Style Animation */
+        #loader {
+            position: fixed;
+            width: 100%; height: 100vh;
+            background: #fff;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+        }
+        #loader h1 { color: var(--saffron); font-size: 4rem; letter-spacing: 10px; animation: fadeOut 2s forwards; }
+        @keyframes fadeOut {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { transform: translateY(-100vh); }
+        }
+
+        /* Header */
+        header {
+            background: var(--saffron);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 5px solid #e66a1f;
+        }
+        .header-title { font-size: 26px; font-weight: 800; margin: 0; }
+
+        /* Top Sales Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .stat-card {
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-top: 5px solid var(--saffron);
+        }
+        .stat-card h3 { margin: 0; font-size: 14px; color: #777; text-transform: uppercase; }
+        .stat-box-val { font-size: 26px; font-weight: bold; margin-top: 10px; color: var(--dark-gray); }
+
+        /* Main Modules Grid */
+        .module-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s ease-out 1s;
+        }
+        .module-container.show { opacity: 1; transform: translateY(0); }
+
+        .module-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 25px 10px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .module-btn i { font-size: 35px; }
+        .module-btn:hover { background: var(--saffron); transform: translateY(-10px); border-color: var(--saffron); }
+
+        /* Bottom Widgets */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .widget {
+            background: var(--glass);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .widget h4 { border-bottom: 2px solid var(--saffron); padding-bottom: 10px; margin-top: 0; color: var(--saffron); }
+
+        /* List Styling */
+        .list-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .badge-live { background: var(--success); color: white; padding: 2px 8px; border-radius: 10px; font-size: 10px; }
+        .badge-alert { background: var(--danger); color: white; padding: 2px 8px; border-radius: 10px; font-size: 10px; }
+
+        footer { text-align: center; padding: 30px; color: #ddd; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><h1>APSITS</h1></div>
+
+    <header>
+        <div class="header-title">APSITS - CANTEEN MANAGEMENT</div>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card"><h3>Today Sales</h3><div class="stat-box-val">₹ 12,450</div></div>
+        <div class="stat-card"><h3>Total Orders</h3><div class="stat-box-val">142</div></div>
+        <div class="stat-card"><h3>Popular Item</h3><div class="stat-box-val" style="font-size: 20px;">Chicken Biryani</div></div>
+        <div class="stat-card"><h3>Stock Alerts</h3><div class="stat-box-val" style="color: var(--danger);">04 Items Low</div></div>
+    </section>
+
+    <div class="module-container" id="moduleGrid">
+        <div class="module-btn" onclick="alert('Opening Menu Editor...')"><i>🍴</i><span>Menu</span></div>
+        <div class="module-btn" onclick="alert('Managing Orders...')"><i>📋</i><span>Orders</span></div>
+        <div class="module-btn" onclick="alert('Viewing Payment Records...')"><i>💰</i><span>Payments</span></div>
+        <div class="module-btn" onclick="alert('Checking Inventory...')"><i>📦</i><span>Inventory</span></div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="widget">
+            <h4>🛎️ Live Orders Queue</h4>
+            <div class="list-item"><span>#ORD-451 (Egg Puff)</span> <span class="badge-live">PREPARING</span></div>
+            <div class="list-item"><span>#ORD-452 (Coffee x2)</span> <span class="badge-live">READY</span></div>
+            <div class="list-item"><span>#ORD-453 (Samosa)</span> <span class="badge-live">QUEUED</span></div>
+        </div>
+
+        <div class="widget">
+            <h4>⚠️ Low Stock Alerts</h4>
+            <div class="list-item"><span>Milk (Amul 500ml)</span> <span class="badge-alert">2 UNITS LEFT</span></div>
+            <div class="list-item"><span>Cooking Oil</span> <span class="badge-alert">LOW STOCK</span></div>
+            <div class="list-item"><span>Disposable Plates</span> <span class="badge-alert">REORDER NOW</span></div>
+        </div>
+
+        <div class="widget">
+            <h4>🔥 Top Selling Items</h4>
+            <div class="list-item"><span>1. Chicken Biryani</span> <span>45 Plates</span></div>
+            <div class="list-item"><span>2. Veg Manchuria</span> <span>32 Plates</span></div>
+            <div class="list-item"><span>3. Cold Coffee</span> <span>28 Cups</span></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 APSITS CANTEEN | Fresh & Healthy Campus Dining
+    </footer>
+
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('moduleGrid').classList.add('show');
+            }, 2000);
+        };
+    </script>
+
+</body>
+</html>
+
