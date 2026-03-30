@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS STUDENT DASHBOARD</title>
+    <style>
+        :root {
+            --saffron: #ff7722;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --bg: #f8f9fa;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* 🎬 Opening Animation (White Background) */
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: 0.8s ease-in-out;
+        }
+
+        #loader h1 {
+            color: var(--saffron);
+            font-size: 5rem;
+            font-weight: 800;
+            letter-spacing: 10px;
+            animation: dellAnimate 2s forwards;
+        }
+
+        @keyframes dellAnimate {
+            0% { transform: scale(0.5); opacity: 0; filter: blur(10px); }
+            50% { transform: scale(1.1); opacity: 1; filter: blur(0); }
+            100% { transform: scale(1); opacity: 0; visibility: hidden; }
+        }
+
+        /* Header Area */
+        header {
+            background: var(--saffron);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .menu-btn {
+            position: absolute;
+            right: 20px;
+            top: 25px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .header-title { font-size: 24px; font-weight: 800; margin: 0; }
+        .dept-title { font-size: 14px; opacity: 0.9; margin-top: 5px; }
+        .wish-text { font-size: 16px; margin-top: 10px; font-weight: 600; }
+
+        /* Overlay Menu */
+        .overlay {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; right: 0; background-color: rgba(0,0,0, 0.95);
+            overflow-x: hidden; transition: 0.5s;
+        }
+        .overlay-content { position: relative; top: 5%; width: 100%; text-align: center; }
+        .overlay a { padding: 10px; text-decoration: none; font-size: 20px; color: #fff; display: block; transition: 0.3s; }
+        .overlay a:hover { color: var(--saffron); }
+        .closebtn { position: absolute; top: 20px; right: 35px; font-size: 50px; color: #fff; cursor: pointer; }
+
+        /* Menu Grid Buttons */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            padding: 30px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s ease-out 0.5s;
+        }
+
+        .menu-grid.show { opacity: 1; transform: translateY(0); }
+
+        .menu-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+            border-bottom: 4px solid var(--saffron);
+        }
+
+        .menu-card:hover { transform: translateY(-5px); background: var(--saffron); color: white; }
+        .menu-card i { font-size: 30px; display: block; margin-bottom: 10px; }
+        .menu-card h4 { margin: 0; font-size: 14px; }
+
+        /* Bottom Widgets Section */
+        .status-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .status-header {
+            background: var(--dark);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            text-align: center;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-box h3 { margin: 0; color: var(--saffron); font-size: 24px; }
+        .stat-box p { margin: 5px 0 0; font-size: 12px; color: #666; font-weight: 600; }
+
+        footer {
+            background: #eee;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><h1>APSITS</h1></div>
+
+    <div id="myNav" class="overlay">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <div class="overlay-content">
+            <a href="#" onclick="closeNav()">🏠 Student Home</a>
+            <hr style="width: 50%; margin: 10px auto; opacity: 0.2;">
+            <a href="#">👤 Profile</a>
+            <a href="#">📅 Attendance</a>
+            <a href="#">🕒 Time Table</a>
+            <a href="#">📊 Results</a>
+            <a href="#">📝 Assignments</a>
+            <a href="#">📚 Materials</a>
+            <a href="#">📢 Announcements</a>
+            <a href="#">📆 Calendar</a>
+            <a href="login.html" style="color: #ff4444; margin-top: 20px;">🚪 Logout</a>
+        </div>
+    </div>
+
+    <header>
+        <span class="menu-btn" onclick="openNav()">☰</span>
+        <div class="header-title">APSITS STUDENT DASHBOARD</div>
+        <div class="dept-title">JNTUA Affiliated Engineering College</div>
+        <div class="wish-text" id="greeting">Welcome, Student!</div>
+    </header>
+
+    <div class="menu-grid" id="menuGrid">
+        <div class="menu-card"><i>👤</i><h4>Profile</h4></div>
+        <div class="menu-card"><i>📅</i><h4>Attendance</h4></div>
+        <div class="menu-card"><i>🕒</i><h4>Time Table</h4></div>
+        <div class="menu-card"><i>📊</i><h4>Results</h4></div>
+        <div class="menu-card"><i>📝</i><h4>Assignments</h4></div>
+        <div class="menu-card"><i>📚</i><h4>Materials</h4></div>
+        <div class="menu-card"><i>📢</i><h4>Announcements</h4></div>
+        <div class="menu-card"><i>📆</i><h4>Calendar</h4></div>
+    </div>
+
+    <div class="status-container">
+        <div class="status-header">QUICK STATS & NOTIFICATIONS</div>
+        <div class="stats-grid">
+            <div class="stat-box"><h3>85%</h3><p>Attendance Avg</p></div>
+            <div class="stat-box"><h3>8.5</h3><p>Current CGPA</p></div>
+            <div class="stat-box"><h3>03</h3><p>Today's Classes</p></div>
+            <div class="stat-box"><h3>02</h3><p>Pending Assignments</p></div>
+            <div class="stat-box" style="grid-column: span 2;">
+                <p style="color:var(--saffron)">📢 New Notification</p>
+                <h4 style="margin:5px 0; font-size:14px;">Internal Exams from Next Monday</h4>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 APSITS PRODDATUR | For Students, By Students
+    </footer>
+
+    <script>
+        // Opening Animation Control
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('menuGrid').classList.add('show');
+                }, 800);
+            }, 2000);
+        };
+
+        // Menu Logic
+        function openNav() { document.getElementById("myNav").style.width = "100%"; }
+        function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+
+        // Time-based Greeting
+        const hours = new Date().getHours();
+        let wish = hours < 12 ? "Good Morning" : hours < 16 ? "Good Afternoon" : "Good Evening";
+        document.getElementById('greeting').innerText = `Hi Student, ${wish}!`;
+    </script>
+</body>
+</html>
+
