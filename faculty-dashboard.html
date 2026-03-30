@@ -3,196 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS - Faculty Dashboard</title>
+    <title>APSITS Faculty Dashboard</title>
     <style>
         :root {
-            --primary: #ff7722;
+            --saffron: #ff7722;
             --dark: #1a1a1a;
-            --bg: #f0f2f5;
+            --white: #ffffff;
+            --light-bg: #f8f9fa;
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg);
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--light-bg);
+            overflow-x: hidden;
         }
 
-        /* Top Header Area */
-        .top-header {
-            background: #fff;
+        /* 1. 🎬 Initial Animation (Splash Screen) */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        #splash-text {
+            font-size: 60px;
+            font-weight: 900;
+            color: var(--saffron);
+            letter-spacing: 5px;
+            animation: zoomInOut 2s infinite alternate;
+        }
+
+        @keyframes zoomInOut {
+            from { transform: scale(1); opacity: 0.5; }
+            to { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* 2. 🟠 Header Section */
+        header {
+            background-color: var(--saffron);
+            color: white;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        .menu-icon {
-            position: absolute;
-            right: 25px;
-            top: 25px;
-            font-size: 30px;
+        .header-title { font-size: 26px; font-weight: bold; margin: 0; }
+        .dept-name { font-size: 16px; opacity: 0.9; margin-top: 5px; }
+        .greeting { font-size: 18px; margin-top: 10px; font-weight: 500; color: #fff; }
+
+        .menu-btn {
+            position: absolute; right: 20px; top: 25px;
+            font-size: 30px; cursor: pointer;
+        }
+
+        /* 3. 📱 Dashboard Content */
+        .content-wrapper {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+            padding: 20px;
+        }
+
+        .content-wrapper.show { opacity: 1; transform: translateY(0); }
+
+        /* 4. 🎴 Dashboard Buttons Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 15px;
+            max-width: 900px;
+            margin: 20px auto;
+        }
+
+        .dash-card {
+            background: white;
+            padding: 20px 10px;
+            border-radius: 15px;
+            text-align: center;
             cursor: pointer;
-            color: var(--dark);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--saffron);
+            transition: 0.3s;
         }
 
-        .header-title { font-size: 24px; font-weight: 800; color: var(--dark); margin: 0; }
-        .dept-title { font-size: 16px; color: #666; margin: 5px 0; }
-        .welcome-msg { font-size: 18px; color: var(--primary); font-weight: 600; margin-top: 10px; }
+        .dash-card:hover { transform: translateY(-8px); background: #fff5ee; }
+        .dash-card span { display: block; font-size: 30px; margin-bottom: 10px; }
+        .dash-card p { font-size: 13px; font-weight: bold; color: var(--dark); margin: 0; }
 
-        /* Current Status Bar */
+        /* 5. 📊 Status Bar & Stats */
         .status-bar {
             background: var(--dark);
             color: white;
             padding: 12px;
             text-align: center;
             font-weight: bold;
-            margin: 20px auto;
+            margin: 30px auto 15px;
             width: 90%;
-            border-radius: 8px;
-            letter-spacing: 1px;
+            border-radius: 10px;
+            text-transform: uppercase;
         }
 
-        /* Dashboard Grid Buttons */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            padding: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .menu-item {
-            background: #fff;
-            padding: 25px 15px;
-            border-radius: 15px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-bottom: 4px solid var(--primary);
-            transition: 0.3s;
+        .stats-middle {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
 
-        .menu-item:hover {
-            transform: translateY(-5px);
-            background: var(--primary);
-            color: #fff;
+        .stat-item {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 120px;
         }
 
-        .icon-box { font-size: 24px; }
+        .stat-item b { display: block; font-size: 22px; color: var(--saffron); }
+        .stat-item small { color: #666; font-weight: 600; }
 
-        /* Full Screen Overlay Menu */
-        .overlay {
-            height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; right: 0; background-color: rgba(0,0,0, 0.95);
-            overflow-x: hidden; transition: 0.5s;
+        /* 6. ℹ️ Function Overview Box */
+        #function-display {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 900px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
-        .overlay-content { position: relative; top: 10%; width: 100%; text-align: center; }
-        .overlay a { padding: 15px; text-decoration: none; font-size: 22px; color: #fff; display: block; transition: 0.3s; }
-        .overlay a:hover { color: var(--primary); }
-        .closebtn { position: absolute; top: 20px; right: 35px; font-size: 50px; color: #fff; cursor: pointer; }
 
-        footer { text-align: center; padding: 30px; font-size: 12px; color: #888; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        footer { text-align: center; padding: 20px; font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
 
-    <div id="sideNav" class="overlay">
-        <span class="closebtn" onclick="closeNav()">&times;</span>
-        <div class="overlay-content">
-            <a href="#" onclick="closeNav()">Home Dashboard</a>
-            <a href="#">Profile Settings</a>
-            <a href="#">Help & Support</a>
-            <a href="login.html" style="color: #ff4444;">Logout</a>
-        </div>
+    <div id="splash-screen">
+        <div id="splash-text">APSITS</div>
     </div>
 
-    <header class="top-header">
-        <div class="menu-icon" onclick="openNav()">☰</div>
+    <header>
+        <div class="menu-btn">☰</div>
         <div class="header-title">APSITS FACULTY DASHBOARD</div>
-        <div class="dept-title">Department of Engineering</div>
-        <div class="welcome-msg" id="greeting">Welcome, Faculty Member!</div>
+        <div class="dept-name">Department of Engineering</div>
+        <div class="greeting" id="wishText">Loading...</div>
     </header>
 
-    <div class="status-bar">CURRENT STATUS</div>
+    <div class="content-wrapper" id="mainContent">
+        
+        <div class="grid-container">
+            <div class="dash-card" onclick="showFunction('profile')"><span>👤</span><p>Profile</p></div>
+            <div class="dash-card" onclick="showFunction('myAttendance')"><span>📅</span><p>Attendance</p></div>
+            <div class="dash-card" onclick="showFunction('stuAttendance')"><span>🧑‍🎓</span><p>Students</p></div>
+            <div class="dash-card" onclick="showFunction('timetable')"><span>🕒</span><p>Time Table</p></div>
+            <div class="dash-card" onclick="showFunction('results')"><span>📊</span><p>Results</p></div>
+            <div class="dash-card" onclick="showFunction('assignments')"><span>📝</span><p>Assignments</p></div>
+            <div class="dash-card" onclick="showFunction('announcements')"><span>📢</span><p>Notices</p></div>
+            <div class="dash-card" onclick="showFunction('calendar')"><span>📆</span><p>Calendar</p></div>
+            <div class="dash-card" onclick="showFunction('reports')"><span>📈</span><p>Reports</p></div>
+        </div>
 
-    <div class="menu-grid">
-        <a href="#" class="menu-item"><span class="icon-box">👤</span>Profile</a>
-        <a href="#" class="menu-item"><span class="icon-box">📅</span>Attendance</a>
-        <a href="#" class="menu-item"><span class="icon-box">✅</span>Student Attendance</a>
-        <a href="#" class="menu-item"><span class="icon-box">🕒</span>Time Table</a>
-        <a href="#" class="menu-item"><span class="icon-box">📊</span>Results</a>
-        <a href="#" class="menu-item"><span class="icon-box">📝</span>Assignments</a>
-        <a href="#" class="menu-item"><span class="icon-box">📢</span>Announcements</a>
-        <a href="#" class="menu-item"><span class="icon-box">🗓️</span>Calendar</a> <a href="#" class="menu-item"><span class="icon-box">📈</span>Reports</a>
+        <div class="status-bar">CURRENT STATUS</div>
+
+        <div class="stats-middle">
+            <div class="stat-item"><b>04</b><small>Today's Classes</small></div>
+            <div class="stat-item"><b>120</b><small>Total Students</small></div>
+            <div class="stat-item"><b>12</b><small>Pending Tasks</small></div>
+            <div class="stat-item"><b>88%</b><small>Attendance Avg</small></div>
+        </div>
+
+        <div id="function-display">
+            <h3 id="func-title" style="color: var(--saffron);"></h3>
+            <p id="func-desc" style="color: #444; line-height: 1.6;"></p>
+        </div>
+
+        <footer>
+            © 2026 APSITS PRODDATUR | Empowering Education
+        </footer>
     </div>
 
-    <footer>
-        © 2026 APSITS PRODDATUR | Empowering Education
-    </footer>
-
     <script>
-        // 3-Line Menu Logic
-        function openNav() { document.getElementById("sideNav").style.width = "100%"; }
-        function closeNav() { document.getElementById("sideNav").style.width = "0%"; }
+        // 1. Splash Screen & Content Animation
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.opacity = '0';
+                document.getElementById('splash-screen').style.visibility = 'hidden';
+                document.getElementById('mainContent').classList.add('show');
+            }, 3000); // 3 సెకన్ల తర్వాత మెయిన్ స్క్రీన్ వస్తుంది
+        };
 
-        // Time-based Greeting with Faculty Name
-        function setGreeting() {
-            const now = new Date();
-            const hours = now.getHours();
-            const facultyName = "Chenna Laxminarayana"; // ఇక్కడ పేరు మార్చుకోవచ్చు
-            let wish = "";
+        // 2. Time-based Greeting
+        const now = new Date();
+        const hrs = now.getHours();
+        let greet = hrs < 12 ? "Good Morning" : hrs < 16 ? "Good Afternoon" : "Good Evening";
+        document.getElementById('wishText').innerText = `Hi Chenna Laxminarayana, ${greet}!`;
 
-            if (hours < 12) wish = "Good Morning";
-            else if (hours < 16) wish = "Good Afternoon";
-            else wish = "Good Evening";
+        // 3. Function Click Logic
+        const details = {
+            profile: { t: "👤 Profile Overview", d: "Displays faculty personal information, department, qualification, and subjects handled. Allows updating profile details." },
+            myAttendance: { t: "📅 My Attendance", d: "Shows your own login time, working days, leave history, and monthly percentage." },
+            stuAttendance: { t: "🧑‍🎓 Student Attendance", d: "Used to mark and manage daily subject-wise student attendance and monitor percentages." },
+            timetable: { t: "🕒 Time Table", d: "Displays your weekly class schedule with subject, time, and classroom details." },
+            results: { t: "📊 Results", d: "Allows entering and updating internal marks and analyzing student exam performance." },
+            assignments: { t: "📝 Assignments", d: "Upload assignments, set deadlines, and review student submissions with feedback." },
+            announcements: { t: "📢 Announcements", d: "Post important notices like class changes, exam updates, or college events." },
+            calendar: { t: "📆 Academic Calendar", d: "Shows holidays, exams, events, and important academic dates for planning." },
+            reports: { t: "📈 Reports", d: "Generates detailed attendance reports and result analysis for official use." }
+        };
 
-            document.getElementById('greeting').innerHTML = `Hi ${facultyName}, ${wish}!`;
+        function showFunction(key) {
+            const display = document.getElementById('function-display');
+            document.getElementById('func-title').innerText = details[key].t;
+            document.getElementById('func-desc').innerText = details[key].d;
+            display.style.display = 'block';
+            window.scrollTo({ top: display.offsetTop - 100, behavior: 'smooth' });
         }
-        setGreeting();
     </script>
-
 </body>
 </html>
-                <h3>Today's Classes</h3>
-                <p>04</p>
-            </div>
-            <div class="card">
-                <h3>Total Students</h3>
-                <p>120</p>
-            </div>
-            <div class="card">
-                <h3>Pending Assignments</h3>
-                <p>12</p>
-            </div>
-            <div class="card">
-                <h3>Attendance Avg</h3>
-                <p>88%</p>
-            </div>
-        </div>
-
-        <div class="dashboard-section" id="content-area">
-            <h3>🏠 Home Dashboard</h3>
-            <hr>
-            <p>పైన ఉన్న మెనూ ద్వారా మీరు విద్యార్థుల అటెండెన్స్ వేయవచ్చు, రిజల్ట్స్ అప్‌లోడ్ చేయవచ్చు లేదా అనౌన్స్‌మెంట్స్ పంపవచ్చు.</p>
-            <br>
-            <div style="background: #fff8f0; padding: 15px; border-radius: 8px; border: 1px solid #ff7722;">
-                <strong>ముఖ్య గమనిక:</strong> ఈరోజు మధ్యాహ్నం 2:00 గంటలకు డిపార్ట్‌మెంట్ మీటింగ్ ఉంది.
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // భవిష్యత్తులో ఒక్కో ఆప్షన్ నొక్కినప్పుడు కంటెంట్ మారడానికి ఇక్కడ JavaScript యాడ్ చేయవచ్చు.
-    </script>
-
-</body>
-</html>
-
