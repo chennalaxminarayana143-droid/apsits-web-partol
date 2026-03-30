@@ -5,62 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APSITS Portal - Login</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', sans-serif;
-            /* Background Image Setup */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('login.jpg');
+            /* 🚩 ఇక్కడ ఇమేజ్ పేరు సరిగ్గా ఉండాలి */
+            background: url('login.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
         }
 
+        /* లాగిన్ కార్డ్ పారదర్శకంగా (Transparent) మార్చబడింది */
         .login-card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.15); /* పారదర్శకత కోసం */
+            backdrop-filter: blur(10px); /* వెనుక ఇమేజ్ బ్లర్ అవ్వడానికి */
+            -webkit-backdrop-filter: blur(10px);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* తెల్లటి బోర్డర్ */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             width: 100%;
-            max-width: 350px;
+            max-width: 380px;
             text-align: center;
+            color: #fff;
         }
 
-        .login-card h2 { color: #ff7722; margin-bottom: 25px; }
+        .login-card h2 { 
+            font-size: 28px;
+            margin-bottom: 25px; 
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
 
         .input-group { text-align: left; margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 14px; margin-bottom: 5px; font-weight: bold; }
+        .input-group label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: 500; }
+        
         .input-group input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            outline-color: #ff7722;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: #ff7722;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2); /* ఇన్‌పుట్ బాక్స్ కూడా పారదర్శకం */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
             transition: 0.3s;
         }
 
-        .login-btn:hover { background: #e66a1f; }
+        .input-group input::placeholder { color: #ddd; }
+        .input-group input:focus { background: rgba(255, 255, 255, 0.3); border-color: #ff7722; }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #ff7722;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 119, 34, 0.4);
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+
+        .login-btn:hover { background: #e66a1f; transform: scale(1.02); }
 
         .forgot-pass {
-            margin-top: 15px;
+            margin-top: 20px;
             display: block;
             font-size: 13px;
-            color: #666;
+            color: #eee;
             text-decoration: none;
         }
         .forgot-pass:hover { color: #ff7722; text-decoration: underline; }
@@ -70,18 +88,20 @@
 
 <div class="login-card">
     <h2>APSITS LOGIN</h2>
+    
     <div class="input-group">
-        <label>Enter ID Number</label>
-        <input type="text" id="userId" placeholder="e.g., STU101 or FAC501">
+        <label>ID Number</label>
+        <input type="text" id="userId" placeholder="e.g. STU101 or FAC501">
     </div>
+    
     <div class="input-group">
         <label>Password</label>
         <input type="password" id="userPass" placeholder="••••••••">
     </div>
     
-    <button class="login-btn" onclick="handleLogin()">Login to Portal</button>
+    <button class="login-btn" onclick="handleLogin()">Login</button>
     
-    <a href="javascript:void(0)" class="forgot-pass" onclick="forgotPassword()">Forgot Password?</a>
+    <a href="#" class="forgot-pass" onclick="forgotPassword()">Forgot Password?</a>
 </div>
 
 <script>
@@ -89,28 +109,27 @@
         const id = document.getElementById('userId').value.toUpperCase();
         const pass = document.getElementById('userPass').value;
 
-        if(pass === "") {
-            alert("Please enter password");
+        if(id === "" || pass === "") {
+            alert("Please Enter ID and Password.");
             return;
         }
 
-        // Logical Routing based on ID Prefix
+        // Logic based on ID Prefix
         if (id.startsWith("STU")) {
-            window.location.href = "diploma-student.html"; // Student Page
+            window.location.href = "diploma-student.html";
         } else if (id.startsWith("FAC")) {
-            window.location.href = "faculty-dashboard.html"; // Management/Faculty Page
+            window.location.href = "faculty-dashboard.html";
         } else if (id.startsWith("ADM")) {
-            window.location.href = "dashboard.html"; // Master Admin
+            window.location.href = "dashboard.html";
         } else {
-            alert("Invalid ID Number. Please check your credentials.");
+            alert("Invalid ID Number!");
         }
     }
 
     function forgotPassword() {
-        alert("Please contact the APSITS Administrative Office or Department HOD to reset your password.");
+        alert("Please Consult Your Department HOD.");
     }
 </script>
 
 </body>
 </html>
-
