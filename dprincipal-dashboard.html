@@ -3,221 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principal Dashboard | APSITS</title>
+    <title>PRINCIPAL PARTOL| APSITS POLYTECHNIC</title>
     <style>
         :root {
             --saffron: #ff7722;
-            --royal-blue: #1a2a6c;
+            --royal: #1a2a6c;
             --gold: #d4af37;
-            --dark: #121212;
-            --white: #ffffff;
-            --bg: #f4f4f9;
+            --glass: rgba(255, 255, 255, 0.92);
         }
 
         body {
             margin: 0;
-            font-family: 'Times New Roman', serif; /* Classic Look */
-            background-color: var(--bg);
-            overflow-x: hidden;
+            font-family: 'Garamond', serif; /* Classic Serif Font */
+            /* 🚩 ఇక్కడ మీ కాలేజీ ఇమేజ్ పేరు ఇవ్వండి */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('IMG_20260330_172904.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
         }
 
-        /* 🎬 Professional Dell-Style Opening (White Background) */
+        /* 🎬 Dell Style Professional Loader */
         #loader {
             position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: var(--white);
+            width: 100%; height: 100vh;
+            background: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            transition: 1s ease-in-out;
         }
-
-        #loader h1 {
-            color: var(--royal-blue);
-            font-size: 4rem;
-            font-weight: bold;
-            letter-spacing: 12px;
-            animation: principalAnimate 2.5s forwards;
-        }
-
-        @keyframes principalAnimate {
-            0% { transform: scale(0.8); opacity: 0; letter-spacing: 0px; }
-            50% { transform: scale(1); opacity: 1; letter-spacing: 15px; }
+        #loader h1 { color: var(--saffron); font-size: 4rem; letter-spacing: 15px; animation: split 2s forwards; }
+        @keyframes split {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
         }
 
-        /* Header Area - Saffron with Address */
+        /* Header Area */
         header {
             background: var(--saffron);
             color: white;
-            padding: 20px 10px;
+            padding: 25px 15px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-bottom: 5px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             position: relative;
-            border-bottom: 4px solid var(--gold);
         }
+        .header-title { font-size: 32px; font-weight: 900; margin: 0; letter-spacing: 2px; }
+        .address { font-size: 14px; opacity: 0.9; margin-top: 8px; font-family: sans-serif; }
+        
+        .menu-btn { position: absolute; right: 30px; top: 35px; font-size: 35px; cursor: pointer; }
 
-        .header-title { font-size: 28px; font-weight: 900; margin: 0; letter-spacing: 1px; }
-        .address-details { font-size: 13px; margin-top: 5px; font-style: italic; opacity: 0.9; }
-        .welcome-text { font-size: 18px; margin-top: 15px; font-weight: bold; color: var(--royal-blue); background: rgba(255,255,255,0.8); display: inline-block; padding: 5px 20px; border-radius: 20px; }
-
-        .menu-btn { position: absolute; right: 25px; top: 30px; font-size: 35px; cursor: pointer; color: var(--royal-blue); }
-
-        /* Stats Section */
-        .college-stats {
+        /* Stats Section - Glassmorphism */
+        .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            padding: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
-
-        .stat-card {
-            background: var(--royal-blue);
-            color: white;
+        .stat-box {
+            background: var(--glass);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 12px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-bottom: 3px solid var(--gold);
+            border-top: 4px solid var(--royal);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
+        .stat-box h2 { font-size: 35px; color: var(--royal); margin: 0; }
+        .stat-box p { font-size: 14px; font-weight: bold; color: var(--saffron); text-transform: uppercase; margin-top: 5px; }
 
-        .stat-card h2 { margin: 0; font-size: 26px; color: var(--gold); }
-        .stat-card p { margin: 5px 0 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Principal Menu Grid */
-        .menu-grid {
+        /* Grid Buttons */
+        .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
             padding: 20px;
             max-width: 1100px;
             margin: 0 auto;
             opacity: 0;
-            transform: translateY(20px);
-            transition: 1s ease-out 1.2s;
+            transform: translateY(30px);
+            transition: 1.2s ease-out 1s;
         }
+        .grid-container.show { opacity: 1; transform: translateY(0); }
 
-        .menu-grid.show { opacity: 1; transform: translateY(0); }
-
-        .menu-item {
-            background: var(--white);
-            padding: 25px 10px;
-            border-radius: 5px;
+        .nav-card {
+            background: var(--glass);
+            padding: 30px 10px;
+            border-radius: 8px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border: 1px solid #ddd;
-            transition: 0.3s;
+            transition: 0.4s;
+            border: 1px solid rgba(255,255,255,0.3);
         }
-
-        .menu-item:hover { background: var(--royal-blue); color: white; border-color: var(--gold); transform: scale(1.03); }
-        .menu-item i { font-size: 32px; display: block; margin-bottom: 10px; }
-        .menu-item span { font-weight: bold; font-size: 15px; }
+        .nav-card:hover { 
+            background: var(--royal); 
+            color: white; 
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+        .nav-card i { font-size: 40px; display: block; margin-bottom: 15px; }
+        .nav-card span { font-weight: bold; font-size: 16px; font-family: sans-serif; }
 
         /* Bottom Widgets */
-        .widgets-section {
+        .bottom-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            padding: 30px 20px;
+            padding: 40px 20px;
             max-width: 1100px;
             margin: 0 auto;
         }
-
         .widget {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: var(--glass);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 8px solid var(--saffron);
         }
-
-        .widget h3 { border-bottom: 2px solid var(--saffron); padding-bottom: 10px; color: var(--royal-blue); font-size: 18px; }
-        .alert-item { color: #d9534f; font-weight: bold; padding: 5px 0; border-bottom: 1px dashed #eee; }
+        .widget h3 { color: var(--royal); border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-top: 0; }
+        .alert-text { color: #cc0000; font-weight: bold; margin: 10px 0; font-family: sans-serif; }
 
         /* Overlay Menu */
         .overlay {
             height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; right: 0; background-color: rgba(26, 42, 108, 0.98);
-            overflow-x: hidden; transition: 0.5s;
+            top: 0; right: 0; background: rgba(0,0,0, 0.95);
+            transition: 0.5s; overflow-x: hidden;
         }
         .overlay-content { position: relative; top: 10%; width: 100%; text-align: center; }
-        .overlay a { padding: 15px; text-decoration: none; font-size: 22px; color: var(--gold); display: block; }
+        .overlay a { padding: 15px; text-decoration: none; font-size: 25px; color: var(--gold); display: block; }
         .closebtn { position: absolute; top: 20px; right: 35px; font-size: 50px; color: white; cursor: pointer; }
 
-        footer { text-align: center; padding: 25px; background: #ddd; color: #555; font-size: 13px; margin-top: 30px; }
+        footer {
+            background: rgba(0,0,0,0.8);
+            color: var(--gold);
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
     </style>
 </head>
 <body>
 
     <div id="loader"><h1>APSITS</h1></div>
 
-    <div id="prinNav" class="overlay">
+    <div id="sideNav" class="overlay">
         <span class="closebtn" onclick="closeNav()">&times;</span>
         <div class="overlay-content">
-            <a href="#">🏛️ Institutional Overview</a>
-            <a href="#">👥 Faculty Management</a>
-            <a href="#">🎓 Student Records</a>
-            <a href="#">💰 Finance & Accounts</a>
-            <a href="#">📑 Official Reports</a>
-            <a href="login.html" style="color: #ff4444;">🚪 Logout</a>
+            <a href="#">Admin Control</a>
+            <a href="#">Faculty Records</a>
+            <a href="#">Student Admission</a>
+            <a href="#">Finance Ledger</a>
+            <a href="login.html" style="color: #ff4444;">Logout</a>
         </div>
     </div>
 
     <header>
-        <span class="menu-btn" onclick="openNav()">☰</span>
+        <div class="menu-btn" onclick="openNav()">☰</div>
         <div class="header-title">APSITS - POLYTECHNIC</div>
-        <div class="address-details">Beside JNTUA, Proddatur - 516360, YSR District, Andhra Pradesh.</div>
-        <div class="welcome-text" id="greeting">Welcome, Honorable Principal</div>
+        <div class="address">Beside JNTUA, Proddatur - 516360, YSR District, Andhra Pradesh.</div>
+        <div style="margin-top: 20px; color: var(--royal); font-weight: bold; background: white; display: inline-block; padding: 5px 25px; border-radius: 50px;" id="wish">
+            Welcome, Honorable Principal
+        </div>
     </header>
 
-    <section class="college-stats">
-        <div class="stat-card"><h2>1200+</h2><p>Students</p></div>
-        <div class="stat-card"><h2>85+</h2><p>Faculty</p></div>
-        <div class="stat-card"><h2>75%</h2><p>Placements</p></div>
-        <div class="stat-card"><h2>92%</h2><p>Results</p></div>
-    </section>
-
-    <div class="menu-grid" id="menuGrid">
-        <div class="menu-item"><i>🏛️</i><span>Departments</span></div>
-        <div class="menu-item"><i>👥</i><span>Faculty</span></div>
-        <div class="menu-item"><i>👨‍🎓</i><span>Students</span></div>
-        <div class="menu-item"><i>✅</i><span>Attendance</span></div>
-        <div class="menu-item"><i>📊</i><span>Results</span></div>
-        <div class="menu-item"><i>💼</i><span>Placements</span></div>
-        <div class="menu-item"><i>💰</i><span>Finance</span></div>
-        <div class="menu-item"><i>📈</i><span>Reports</span></div>
+    <div class="stats-container">
+        <div class="stat-box"><h2>1200+</h2><p>Students</p></div>
+        <div class="stat-box"><h2>85+</h2><p>Faculty Members</p></div>
+        <div class="stat-box"><h2>75%</h2><p>Placements</p></div>
+        <div class="stat-box"><h2>92%</h2><p>Academic Results</p></div>
     </div>
 
-    <section class="widgets-section">
+    <div class="grid-container" id="menuGrid">
+        <div class="nav-card"><i>🏛️</i><span>Departments</span></div>
+        <div class="nav-card"><i>👥</i><span>Faculty</span></div>
+        <div class="nav-card"><i>👨‍🎓</i><span>Students</span></div>
+        <div class="nav-card"><i>✅</i><span>Attendance</span></div>
+        <div class="nav-card"><i>📊</i><span>Results</span></div>
+        <div class="nav-card"><i>💼</i><span>Placements</span></div>
+        <div class="nav-card"><i>💰</i><span>Finance</span></div>
+        <div class="nav-card"><i>📈</i><span>Reports</span></div>
+    </div>
+
+    <div class="bottom-section">
         <div class="widget">
-            <h3>⚠️ Alerts (Critical Issues)</h3>
-            <div class="alert-item">● Faculty Recruitment Pending (Mechanical)</div>
-            <div class="alert-item">● Semester Fee Arrears > 15%</div>
-            <div class="alert-item">● Lab Equipment Audit Due</div>
+            <h3>🚨 Critical Alerts</h3>
+            <p class="alert-text">⚠️ Lab Maintenance Audit Overdue</p>
+            <p class="alert-text">⚠️ Final Semester Fee Collection Pending</p>
         </div>
         <div class="widget">
-            <h3>🏆 Top Departments</h3>
-            <p>1. Computer Engineering (96% Pass)</p>
-            <p>2. EEE (90% Placement)</p>
-            <p>3. Civil Engineering (Top Attendance)</p>
+            <h3>🏆 Top Performance</h3>
+            <p><b>Mechanical Eng:</b> 98% Attendance</p>
+            <p><b>Computer Eng:</b> 15 Students Placed</p>
         </div>
         <div class="widget">
-            <h3>📅 Upcoming Events</h3>
-            <p>● JNTUA Inspection: April 15</p>
-            <p>● Annual Day: May 02</p>
-            <p>● Campus Recruitment Drive: April 20</p>
+            <h3>📅 Upcoming</h3>
+            <p>• JNTUA Academic Audit - April 10</p>
+            <p>• Annual Sports Meet - May 05</p>
         </div>
-    </section>
+    </div>
 
     <footer>
-        © 2026 APSITS PRODDATUR | Office of the Principal
+        OFFICE OF THE PRINCIPAL | APSITS POLYTECHNIC PRODDATUR<br>
+        <small>© 2026 Professional Academic Management System</small>
     </footer>
 
     <script>
-        // Opening Animation
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('loader').style.display = 'none';
@@ -225,14 +219,13 @@
             }, 2500);
         };
 
-        function openNav() { document.getElementById("prinNav").style.width = "100%"; }
-        function closeNav() { document.getElementById("prinNav").style.width = "0%"; }
-        
-        // Wish Logic
-        const hours = new Date().getHours();
-        let wish = hours < 12 ? "Good Morning" : hours < 16 ? "Good Afternoon" : "Good Evening";
-        document.getElementById('greeting').innerText = `Honorable Principal, ${wish}!`;
+        function openNav() { document.getElementById("sideNav").style.width = "100%"; }
+        function closeNav() { document.getElementById("sideNav").style.width = "0%"; }
+
+        const hr = new Date().getHours();
+        let w = hr < 12 ? "Good Morning" : hr < 16 ? "Good Afternoon" : "Good Evening";
+        document.getElementById('wish').innerText = `Honorable Principal, ${w}!`;
     </script>
+
 </body>
 </html>
-
