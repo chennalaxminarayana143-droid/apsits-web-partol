@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account SECTION | APSITS</title>
+    <style>
+        :root {
+            --bank-blue: #003366;
+            --saffron: #ff7722;
+            --success: #28a745;
+            --danger: #dc3545;
+            --white: #ffffff;
+            --bg: #f0f2f5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('IMG_20260330_172904.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* 🎬 Banking Loader */
+        #loader {
+            position: fixed;
+            width: 100%; height: 100vh;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        #loader h1 { color: var(--bank-blue); font-size: 3rem; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+
+        header {
+            background: var(--saffron);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 4px solid var(--bank-blue);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Top Tabs */
+        .account-tabs {
+            display: flex;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 0;
+        }
+        .tab-btn {
+            padding: 10px 25px;
+            margin: 0 5px;
+            border: none;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .tab-btn.active { background: var(--bank-blue); border-bottom: 3px solid white; }
+
+        /* Main Statistics Cards */
+        .main-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 6px solid var(--bank-blue);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .stat-card h4 { margin: 0; color: #666; font-size: 14px; text-transform: uppercase; }
+        .stat-card h2 { margin: 10px 0; color: var(--bank-blue); font-size: 28px; }
+        .stat-card .percent { color: var(--success); font-weight: bold; }
+
+        /* Modules Grid */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            padding: 0 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .module-box {
+            background: var(--bank-blue);
+            color: white;
+            padding: 25px 10px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .module-box:hover { background: var(--saffron); transform: translateY(-5px); }
+
+        /* Bottom Section */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .widget {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .widget h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: var(--bank-blue); }
+        .alert-row { color: var(--danger); font-size: 14px; padding: 8px 0; border-bottom: 1px solid #f9f9f9; font-weight: 500; }
+        .trans-row { display: flex; justify-content: space-between; font-size: 13px; padding: 8px 0; border-bottom: 1px solid #f9f9f9; }
+
+        footer { text-align: center; padding: 20px; color: white; font-size: 12px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><h1>APSITS BANKING</h1></div>
+
+    <header>
+        <h2 style="margin:0;">APSITS - ACCOUNTS SECTION</h2>
+        <p style="margin:5px 0 0; font-size:12px; opacity:0.8;">Financial Management System | Proddatur</p>
+    </header>
+
+    <div class="account-tabs">
+        <button class="tab-btn active" onclick="switchTab('B.Tech')">B.Tech Accounts</button>
+        <button class="tab-btn" onclick="switchTab('Diploma')">Diploma Accounts</button>
+    </div>
+
+    <div class="main-stats">
+        <div class="stat-card">
+            <h4>Total Collection</h4>
+            <h2 id="totalColl">₹ 45,60,000</h2>
+            <small>Current Academic Year</small>
+        </div>
+        <div class="stat-card">
+            <h4>Pending Dues</h4>
+            <h2 style="color:var(--danger)">₹ 12,40,500</h2>
+            <small>Target: End of Month</small>
+        </div>
+        <div class="stat-card">
+            <h4>Transactions</h4>
+            <h2>1,240</h2>
+            <small>This Semester</small>
+        </div>
+        <div class="stat-card">
+            <h4>Students Paid %</h4>
+            <h2><span class="percent">78.5%</span></h2>
+            <progress value="78.5" max="100" style="width:100%; accent-color:var(--success);"></progress>
+        </div>
+    </div>
+
+    <div class="module-grid">
+        <div class="module-box">Fee Management</div>
+        <div class="module-box">Payments</div>
+        <div class="module-box">Reports</div>
+        <div class="module-box">Expenses</div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="widget">
+            <h3>🚨 Alerts (Due Fees)</h3>
+            <div class="alert-row">● CSE III Year: 15 Students Pending</div>
+            <div class="alert-row">● ECE II Year: Last Date Tomorrow</div>
+            <div class="alert-row">● Diploma ME: Fine Applicable from Monday</div>
+        </div>
+        <div class="widget">
+            <h3>🧾 Recent Transactions</h3>
+            <div class="trans-row"><span>TXN_9920 (Student: Raj)</span> <b>+ ₹ 25,000</b></div>
+            <div class="trans-row"><span>TXN_9918 (Electricity Bill)</span> <b style="color:var(--danger)">- ₹ 12,400</b></div>
+            <div class="trans-row"><span>TXN_9915 (Student: Sneha)</span> <b>+ ₹ 15,000</b></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 APSITS ACCOUNTS | Secure Financial Portal
+    </footer>
+
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
+            }, 1500);
+        };
+
+        function switchTab(type) {
+            alert(type + " Accounts Loading...");
+            // ఇక్కడ మీరు B.Tech లేదా Diploma డేటాను మార్చుకోవచ్చు
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
+
