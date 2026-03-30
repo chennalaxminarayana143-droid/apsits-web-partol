@@ -19,12 +19,12 @@
             overflow-x: hidden;
         }
 
-        /* 🎬 Opening Animation (Dell Style) */
+        /* 🎬 Opening Animation (White Background) */
         #loader {
             position: fixed;
             width: 100%;
             height: 100vh;
-            background: var(--dark);
+            background: var(--white); /* White Background as requested */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,14 +35,15 @@
         #loader h1 {
             color: var(--saffron);
             font-size: 5rem;
+            font-weight: 800;
             letter-spacing: 10px;
             animation: dellAnimate 2s forwards;
         }
 
         @keyframes dellAnimate {
             0% { transform: scale(0.5); opacity: 0; filter: blur(10px); }
-            50% { transform: scale(1.2); opacity: 1; filter: blur(0); }
-            100% { transform: scale(1); opacity: 1; margin-top: -80vh; font-size: 1.5rem; }
+            50% { transform: scale(1.1); opacity: 1; filter: blur(0); }
+            100% { transform: scale(1); opacity: 0; visibility: hidden; }
         }
 
         /* Header Area */
@@ -55,9 +56,29 @@
             position: relative;
         }
 
+        .menu-btn {
+            position: absolute;
+            right: 20px;
+            top: 25px;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
         .header-title { font-size: 24px; font-weight: 800; margin: 0; }
         .dept-title { font-size: 14px; opacity: 0.9; margin-top: 5px; }
         .wish-text { font-size: 16px; margin-top: 10px; font-weight: 600; }
+
+        /* Full Screen Overlay Menu */
+        .overlay {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; right: 0; background-color: rgba(0,0,0, 0.95);
+            overflow-x: hidden; transition: 0.5s;
+        }
+        .overlay-content { position: relative; top: 5%; width: 100%; text-align: center; }
+        .overlay a { padding: 10px; text-decoration: none; font-size: 20px; color: #fff; display: block; transition: 0.3s; }
+        .overlay a:hover { color: var(--saffron); }
+        .closebtn { position: absolute; top: 20px; right: 35px; font-size: 50px; color: #fff; cursor: pointer; }
 
         /* Menu Grid Buttons */
         .menu-grid {
@@ -69,7 +90,7 @@
             margin: 0 auto;
             opacity: 0;
             transform: translateY(30px);
-            transition: 1s ease-out 1.5s;
+            transition: 1s ease-out 0.5s;
         }
 
         .menu-grid.show { opacity: 1; transform: translateY(0); }
@@ -85,7 +106,7 @@
             border-bottom: 4px solid var(--saffron);
         }
 
-        .menu-card:hover { transform: scale(1.05); background: var(--saffron); color: white; }
+        .menu-card:hover { transform: translateY(-5px); background: var(--saffron); color: white; }
         .menu-card i { font-size: 30px; display: block; margin-bottom: 10px; }
         .menu-card h4 { margin: 0; font-size: 14px; }
 
@@ -137,22 +158,41 @@
 
     <div id="loader"><h1>APSITS</h1></div>
 
+    <div id="myNav" class="overlay">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <div class="overlay-content">
+            <a href="#" onclick="closeNav()">🏠 Dashboard Home</a>
+            <hr style="width: 50%; margin: 10px auto; opacity: 0.2;">
+            <a href="#">👤 Profile</a>
+            <a href="#">📅 My Attendance</a>
+            <a href="#">🧑‍🎓 Student Attendance</a>
+            <a href="#">🕒 Time Table</a>
+            <a href="#">📊 Results</a>
+            <a href="#">📝 Assignments</a>
+            <a href="#">📢 Announcements</a>
+            <a href="#">📆 Calendar</a>
+            <a href="#">📈 Reports</a>
+            <a href="login.html" style="color: #ff4444; margin-top: 20px;">🚪 Logout</a>
+        </div>
+    </div>
+
     <header>
+        <span class="menu-btn" onclick="openNav()">☰</span>
         <div class="header-title">APSITS FACULTY DASHBOARD</div>
         <div class="dept-title">Department of Engineering</div>
         <div class="wish-text" id="greeting">Loading wishes...</div>
     </header>
 
     <div class="menu-grid" id="menuGrid">
-        <div class="menu-card" onclick="alert('Profile Overview: Name, Exp, Subjects...')"><i>👤</i><h4>Profile</h4></div>
-        <div class="menu-card" onclick="alert('Faculty Attendance: Login/Working Days...')"><i>📅</i><h4>My Attendance</h4></div>
-        <div class="menu-card" onclick="alert('Student Attendance: Mark/Daily records...')"><i>🧑‍🎓</i><h4>Student Attendance</h4></div>
-        <div class="menu-card" onclick="alert('Time Table: Weekly class schedule...')"><i>🕒</i><h4>Time Table</h4></div>
-        <div class="menu-card" onclick="alert('Results: Update/Analyze marks...')"><i>📊</i><h4>Results</h4></div>
-        <div class="menu-card" onclick="alert('Assignments: Upload/Review...')"><i>📝</i><h4>Assignments</h4></div>
-        <div class="menu-card" onclick="alert('Announcements: Post notices...')"><i>📢</i><h4>Announcements</h4></div>
-        <div class="menu-card" onclick="alert('Calendar: Academic holidays/exams...')"><i>📆</i><h4>Calendar</h4></div>
-        <div class="menu-card" onclick="alert('Reports: PDF/Excel exports...')"><i>📈</i><h4>Reports</h4></div>
+        <div class="menu-card"><i>👤</i><h4>Profile</h4></div>
+        <div class="menu-card"><i>📅</i><h4>My Attendance</h4></div>
+        <div class="menu-card"><i>🧑‍🎓</i><h4>Student Attendance</h4></div>
+        <div class="menu-card"><i>🕒</i><h4>Time Table</h4></div>
+        <div class="menu-card"><i>📊</i><h4>Results</h4></div>
+        <div class="menu-card"><i>📝</i><h4>Assignments</h4></div>
+        <div class="menu-card"><i>📢</i><h4>Announcements</h4></div>
+        <div class="menu-card"><i>📆</i><h4>Calendar</h4></div>
+        <div class="menu-card"><i>📈</i><h4>Reports</h4></div>
     </div>
 
     <div class="status-container">
@@ -170,7 +210,7 @@
     </footer>
 
     <script>
-        // Animation Control
+        // Opening Animation Control
         window.onload = function() {
             setTimeout(() => {
                 document.getElementById('loader').style.opacity = '0';
@@ -180,6 +220,10 @@
                 }, 800);
             }, 2000);
         };
+
+        // Menu Logic
+        function openNav() { document.getElementById("myNav").style.width = "100%"; }
+        function closeNav() { document.getElementById("myNav").style.width = "0%"; }
 
         // Time-based Greeting
         const hours = new Date().getHours();
