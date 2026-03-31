@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Administration | APSITS</title>
+    <style>
+        :root {
+            --saffron: #ff7722;
+            --navy: #002147;
+            --glass: rgba(255, 255, 255, 0.1);
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(rgba(0,33,71,0.9), rgba(0,33,71,0.9)), url('1000229094.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+        }
+
+        /* ☰ Sidebar with Back Option */
+        .sidebar {
+            height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0;
+            background-color: var(--navy); overflow-x: hidden; transition: 0.5s;
+            padding-top: 60px; border-right: 2px solid var(--saffron);
+        }
+        .sidebar a {
+            padding: 15px 25px; text-decoration: none; font-size: 17px; color: white;
+            display: block; transition: 0.3s; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .sidebar a:hover { background: var(--saffron); padding-left: 35px; }
+        .sidebar .back-btn { color: var(--saffron); font-weight: bold; border-bottom: 2px solid var(--saffron); }
+
+        /* Header Section */
+        header {
+            padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0,0,0,0.3); border-bottom: 2px solid var(--saffron);
+        }
+        .menu-toggle { font-size: 28px; cursor: pointer; color: var(--saffron); }
+        .college-info { text-align: center; }
+        .college-info h2 { margin: 0; font-size: 22px; letter-spacing: 1px; }
+        .college-info p { margin: 2px 0; font-size: 11px; opacity: 0.8; }
+        .date-time { text-align: right; font-size: 13px; font-weight: bold; min-width: 100px; }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; padding: 25px; max-width: 1200px; margin: 0 auto;
+        }
+        .stat-card {
+            background: var(--glass); padding: 20px; border-radius: 15px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .stat-card::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%;
+            height: 4px; background: var(--saffron);
+        }
+        .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--saffron); }
+        .stat-value { font-size: 24px; font-weight: bold; margin-top: 8px; }
+        .stat-sub { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+
+        /* Navigation Grid */
+        .btn-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px; padding: 20px 40px; max-width: 1000px; margin: 0 auto;
+        }
+        .nav-btn {
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 25px; border-radius: 15px; text-align: center;
+            text-decoration: none; transition: 0.4s; backdrop-filter: blur(5px);
+        }
+        .nav-btn:hover {
+            background: var(--saffron); transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .nav-btn i { display: block; font-size: 30px; margin-bottom: 10px; font-style: normal; }
+
+        /* Department Section */
+        .dept-pills {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 20px;
+        }
+        .pill {
+            background: rgba(255,255,255,0.1); padding: 8px 20px; border-radius: 20px;
+            font-size: 13px; font-weight: bold; border: 1px solid var(--saffron); cursor: pointer;
+        }
+        .pill:hover { background: var(--saffron); }
+
+        footer { text-align: center; padding: 30px; font-size: 11px; opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+    <div id="sidebar" class="sidebar">
+        <a href="javascript:void(0)" style="font-size:30px; text-align:right" onclick="toggleNav(0)">&times;</a>
+        <a href="admin-dashboard.html" class="back-btn">⬅ Back to Main Admin</a>
+        <a href="#">Student Records</a>
+        <a href="#">Faculty Management</a>
+        <a href="principal-dashboard.html">Principal Portal</a>
+        <a href="#">Accounts & Fees</a>
+        <a href="#">Department Control</a>
+    </div>
+
+    <header>
+        <div class="menu-toggle" onclick="toggleNav(250)">&#9776;</div>
+        <div class="college-info">
+            <h2>APSITS - B.TECH</h2>
+            <p>Proddatur, Andhra Pradesh | Affiliated to JNTUA, Anantapur</p>
+        </div>
+        <div class="date-time">
+            <div id="clock">00:00:00</div>
+            <div id="date" style="font-size: 10px; color: var(--saffron);">DD/MM/YYYY</div>
+        </div>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label">Students</div>
+            <div class="stat-value">840 / 900</div>
+            <div class="stat-sub">Present Today / Total Enrolled</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Faculty</div>
+            <div class="stat-value">52 / 55</div>
+            <div class="stat-sub">On Duty / Total Staff</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Lab Status</div>
+            <div class="stat-value">08 Active</div>
+            <div class="stat-sub">Running Practical Sessions</div>
+        </div>
+    </section>
+
+    <div class="btn-grid">
+        <a href="#" class="nav-btn"><i>👨‍🎓</i>Student</a>
+        <a href="#" class="nav-btn"><i>💼</i>Faculty</a>
+        <a href="principal-dashboard.html" class="nav-btn"><i>🏛️</i>Principal</a>
+        <a href="#" class="nav-btn"><i>💰</i>Account</a>
+    </div>
+
+    <h3 style="text-align: center; color: var(--saffron); margin-top: 30px;">Department Portals</h3>
+    <div class="dept-pills">
+        <div class="pill">CSE</div>
+        <div class="pill">ECE</div>
+        <div class="pill">EEE</div>
+        <div class="pill">MECH</div>
+        <div class="pill">CIVIL</div>
+    </div>
+
+    <footer>
+        APSITS B.TECH ADMINISTRATION MODULE V1.0 | 2026
+    </footer>
+
+    <script>
+        function toggleNav(width) {
+            document.getElementById("sidebar").style.width = width + "px";
+        }
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+            document.getElementById('date').innerText = now.toLocaleDateString('en-GB');
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+</html>
+
