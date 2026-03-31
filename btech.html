@@ -3,209 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS B.Tech - Proddatur</title>
+    <title>APSITS B.Tech | Engineering Excellence</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #ff7722; /* Saffron Background */
-            color: #333;
+        :root {
+            --saffron: #ff7722;
+            --navy: #002147;
+            --light-grey: #f8f9fa;
+            --dark-grey: #333;
         }
 
-        /* Header Styling */
-        header {
-            background-color: #fff;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--dark-grey); line-height: 1.6; }
 
-        .logo-area { font-size: 22px; font-weight: 800; color: #ff7722; }
-        .menu-btn { font-size: 28px; cursor: pointer; color: #333; }
+        /* 1. Header Section (Image 1000229185) */
+        .top-header { padding: 10px 20px; border-bottom: 1px solid #eee; }
+        .college-title { color: var(--saffron); font-weight: bold; font-size: 1.2rem; margin: 0; }
+        .nav-main { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--saffron); }
+        .nav-right { display: flex; gap: 15px; align-items: center; }
+        .adm-btn { background: var(--dark-grey); color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-size: 11px; font-weight: bold; text-align: center; }
+        .menu-icon { background: var(--saffron); width: 40px; height: 40px; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; }
+        .menu-line { width: 22px; height: 3px; background: white; }
 
-        /* Side Menu Overlay */
-        .overlay {
-            height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; right: 0; background-color: rgba(0,0,0, 0.9);
-            overflow-x: hidden; transition: 0.5s;
-        }
-        .overlay-content { position: relative; top: 15%; width: 100%; text-align: center; }
-        .overlay a { padding: 15px; text-decoration: none; font-size: 24px; color: #fff; display: block; transition: 0.3s; }
-        .overlay a:hover { color: #ff7722; }
-        .closebtn { position: absolute; top: 15px; right: 35px; font-size: 45px; color: #fff; cursor: pointer; }
+        /* 2. Hero Section (Image 1000229184 & 1000229185) */
+        .hero-banner { background: var(--saffron); color: white; text-align: center; padding: 40px 20px; }
+        .hero-banner h1 { font-size: 2rem; margin: 0; text-transform: uppercase; }
+        .hero-banner p { font-size: 1.1rem; margin-top: 10px; }
+        .campus-img { width: 90%; max-width: 800px; border-radius: 15px; border: 5px solid white; margin-top: -30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
 
-        /* Flash News Ticker */
-        .flash-news {
-            background: #000;
-            color: #fff;
-            padding: 8px;
-            font-size: 14px;
-        }
+        /* 3. Welcome Text (Image 1000229187 & 1000229193) */
+        .welcome-section { padding: 60px 20px; text-align: center; max-width: 900px; margin: auto; }
+        .welcome-section h2 { color: var(--saffron); font-size: 1.8rem; }
+        .welcome-section p { font-size: 1rem; color: #555; text-align: justify; }
 
-        /* Content Container */
-        .container { padding: 20px; text-align: center; color: #fff; }
-        .campus-img {
-            width: 100%; max-width: 900px; border-radius: 12px;
-            margin: 20px 0; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
+        /* 4. Features Grid (Image 1000229183) */
+        .features-grid { display: flex; flex-wrap: wrap; }
+        .feat-box { flex: 1; min-width: 300px; padding: 50px 30px; display: flex; gap: 15px; }
+        .feat-box.saffron { background: var(--saffron); color: white; }
+        .feat-box.grey { background: #e9ecef; }
+        .feat-box.white { background: #f8f9fa; }
+        .v-line { width: 5px; height: 40px; background: white; flex-shrink: 0; }
+        .v-line.orange { background: var(--saffron); }
 
-        /* Section Cards */
-        .info-card {
-            background: #fff; color: #333; margin: 20px auto;
-            padding: 25px; border-radius: 15px; max-width: 900px;
-            text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .info-card h2 { color: #ff7722; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
-        
-        /* Links List */
-        .link-list { list-style: none; padding: 0; }
-        .link-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-        .link-list li a { text-decoration: none; color: #1f6feb; font-weight: 600; font-size: 15px; }
+        /* 5. Course Cards (Image 1000229199 & 1000229200) */
+        .courses-container { padding: 40px 20px; background: #eee; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .course-card { background: white; width: 320px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .course-tag { background: var(--saffron); color: white; padding: 10px; text-align: center; font-weight: bold; }
+        .course-img { width: 100%; height: 180px; object-fit: cover; }
+        .course-body { padding: 20px; }
+        .learn-more { display: inline-block; background: var(--saffron); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px; font-weight: bold; }
 
-        /* Footer */
-        footer {
-            background: #222; color: rgba(255,255,255,0.8);
-            padding: 30px 20px; text-align: center; font-size: 12px; line-height: 1.6;
+        /* 6. Placements (Image 1000229191) */
+        .stats-section { padding: 40px 20px; text-align: center; }
+        .stat-item { margin-bottom: 30px; }
+        .stat-item h3 { color: var(--saffron); text-transform: uppercase; margin-bottom: 5px; }
+        .stat-item p { max-width: 600px; margin: auto; }
+
+        @media (max-width: 768px) {
+            .feat-box { flex: 100%; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo-area">APSITS B.TECH</div>
-    <div class="menu-btn" onclick="openNav()">☰</div>
-</header>
-
-<div class="flash-news">
-    <marquee scrollamount="5">⚡ Admissions 2026 - Registration Started for B.Tech CSE, ECE, & CIVIL | 🎓 Affiliated to JNTUA, Anantapur | 🚀 Upcoming Tech Fest "Vision 2047" on April 15th.</marquee>
-</div>
-
-<div id="sideMenu" class="overlay">
-    <span class="closebtn" onclick="closeNav()">&times;</span>
-    <div class="overlay-content">
-        <a href="index.html">Home</a>
-        <a href="#">About B.Tech</a>
-        <a href="#">Academic Calendar</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="#">Faculty List</a>
-        <a href="#">Contact Us</a>
-        <a href="login.html">Login</a>
+    <div class="top-header">
+        <p class="college-title">CHenna Naga Laxmi Institute of Technology & Science</p>
+        <small>(APSITS - Proddatur)</small>
     </div>
-</div>
 
-<div class="container">
-    <h1 style="margin-bottom: 5px;">Admissions – 2026</h1>
-    <p style="opacity: 0.9;">Shaping the Engineers of Tomorrow</p>
-    
-    <img src="college-campus.jpg" alt="APSITS B.Tech Campus" class="campus-img">
-<style>
-    .highlights-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding: 40px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        justify-content: center;
-    }
-
-    .highlight-card {
-        background: #f4f4f4; /* Light grey background */
-        flex: 1;
-        min-width: 300px; /* Forces stacking on small screens */
-        padding: 0;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        transition: transform 0.3s;
-    }
-
-    .highlight-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .highlight-header {
-        background: #ff7722; /* Saffron Orange */
-        color: white;
-        padding: 20px;
-        font-weight: bold;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        border-left: 5px solid #002147; /* Navy Blue Accent */
-    }
-
-    .highlight-body {
-        padding: 20px;
-        color: #333;
-        line-height: 1.6;
-        font-size: 1rem;
-    }
-
-    /* Desktop View: Side by Side | Mobile View: Stacks automatically */
-    @media (max-width: 768px) {
-        .highlight-card {
-            min-width: 100%;
-        }
-    }
-</style>
-
-<div class="highlights-container">
-    <div class="highlight-card">
-        <div class="highlight-header">Scholarship Facility</div>
-        <div class="highlight-body">
-            Merit-based and need-based scholarships at APSITS make quality engineering education accessible to every deserving student.
+    <div class="nav-main">
+        <div class="logo">APSITS</div>
+        <div class="nav-right">
+            <a href="#" class="adm-btn">ADMISSIONS<br>2026</a>
+            <div class="menu-icon">
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+                <div class="menu-line"></div>
+            </div>
         </div>
     </div>
 
-    <div class="highlight-card">
-        <div class="highlight-header">Skilled Faculty</div>
-        <div class="highlight-body">
-            Our expert faculty brings strong academic and industry experience, committed to mentoring the next generation of engineers in Proddatur.
+    <div class="hero-banner">
+        <h1>Admissions - 2026</h1>
+        <p>Shaping the Engineers of Tomorrow</p>
+    </div>
+    <div style="text-align: center;">
+        <img src="1000229184.jpg" class="campus-img" alt="Campus">
+    </div>
+
+    <section class="welcome-section">
+        <h2>Welcome to APSITS</h2>
+        <p>Enter the APSITS campus and step into a world of serene surroundings and technology-rich environs. Situated in Proddatur, we offer a clean, green, and distraction-free environment designed for focused learning and innovative thinking.</p>
+        <a href="#" class="learn-more">Discover More</a>
+    </section>
+
+    <section class="features-grid">
+        <div class="feat-box saffron">
+            <div class="v-line"></div>
+            <div>
+                <h3>SCHOLARSHIP FACILITY</h3>
+                <p>Merit-based scholarships that make quality engineering education accessible.</p>
+            </div>
         </div>
-    </div>
-
-    <div class="highlight-card">
-        <div class="highlight-header">Campus Life</div>
-        <div class="highlight-body">
-            A vibrant campus experience at APSITS that perfectly blends technical academics, cultural heritage, and personal growth.
+        <div class="feat-box grey">
+            <div class="v-line orange"></div>
+            <div>
+                <h3>SKILLED FACULTY</h3>
+                <p>Expert faculty with industry experience committed to student success.</p>
+            </div>
         </div>
-    </div>
-</div>
-    
+        <div class="feat-box white">
+            <div class="v-line orange"></div>
+            <div>
+                <h3>CAMPUS LIFE</h3>
+                <p>A vibrant experience that blends academics and personal growth.</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="info-card">
-        <h2>About B.Tech @ APSITS</h2>
-        <p>APSITS offers premier undergraduate engineering programs with a focus on practical knowledge and industry readiness. Being <b>Affiliated to JNTUA</b>, we follow a curriculum that balances core fundamentals with emerging technologies.</p>
-    </div>
+    <div style="text-align: center; padding-top: 40px;"><h2>Our Specializations</h2></div>
+    <section class="courses-container">
+        <div class="course-card">
+            <div class="course-tag">CSE</div>
+            <img src="1000229199.jpg" class="course-img">
+            <div class="course-body">
+                <p>Focuses on computing principles, software development, and system architecture.</p>
+                <a href="#" class="learn-more">LEARN MORE</a>
+            </div>
+        </div>
+        <div class="course-card">
+            <div class="course-tag">AI & ML</div>
+            <img src="1000229200.jpg" class="course-img">
+            <div class="course-body">
+                <p>Explores technologies that enable machines to think, learn, and evolve.</p>
+                <a href="#" class="learn-more">LEARN MORE</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="info-card">
-        <h2>Mandatory Information</h2>
-        <ul class="link-list">
-            <li><a href="#">📑 AICTE - Extension of Approvals (EoA)</a></li>
-            <li><a href="#">💬 AICTE - Feedback (Students & Faculty)</a></li>
-            <li><a href="#">⚖️ Online Grievance Redressal Portal</a></li>
-            <li><a href="#">📜 RTI Policy & Mandatory Disclosures</a></li>
-            <li><a href="gallery.html">🖼️ Campus Gallery & Labs</a></li>
-        </ul>
-    </div>
-</div>
+    <section class="stats-section">
+        <div class="stat-item">
+            <h3>TRUSTED FOR PLACEMENTS</h3>
+            <p>Industry-focused training and expert guidance drive consistent placement success for our students.</p>
+        </div>
+        <hr style="width: 50%; opacity: 0.2;">
+        <div class="stat-item">
+            <h3>OUTCOME-BASED EDUCATION</h3>
+            <p>Clear learning outcomes guide every course to help students achieve measurable academic success.</p>
+        </div>
+    </section>
 
-<footer>
-    © 2026 APSITS - Amarajivi Potti Sriramulu Institute of Technology & Science<br>
-    Proddatur, Andhra Pradesh | Affiliated to JNTUA | Approved by AICTE<br>
-    <b>VISION 2047</b>
-</footer>
-
-<script>
-    function openNav() { document.getElementById("sideMenu").style.width = "100%"; }
-    function closeNav() { document.getElementById("sideMenu").style.width = "0%"; }
-</script>
+    <footer style="background: var(--navy); color: white; text-align: center; padding: 20px;">
+        <p>© 2026 APSITS | Proddatur, Andhra Pradesh</p>
+    </footer>
 
 </body>
 </html>
-
