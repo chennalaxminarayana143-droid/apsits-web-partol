@@ -122,13 +122,16 @@ async function handleLogin(event) {
 
     try {
         const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'cors', // CORS ఎర్రర్స్ రాకుండా ఉండటానికి
-            body: JSON.stringify({
-                username: user,
-                password: pass
-            })
-        });
+    method: 'POST',
+    mode: 'no-cors', // ఇది సెక్యూరిటీ ఎర్రర్స్ రాకుండా చూస్తుంది
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        username: user,
+        password: pass
+       })
+    });
 
         const result = await response.json();
 
