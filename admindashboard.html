@@ -3,160 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Admin | APSITS Control Center</title>
+    <title>Admin Command Center | APSITS</title>
     <style>
         :root {
             --saffron: #ff7722;
             --navy: #002147;
-            --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.95);
-            --danger: #d90429;
-            --success: #1b4d3e;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-heavy: rgba(255, 255, 255, 0.2);
+            --text: #ffffff;
         }
 
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
-            background: #f4f7f6 url('1000229094.jpg') no-repeat center center fixed;
+            background: linear-gradient(rgba(0,33,71,0.85), rgba(0,33,71,0.85)), url('1000229094.jpg');
             background-size: cover;
-            color: #333;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text);
+            overflow-x: hidden;
         }
 
-        /* Top Navigation Bar (Same as Index) */
-        nav {
-            background: var(--navy);
-            padding: 15px 30px;
+        /* ☰ Sidebar Menu */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: var(--navy);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            border-right: 2px solid var(--saffron);
+        }
+
+        .sidebar a {
+            padding: 15px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar a:hover {
+            background: var(--saffron);
+            padding-left: 45px;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+            cursor: pointer;
+        }
+
+        /* Header */
+        header {
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid var(--saffron);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--glass);
         }
-        .logo-area { color: white; font-size: 22px; font-weight: 800; letter-spacing: 1px; }
-        .admin-profile { color: var(--saffron); font-weight: bold; border: 1px solid var(--saffron); padding: 5px 15px; border-radius: 20px; }
 
-        /* Statistics Section */
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--saffron);
+        }
+
+        .logo-area h2 { margin: 0; letter-spacing: 2px; font-weight: 800; }
+
+        /* Stats Section */
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 30px;
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .stat-card {
+
+        .stat-box {
             background: var(--glass);
             padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            text-align: center;
-            border-bottom: 5px solid var(--navy);
-            transition: 0.3s;
-        }
-        .stat-card:hover { transform: translateY(-5px); border-color: var(--saffron); }
-        .stat-card h3 { font-size: 14px; color: #666; text-transform: uppercase; margin-bottom: 10px; }
-        .stat-card .value { font-size: 32px; font-weight: 800; color: var(--navy); }
-
-        /* Modules Grid */
-        .modules-title { text-align: center; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 28px; margin: 20px 0; }
-        
-        .main-modules {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            padding: 0 30px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .module-item {
-            background: rgba(0, 33, 71, 0.85);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 30px 15px;
             border-radius: 15px;
             text-align: center;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.4s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .stat-box h3 { font-size: 14px; text-transform: uppercase; color: var(--saffron); margin-bottom: 10px; }
+        .stat-box p { font-size: 28px; font-weight: bold; margin: 0; }
+
+        /* Main Buttons Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .admin-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass);
+            color: white;
+            padding: 30px 10px;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(15px);
+            transition: 0.4s all;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            gap: 10px;
+            animation: slideUp 0.8s ease-out;
         }
-        .module-item i { font-size: 40px; color: var(--saffron); }
-        .module-item:hover { background: var(--saffron); transform: scale(1.05); }
-        .module-item span { font-weight: bold; font-size: 16px; letter-spacing: 1px; }
 
-        /* Alerts & Activity Section */
-        .bottom-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 20px;
-            padding: 0 30px 50px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .admin-btn i { font-size: 30px; }
+
+        .admin-btn:hover {
+            background: var(--saffron);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 119, 34, 0.4);
+            border-color: var(--saffron);
         }
-        .alert-box {
-            background: var(--glass);
+
+        /* Alerts Widget */
+        .alerts-panel {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             padding: 25px;
-            border-radius: 15px;
-            border-left: 8px solid var(--danger);
+            border-left: 5px solid var(--saffron);
         }
-        .alert-box h4 { margin-top: 0; color: var(--danger); display: flex; align-items: center; gap: 10px; }
-        .alert-item { padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14px; display: flex; justify-content: space-between; }
 
-        @media (max-width: 768px) {
-            .bottom-grid { grid-template-columns: 1fr; }
+        .alert-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+
+        .alert-tag { color: var(--saffron); font-weight: bold; }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 12px; }
+
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo-area">APSITS MASTER ADMIN</div>
-        <div class="admin-profile">SYSTEM COMMANDER</div>
-    </nav>
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">B.Tech Management</a>
+        <a href="#">Diploma Portal</a>
+        <a href="#">Student Database</a>
+        <a href="#">Faculty/Employee</a>
+        <a href="#">Accounts/Finance</a>
+        <a href="#">Exam Cell</a>
+        <a href="#">Canteen Orders</a>
+        <a href="#">Security Logs</a>
+        <a href="index.html" style="color: var(--saffron); margin-top: 50px;">Logout</a>
+    </div>
+
+    <header>
+        <div class="menu-icon" onclick="openNav()">&#9776;</div>
+        <div class="logo-area"><h2>APSITS ADMIN</h2></div>
+        <div id="current-time" style="font-size: 14px; font-weight: bold;"></div>
+    </header>
 
     <section class="stats-container">
-        <div class="stat-card"><h3>Total Strength</h3><div class="value">2,840</div></div>
-        <div class="stat-card"><h3>Staff Active</h3><div class="value">142</div></div>
-        <div class="stat-card"><h3>Daily Revenue</h3><div class="value">₹ 45,200</div></div>
-        <div class="stat-card"><h3>Security Status</h3><div class="value" style="color:var(--success)">SECURE</div></div>
+        <div class="stat-box"><h3>Live Students</h3><p>1,240</p></div>
+        <div class="stat-box"><h3>Active Faculty</h3><p>86</p></div>
+        <div class="stat-box"><h3>Today's Attendance</h3><p>92%</p></div>
+        <div class="stat-box"><h3>Pending Tasks</h3><p>05</p></div>
     </section>
 
-    <h2 class="modules-title">Management Modules</h2>
-
-    <div class="main-modules">
-        <div class="module-item" onclick="location.href='btech-clg.html'"><i>🎓</i><span>B.TECH</span></div>
-        <div class="module-item" onclick="location.href='diploma-clg.html'"><i>📜</i><span>DIPLOMA</span></div>
-        <div class="module-item" onclick="location.href='student-db.html'"><i>👨‍🎓</i><span>STUDENTS</span></div>
-        <div class="module-item" onclick="location.href='faculty-db.html'"><i>👔</i><span>FACULTY / EMPLOYEE</span></div>
-        <div class="module-item" onclick="location.href='accounts-dashboard.html'"><i>💰</i><span>ACCOUNTS</span></div>
-        <div class="module-item" onclick="location.href='exam-cell-dashboard.html'"><i>📝</i><span>EXAM CELL</span></div>
-        <div class="module-item" onclick="location.href='canteen-dashboard.html'"><i>🍔</i><span>CANTEEN</span></div>
-        <div class="module-item" onclick="location.href='security-dashboard.html'"><i>🛡️</i><span>SECURITY</span></div>
+    <div class="grid-container">
+        <a href="#" class="admin-btn"><i>🎓</i><span>B.Tech</span></a>
+        <a href="#" class="admin-btn"><i>📜</i><span>Diploma</span></a>
+        <a href="#" class="admin-btn"><i>👨‍🎓</i><span>Student</span></a>
+        <a href="#" class="admin-btn"><i>💼</i><span>Faculty / Employee</span></a>
+        <a href="#" class="admin-btn"><i>💰</i><span>Accounts</span></a>
+        <a href="#" class="admin-btn"><i>📝</i><span>Exam Cell</span></a>
+        <a href="#" class="admin-btn"><i>🍔</i><span>Canteen</span></a>
+        <a href="#" class="admin-btn"><i>🛡️</i><span>Security</span></a>
     </div>
 
-    <div class="bottom-grid">
-        <div class="alert-box">
-            <h4>🚨 System Alerts & Notifications</h4>
-            <div class="alert-item"><span>⚠️ JNTUA Exam Portal Sync Pending</span> <small>10 mins ago</small></div>
-            <div class="alert-item"><span>⚠️ Low Stationary Stock (Exam Cell)</span> <small>1 hour ago</small></div>
-            <div class="alert-item"><span>⚠️ Server Backup Overdue (24 Hours)</span> <small>Today 09:00 AM</small></div>
-            <div class="alert-item"><span>⚠️ Unauthorized Login Attempt (Gate 4)</span> <small>Yesterday</small></div>
+    <div class="alerts-panel">
+        <h3 style="margin-top:0;">🚨 Critical System Alerts</h3>
+        <div class="alert-item">
+            <span>Server Sync with JNTUA is successful.</span>
+            <span class="alert-tag">INFO</span>
         </div>
-        
-        <div class="alert-box" style="border-left-color: var(--navy);">
-            <h4 style="color: var(--navy);">📅 Schedule</h4>
-            <div class="alert-item">Admission Meeting <br> @ 02:30 PM</div>
-            <div class="alert-item">Audit Verification <br> Tomorrow</div>
+        <div class="alert-item">
+            <span>Shortage of attendance in 3rd Year CSE-B.</span>
+            <span class="alert-tag">WARNING</span>
+        </div>
+        <div class="alert-item" style="border:none;">
+            <span>Security Breach Attempt Blocked - Gate 4.</span>
+            <span class="alert-tag" style="color:#ff4444;">CRITICAL</span>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 20px; color: white; background: var(--navy);">
-        © 2026 APSITS | AMARAJIVI POTTI SRIRAMULU INSTITUTE OF TECHNOLOGY & SCIENCE
+    <footer>
+        © 2026 APSITS FOUNDER | PRODDATUR | ALL SYSTEMS OPERATIONAL
     </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "280px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+
+        // Clock Update
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('current-time').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 
 </body>
 </html>
