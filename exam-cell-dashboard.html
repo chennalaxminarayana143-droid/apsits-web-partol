@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Cell Portal | APSITS</title>
+    <style>
+        :root {
+            --saffron: #ff7722;
+            --deep-purple: #2c003e; /* Academic/Exam Authority Theme */
+            --glass: rgba(255, 255, 255, 0.92);
+            --white: #ffffff;
+            --danger: #e63946;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('1000229080.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+        }
+
+        /* 🎬 Dell Style Professional Loader */
+        #loader {
+            position: fixed;
+            width: 100%; height: 100vh;
+            background: #fff;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999;
+        }
+        #loader h1 { color: var(--deep-purple); font-size: 3.5rem; letter-spacing: 15px; animation: examAnimate 2s forwards; }
+        @keyframes examAnimate {
+            0% { opacity: 0; letter-spacing: 0px; }
+            50% { opacity: 1; letter-spacing: 15px; }
+            100% { transform: scale(1.5); opacity: 0; visibility: hidden; }
+        }
+
+        /* Header Area */
+        header {
+            background: var(--saffron);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--deep-purple);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .header-title { font-size: 26px; font-weight: 900; margin: 0; }
+        .sub-header { font-size: 13px; opacity: 0.9; margin-top: 5px; font-weight: bold; }
+
+        /* Top Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .stat-card {
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border-top: 5px solid var(--deep-purple);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .stat-card h3 { margin: 0; font-size: 12px; color: #777; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-val { font-size: 28px; font-weight: bold; margin-top: 10px; color: var(--deep-purple); }
+
+        /* Main Modules Grid */
+        .module-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1.2s ease-out 1s;
+        }
+        .module-container.show { opacity: 1; transform: translateY(0); }
+
+        .module-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 30px 10px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .module-btn i { font-size: 35px; }
+        .module-btn:hover { background: var(--saffron); transform: scale(1.05); border-color: var(--saffron); box-shadow: 0 0 15px var(--saffron); }
+
+        /* Bottom Widgets Section */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            padding: 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .widget {
+            background: var(--glass);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .widget h4 { border-bottom: 2px solid var(--deep-purple); padding-bottom: 10px; margin-top: 0; color: var(--deep-purple); }
+
+        /* List Items */
+        .item-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+        .alert-badge { background: var(--danger); color: white; padding: 2px 8px; border-radius: 10px; font-weight: bold; font-size: 11px; }
+
+        footer { text-align: center; padding: 30px; color: #ccc; font-size: 12px; }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><h1>APSITS EXAM CELL</h1></div>
+
+    <header>
+        <div class="header-title">APSITS - EXAM CELL CONTROL</div>
+        <div class="sub-header">Jawaharlal Nehru Technological University, Anantapur (JNTUA) Affiliated</div>
+        <div style="margin-top: 15px; background: white; color: var(--deep-purple); display: inline-block; padding: 5px 25px; border-radius: 50px; font-weight: bold;" id="greeting">
+            Exam Cell Administrator
+        </div>
+    </header>
+
+    <section class="stats-grid">
+        <div class="stat-card"><h3>Upcoming Exams</h3><div class="stat-val">12</div></div>
+        <div class="stat-card"><h3>Total Students</h3><div class="stat-val">1,245</div></div>
+        <div class="stat-card"><h3>Results Declared</h3><div class="stat-val">08/10</div></div>
+        <div class="stat-card"><h3>System Alerts</h3><div class="stat-val" style="color: var(--danger);">03 Critical</div></div>
+    </section>
+
+    <div class="module-container" id="moduleGrid">
+        <div class="module-btn"><i>📅</i><span>Schedule</span></div>
+        <div class="module-btn"><i>🪑</i><span>Seating</span></div>
+        <div class="module-btn"><i>🎟️</i><span>Hall Tickets</span></div>
+        <div class="module-btn"><i>📝</i><span>Marks Entry</span></div>
+        <div class="module-btn"><i>📊</i><span>Results</span></div>
+        <div class="module-btn"><i>👮</i><span>Invigilation</span></div>
+        <div class="module-btn"><i>📉</i><span>Reports</span></div>
+    </div>
+
+    <div class="bottom-section">
+        <div class="widget">
+            <h4>📅 Upcoming Exams</h4>
+            <div class="item-row"><span>R23 2-1 Semester Regular</span> <span>April 05</span></div>
+            <div class="item-row"><span>Diploma Supplementary</span> <span>April 08</span></div>
+            <div class="item-row"><span>Internal Assessment - II</span> <span>April 12</span></div>
+        </div>
+
+        <div class="widget">
+            <h4>⏳ Pending Tasks</h4>
+            <div class="item-row"><span>● Finalize Seating for Block-A</span> <span class="alert-badge">PENDING</span></div>
+            <div class="item-row"><span>● Verify Hall Tickets Signatures</span> <span class="alert-badge">IN PROGRESS</span></div>
+            <div class="item-row"><span>● Upload Marks (MEFA)</span> <span class="alert-badge">DUE TODAY</span></div>
+        </div>
+
+        <div class="widget">
+            <h4>🚨 Alerts</h4>
+            <div class="item-row" style="color:var(--danger); font-weight:bold;"><span>⚠️ JNTUA Server Sync Error</span> <span>10:20 AM</span></div>
+            <div class="item-row"><span>⚠️ Malpractice Case Reported (Room 102)</span> <span>Yesterday</span></div>
+            <div class="item-row"><span>⚠️ Stationary Stock Low (Answer Booklets)</span> <span>Check Now</span></div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 APSITS EXAM CELL | PRODDATUR | CONFIDENTIAL ACCESS ONLY
+    </footer>
+
+    <script>
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('moduleGrid').classList.add('show');
+            }, 2000);
+        };
+
+        const hr = new Date().getHours();
+        let w = hr < 12 ? "Good Morning" : hr < 16 ? "Good Afternoon" : "Good Evening";
+        document.getElementById('greeting').innerText = `Administrator, ${w}!`;
+    </script>
+
+</body>
+</html>
+
