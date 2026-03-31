@@ -103,6 +103,80 @@
     <p style="opacity: 0.9;">Shaping the Engineers of Tomorrow</p>
     
     <img src="college-campus.jpg" alt="APSITS B.Tech Campus" class="campus-img">
+<style>
+    .highlights-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .highlight-card {
+        background: #f4f4f4; /* Light grey background */
+        flex: 1;
+        min-width: 300px; /* Forces stacking on small screens */
+        padding: 0;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+
+    .highlight-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .highlight-header {
+        background: #ff7722; /* Saffron Orange */
+        color: white;
+        padding: 20px;
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        border-left: 5px solid #002147; /* Navy Blue Accent */
+    }
+
+    .highlight-body {
+        padding: 20px;
+        color: #333;
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+
+    /* Desktop View: Side by Side | Mobile View: Stacks automatically */
+    @media (max-width: 768px) {
+        .highlight-card {
+            min-width: 100%;
+        }
+    }
+</style>
+
+<div class="highlights-container">
+    <div class="highlight-card">
+        <div class="highlight-header">Scholarship Facility</div>
+        <div class="highlight-body">
+            Merit-based and need-based scholarships at APSITS make quality engineering education accessible to every deserving student.
+        </div>
+    </div>
+
+    <div class="highlight-card">
+        <div class="highlight-header">Skilled Faculty</div>
+        <div class="highlight-body">
+            Our expert faculty brings strong academic and industry experience, committed to mentoring the next generation of engineers in Proddatur.
+        </div>
+    </div>
+
+    <div class="highlight-card">
+        <div class="highlight-header">Campus Life</div>
+        <div class="highlight-body">
+            A vibrant campus experience at APSITS that perfectly blends technical academics, cultural heritage, and personal growth.
+        </div>
+    </div>
+</div>
+    
 
     <div class="info-card">
         <h2>About B.Tech @ APSITS</h2>
