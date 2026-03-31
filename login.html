@@ -106,44 +106,49 @@
 </div>
 
 <script>
-    function handleLogin() {
-        const id = document.getElementById('userId').value.toUpperCase();
-        const pass = document.getElementById('userPass').value;
+    // మీ వెబ్ యాప్ URL ఇక్కడ ఉంది
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz64l_eMbEHO_ZYfrGkfUTe7EIFzhis2sMncjxtn28BqArivMJToYIt6rL3ZWjnMDCY/exec";
 
-        if(id === "" || pass === "") {
-            alert("Please Enter ID and Password.");
-            return;
-        }
+async function handleLogin(event) {
+    event.preventDefault();
+    
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+    const loginBtn = document.getElementById('loginBtn');
 
-        // Logic based on ID Prefix
-        if (id.startsWith("STU")) {
-            window.location.href = "student-dashboard.html";
-        } else if (id.startsWith("FAC")) {
-            window.location.href = "faculty-dashboard.html";
-        } else if (id.startsWith("ADM")) {
-            window.location.href = "admindashboard.html";
-        } else if (id.startsWith("DPRI")) {
-            window.location.href = "dprincipal-dashboard.html";
-        } else if (id.startsWith("ACCO")) {
-            window.location.href = "accounts-dashboard.html";
-        } else if (id.startsWith("CANT")) {
-            window.location.href = "canteen-dashboard.html";
-        } else if (id.startsWith("SECU")) {
-            window.location.href = "security-dashboard.html";
-        } else if (id.startsWith("HOD")) {
-            window.location.href = "hod-dashboard.html";
-        } else if (id.startsWith("EXAM")) {
-            window.location.href = "exam-cell-dashboard.html";
-        } else if (id.startsWith("LIB")) {
-            window.location.href = "library-dashboard.html";
+    // బటన్ స్టేటస్ మార్చడం
+    loginBtn.innerText = "Verifying...";
+    loginBtn.disabled = true;
+
+    try {
+        const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'cors', // CORS ఎర్రర్స్ రాకుండా ఉండటానికి
+            body: JSON.stringify({
+                username: user,
+                password: pass
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+            // లాగిన్ సక్సెస్ అయితే సంబంధిత పేజీకి వెళ్తుంది
+            // ఉదాహరణకు: hod-dashboard.html లేదా library-dashboard.html
+            window.location.href = result.url; 
         } else {
-            alert("Invalid ID Number!");
+            alert("⚠️ Invalid Credentials! దయచేసి వివరాలు సరిచూసుకోండి.");
+            loginBtn.innerText = "Login";
+            loginBtn.disabled = false;
         }
+    } catch (error) {
+        console.error("Login Error:", error);
+        alert("❌ సర్వర్ కనెక్షన్ విఫలమైంది. మళ్ళీ ప్రయత్నించండి.");
+        loginBtn.innerText = "Login";
+        loginBtn.disabled = false;
     }
+  }
 
-    function forgotPassword() {
-        alert("Please Consult Your Department HOD.");
-    }
 </script>
 
 </body>
