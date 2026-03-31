@@ -1,170 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS | Secure Login</title>
+    <title>APSITS Portal - Login</title>
     <style>
-        :root {
-            --saffron: #ff7722;
-            --navy: #002147;
-            --white: #ffffff;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(rgba(0,33,71,0.8), rgba(0,33,71,0.8)), url('1000229094.jpg');
-            background-size: cover;
-            background-position: center;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            /* 🚩 ఇక్కడ ఇమేజ్ పేరు సరిగ్గా ఉండాలి */
+            background: url('IMG_20260330_172904.jpg') no-repeat center center fixed;
+            background-size: cover;
         }
 
-        .login-container {
-            background: rgba(255, 255, 255, 0.95);
+        /* లాగిన్ కార్డ్ పారదర్శకంగా (Transparent) మార్చబడింది */
+        .login-card {
+            background: rgba(255, 255, 255, 0.15); /* పారదర్శకత కోసం */
+            backdrop-filter: blur(10px); /* వెనుక ఇమేజ్ బ్లర్ అవ్వడానికి */
+            -webkit-backdrop-filter: blur(10px);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2); /* తెల్లటి బోర్డర్ */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             text-align: center;
-            border-top: 5px solid var(--saffron);
+            color: #fff;
         }
 
-        .login-container h2 {
-            color: var(--navy);
-            margin-bottom: 10px;
-            font-weight: 800;
+        .login-card h2 { 
+            font-size: 28px;
+            margin-bottom: 25px; 
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .login-container p {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--navy);
-            font-weight: 600;
-        }
-
-        .form-group input {
+        .input-group { text-align: left; margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 14px; margin-bottom: 8px; font-weight: 500; }
+        
+        .input-group input {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--saffron);
-            border: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2); /* ఇన్‌పుట్ బాక్స్ కూడా పారదర్శకం */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
             transition: 0.3s;
         }
 
-        .login-btn:hover {
-            background: #e66a1f;
-            transform: translateY(-2px);
+        .input-group input::placeholder { color: #ddd; }
+        .input-group input:focus { background: rgba(255, 255, 255, 0.3); border-color: #ff7722; }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: #ff7722;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 119, 34, 0.4);
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        .login-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-        }
+        .login-btn:hover { background: #e66a1f; transform: scale(1.02); }
 
-        .footer-text {
+        .forgot-pass {
             margin-top: 20px;
-            font-size: 12px;
-            color: #888;
+            display: block;
+            font-size: 13px;
+            color: #eee;
+            text-decoration: none;
         }
+        .forgot-pass:hover { color: #ff7722; text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>APSITS PORTAL</h2>
-        <p>Enter your credentials to access your dashboard</p>
-        
-        <form id="loginForm">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" id="username" placeholder="e.g. hod_cse" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="••••••••" required>
-            </div>
-            
-            <button type="submit" id="loginBtn" class="login-btn">Login</button>
-        </form>
-
-        <div class="footer-text">
-            © 2026 APSITS | Authorized Access Only
-        </div>
+<div class="login-card">
+    <h2>APSITS LOGIN</h2>
+    
+    <div class="input-group">
+        <label>ID Number</label>
+        <input type="text" id="userId" placeholder="e.g. Enter User ID">
     </div>
+    
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="userPass" placeholder="••••••••">
+    </div>
+    
+    <button class="login-btn" onclick="handleLogin()">Login</button>
+    
+    <a href="#" class="forgot-pass" onclick="forgotPassword()">Forgot Password?</a>
+</div>
 
-    <script>
-        // Your Verified Apps Script URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz64l_eMbEHO_ZYfrGkfUTe7EIFzhis2sMncjxtn28BqArivMJToYIt6rL3ZWjnMDCY/exec";
+<script>
+    function handleLogin() {
+        const id = document.getElementById('userId').value.toUpperCase();
+        const pass = document.getElementById('userPass').value;
 
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const loginBtn = document.getElementById('loginBtn');
-
-            // UI Feedback
-            loginBtn.innerText = "Authenticating...";
-            loginBtn.disabled = true;
-
-            try {
-                // Using GET parameters to avoid common CORS blocks with Google Scripts
-                const targetUrl = `${SCRIPT_URL}?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-                
-                const response = await fetch(targetUrl);
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    alert("Login Successful! Redirecting...");
-                    // This redirects to the URL found in your Google Sheet column D
-                    window.location.href = result.url; 
-                } else {
-                    alert("⚠️ Access Denied: " + result.message);
-                    resetButton();
-                }
-            } catch (error) {
-                console.error("Connection Error:", error);
-                alert("❌ Connection Error: Unable to reach the security server. Please check your internet.");
-                resetButton();
-            }
-        });
-
-        function resetButton() {
-            const loginBtn = document.getElementById('loginBtn');
-            loginBtn.innerText = "Login";
-            loginBtn.disabled = false;
+        if(id === "" || pass === "") {
+            alert("దయచేసి ID మరియు Password ఎంటర్ చేయండి.");
+            return;
         }
-    </script>
+
+        // Logic based on ID Prefix
+        if (id.startsWith("STU")) {
+            window.location.href = "diploma-student.html";
+        } else if (id.startsWith("FAC")) {
+            window.location.href = "faculty-dashboard.html";
+        } else if (id.startsWith("ADM")) {
+            window.location.href = "dashboard.html";
+        } else {
+            alert("Invalid ID Number!");
+        }
+    }
+
+    function forgotPassword() {
+        alert("దయచేసి మీ Department HOD ని సంప్రదించండి.");
+    }
+</script>
+
 </body>
 </html>
