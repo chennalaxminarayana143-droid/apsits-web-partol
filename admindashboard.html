@@ -1,155 +1,162 @@
 <!DOCTYPE html>
-<html lang="te">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS Admin - Management Hub</title>
+    <title>Master Admin | APSITS Control Center</title>
     <style>
-        * { box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #0d1117;
-            color: white;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        :root {
+            --saffron: #ff7722;
+            --navy: #002147;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.95);
+            --danger: #d90429;
+            --success: #1b4d3e;
         }
 
-        /* Top Navigation */
-        .top-nav {
-            background: #161b22;
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f7f6 url('1000229094.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        /* Top Navigation Bar (Same as Index) */
+        nav {
+            background: var(--navy);
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 4px solid var(--saffron);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
+        .logo-area { color: white; font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+        .admin-profile { color: var(--saffron); font-weight: bold; border: 1px solid var(--saffron); padding: 5px 15px; border-radius: 20px; }
 
-        .logo-text { font-size: 24px; font-weight: bold; color: #58a6ff; letter-spacing: 1px; }
-
-        /* Dashboard Container */
-        .container {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: auto;
+        /* Statistics Section */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .stat-card {
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             text-align: center;
+            border-bottom: 5px solid var(--navy);
+            transition: 0.3s;
         }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--saffron); }
+        .stat-card h3 { font-size: 14px; color: #666; text-transform: uppercase; margin-bottom: 10px; }
+        .stat-card .value { font-size: 32px; font-weight: 800; color: var(--navy); }
 
-        h1 { margin-bottom: 10px; font-weight: 300; }
-        .sub-title { color: #8b949e; margin-bottom: 40px; }
-
-        /* Square Button Grid */
-        .grid {
+        /* Modules Grid */
+        .modules-title { text-align: center; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 28px; margin: 20px 0; }
+        
+        .main-modules {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 25px;
-            justify-content: center;
+            gap: 20px;
+            padding: 0 30px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        .menu-btn {
-            background: rgba(22, 27, 34, 1);
-            border: 1px solid #30363d;
+        .module-item {
+            background: rgba(0, 33, 71, 0.85);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 30px 15px;
             border-radius: 15px;
-            aspect-ratio: 1 / 1; /* పక్కా స్క్వేర్ షేప్ కోసం */
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.4s;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            gap: 15px;
         }
+        .module-item i { font-size: 40px; color: var(--saffron); }
+        .module-item:hover { background: var(--saffron); transform: scale(1.05); }
+        .module-item span { font-weight: bold; font-size: 16px; letter-spacing: 1px; }
 
-        .menu-btn:hover {
-            transform: translateY(-8px);
-            border-color: #58a6ff;
-            background: linear-gradient(145deg, #161b22, #1f6feb);
-            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.2);
+        /* Alerts & Activity Section */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            padding: 0 30px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
-        .icon { font-size: 40px; margin-bottom: 15px; }
-        .label { font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-
-        .logout-btn {
-            background: transparent;
-            color: #f85149;
-            border: 1px solid #f85149;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
+        .alert-box {
+            background: var(--glass);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 8px solid var(--danger);
         }
+        .alert-box h4 { margin-top: 0; color: var(--danger); display: flex; align-items: center; gap: 10px; }
+        .alert-item { padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14px; display: flex; justify-content: space-between; }
 
-        /* Responsive Settings */
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .icon { font-size: 30px; }
-            .label { font-size: 13px; }
+        @media (max-width: 768px) {
+            .bottom-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<div class="top-nav">
-    <div class="logo-text">APSITS ADMIN</div>
-    <button class="logout-btn" onclick="window.location.href='index.html'">LOGOUT</button>
-</div>
+    <nav>
+        <div class="logo-area">APSITS MASTER ADMIN</div>
+        <div class="admin-profile">SYSTEM COMMANDER</div>
+    </nav>
 
-<div class="container">
-    <h1>Management Hub</h1>
-    <p class="sub-title">APSITS Institutional Control Panel - Proddatur</p>
+    <section class="stats-container">
+        <div class="stat-card"><h3>Total Strength</h3><div class="value">2,840</div></div>
+        <div class="stat-card"><h3>Staff Active</h3><div class="value">142</div></div>
+        <div class="stat-card"><h3>Daily Revenue</h3><div class="value">₹ 45,200</div></div>
+        <div class="stat-card"><h3>Security Status</h3><div class="value" style="color:var(--success)">SECURE</div></div>
+    </section>
 
-    <div class="grid">
-        <div class="menu-btn" onclick="window.location.href='diploma.html'">
-        <div class="icon">🎓</div>
-        <div class="label">Diploma</div>
+    <h2 class="modules-title">Management Modules</h2>
+
+    <div class="main-modules">
+        <div class="module-item" onclick="location.href='btech-clg.html'"><i>🎓</i><span>B.TECH</span></div>
+        <div class="module-item" onclick="location.href='diploma-clg.html'"><i>📜</i><span>DIPLOMA</span></div>
+        <div class="module-item" onclick="location.href='student-db.html'"><i>👨‍🎓</i><span>STUDENTS</span></div>
+        <div class="module-item" onclick="location.href='faculty-db.html'"><i>👔</i><span>FACULTY / EMPLOYEE</span></div>
+        <div class="module-item" onclick="location.href='accounts-dashboard.html'"><i>💰</i><span>ACCOUNTS</span></div>
+        <div class="module-item" onclick="location.href='exam-cell-dashboard.html'"><i>📝</i><span>EXAM CELL</span></div>
+        <div class="module-item" onclick="location.href='canteen-dashboard.html'"><i>🍔</i><span>CANTEEN</span></div>
+        <div class="module-item" onclick="location.href='security-dashboard.html'"><i>🛡️</i><span>SECURITY</span></div>
+    </div>
+
+    <div class="bottom-grid">
+        <div class="alert-box">
+            <h4>🚨 System Alerts & Notifications</h4>
+            <div class="alert-item"><span>⚠️ JNTUA Exam Portal Sync Pending</span> <small>10 mins ago</small></div>
+            <div class="alert-item"><span>⚠️ Low Stationary Stock (Exam Cell)</span> <small>1 hour ago</small></div>
+            <div class="alert-item"><span>⚠️ Server Backup Overdue (24 Hours)</span> <small>Today 09:00 AM</small></div>
+            <div class="alert-item"><span>⚠️ Unauthorized Login Attempt (Gate 4)</span> <small>Yesterday</small></div>
         </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">🛡️</div>
-            <div class="label">B.Tech</div>
-        </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">💼</div>
-            <div class="label">AO Employees</div>
-        </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">🏦</div>
-            <div class="label">Accounts</div>
-        </div>
-
-        <div class="menu-btn" onclick="window.location.href='registration.html'">
-            <div class="icon">📝</div>
-            <div class="label">Admissions</div>
-        </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">📄</div>
-            <div class="label">Exam Cell</div>
-        </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">🔒</div>
-            <div class="label">Security</div>
-        </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">🍔</div>
-            <div class="label">Canteen</div>
-        </div>
-
-        <div class="menu-btn" onclick="location.href='#'">
-            <div class="icon">💰</div>
-            <div class="label">Revenue</div>
+        
+        <div class="alert-box" style="border-left-color: var(--navy);">
+            <h4 style="color: var(--navy);">📅 Schedule</h4>
+            <div class="alert-item">Admission Meeting <br> @ 02:30 PM</div>
+            <div class="alert-item">Audit Verification <br> Tomorrow</div>
         </div>
     </div>
-</div>
 
-<footer style="text-align: center; padding: 20px; color: #484f58; font-size: 12px;">
-    APSITS Vision 2047 | Integrated Campus Management System
-</footer>
+    <footer style="text-align: center; padding: 20px; color: white; background: var(--navy);">
+        © 2026 APSITS | AMARAJIVI POTTI SRIRAMULU INSTITUTE OF TECHNOLOGY & SCIENCE
+    </footer>
 
 </body>
 </html>
