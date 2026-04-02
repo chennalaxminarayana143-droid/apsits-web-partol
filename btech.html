@@ -3,271 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS | Institute of Technology & Science</title>
+    <title>APSITS | Andhra Pradesh State Institute of Technology & Sciences</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-orange: #ff7722;
-            --dark-bg: #1a1a1a;
-            --light-grey: #f4f4f4;
+            --orange: #ff7722;
             --white: #ffffff;
+            --black: #1a1a1a;
+            --brown: #4e342e;
+            --light-grey: #f8f9fa;
         }
 
-        body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; scroll-behavior: smooth; color: #333; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--black); overflow-x: hidden; }
 
-        /* 1. HEADER & NAV */
+        /* 1. HEADER */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 5%;
-            background: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background: var(--white); position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 3px solid var(--orange);
         }
-        .logo-container img { height: 60px; } /* యూజర్ లోగో 1000229573.jpg ఇక్కడ వస్తుంది */
-        
-        .nav-right { display: flex; align-items: center; gap: 20px; }
-        .adm-btn {
-            background: var(bg-black);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .menu-btn {
-            background: var(--primary-orange);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 20px;
-        }
+        .logo img { height: 65px; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .adm-btn { background: var(--orange); color: white; padding: 10px 18px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 14px; }
+        .menu-btn { background: var(--black); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
 
         /* 2. HERO SECTION */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('college-campus.jpg'); /* బ్యాక్‌గ్రౌండ్ క్యాంపస్ ఇమేజ్ */
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
+            height: 75vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('college-campus.jpg');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 20px;
         }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        .hero p { font-size: 1.2rem; max-width: 700px; margin-bottom: 25px; }
-        .btn-orange {
-            background: var(--primary-orange);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+        .hero h1 { font-size: 2.8rem; color: var(--orange); margin-bottom: 15px; }
+        .hero p { max-width: 800px; font-size: 1.2rem; margin-bottom: 25px; }
+        .btn-orange { background: var(--orange); color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; }
 
-        /* 3. HIGHLIGHT CARDS */
-        .highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            margin-top: -50px;
-            padding: 0 5%;
-            gap: 20px;
-        }
-        .highlight-card {
-            padding: 30px;
-            color: white;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .bg-orange { background: var(--primary-orange); }
-        .bg-black { background: var(--dark-bg); }
+        /* 3. HIGHLIGHTS (CARDS) */
+        .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; padding: 0 5%; margin-top: -50px; }
+        .h-card { padding: 30px; border-radius: 10px; text-align: center; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .bg-brown { background: var(--brown); }
+        .bg-orange { background: var(--orange); }
 
-        /* 4. ABOUT SECTION */
-        .section-padding { padding: 60px 10% 40px; text-align: center; }
-        .about-text { max-width: 800px; margin: 20px auto; line-height: 1.8; color: #555; }
+        /* 4. ABOUT & 5. ACADEMIC FEATURES */
+        .about-section { padding: 80px 10% 50px; text-align: center; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
+        .f-item { background: var(--light-grey); padding: 20px; border-radius: 8px; border-left: 5px solid var(--orange); }
 
-        /* 6. COURSES GRID */
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            padding: 40px 5%;
-        }
-        .course-card {
-            background: white;
-            border-top: 5px solid var(--primary-orange);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        .course-card h3 { color: var(--primary-orange); margin-bottom: 10px; }
-        .learn-btn {
-            display: inline-block;
-            margin-top: 15px;
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 2px solid var(--primary-orange);
-        }
+        /* 6. COURSES / DEPARTMENTS */
+        .courses { padding: 60px 5%; background: #eee; }
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .c-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .c-card img { width: 100%; height: 200px; object-fit: cover; }
+        .c-content { padding: 25px; border-top: 5px solid var(--brown); }
+        .c-content h3 { color: var(--orange); margin-top: 0; }
+
+        /* 13. STUDENT EXPERIENCES (Scroll) */
+        .video-slider { display: flex; overflow-x: auto; gap: 20px; padding: 20px 0; scrollbar-width: none; }
+        .video-box { min-width: 320px; height: 200px; background: var(--black); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: white; }
 
         /* 12. PLACEMENTS */
-        .placements { background: var(--light-grey); padding: 50px 5%; text-align: center; }
-        .partner-logos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin-top: 30px;
-            filter: grayscale(100%);
-            opacity: 0.7;
-        }
-        .partner-logos span { font-size: 24px; font-weight: bold; color: #555; }
+        .placement-logos { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; padding: 40px 0; font-size: 24px; font-weight: bold; color: #777; }
 
         /* FOOTER */
-        footer { background: var(--dark-bg); color: white; padding: 40px 5% 20px; }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 30px;
-        }
-        .footer-links a { color: #bbb; text-decoration: none; display: block; margin-bottom: 10px; }
-        .footer-bottom { text-align: center; padding-top: 20px; font-size: 13px; color: #888; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .highlights { margin-top: 20px; }
-        }
+        footer { background: var(--black); color: #ccc; padding: 60px 5% 20px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-grid h4 { color: var(--orange); margin-bottom: 20px; }
+        .footer-grid a { color: #ccc; text-decoration: none; display: block; margin-bottom: 10px; }
+        .legal { border-top: 1px solid #333; margin-top: 40px; padding-top: 20px; text-align: center; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo-container">
-            <img src="Picsart_26-04-01_18-36-48-756.jpg" alt="APSITS Logo"> </div>
+        <div class="logo"><img src="1000229573.jpg" alt="APSITS Logo"></div>
         <div class="nav-right">
-            <a href="#" class="adm-btn">ADMISSIONS OPEN 2026</a>
-            <button class="menu-btn"><i class="fas fa-bars"></i></button> </div>
+            <a href="#" class="adm-btn">ADMISSIONS OPEN</a>
+            <button class="menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
     </header>
 
     <section class="hero">
-        <h1>Empowering Future Engineers </h1>
-        <p>APSITS provides world-class education, modern labs, and industry-focused training to shape future-ready engineers.</p>
+        <h1>Empowering Future Engineers for Global Careers</h1>
+        <p>At APSITS, we provide world-class technical education with a strong focus on innovation, practical learning, and industry readiness.</p>
         <a href="#" class="btn-orange">Discover More</a>
     </section>
 
     <section class="highlights">
-        <div class="highlight-card bg-orange">
-            <i class="fas fa-graduation-cap fa-2x"></i>
-            <h3>Scholarships</h3>
-            <p>Financial support for deserving and meritorious students.</p>
-        </div>
-        <div class="highlight-card bg-black">
-            <i class="fas fa-users-cog fa-2x"></i>
-            <h3>Expert Faculty</h3>
-            <p>Highly qualified and experienced teaching staff.</p>
-        </div>
-        <div class="highlight-card bg-orange">
-            <i class="fas fa-campus fa-2x"></i>
-            <h3>Campus Life</h3>
-            <p>Vibrant student life with events and activities.</p>
-        </div>
-        <div class="highlight-card bg-black">
-            <i class="fas fa-microscope fa-2x"></i>
-            <h3>Labs & Infrastructure</h3>
-            <p>Modern labs with advanced equipment.</p>
-        </div>
+        <div class="h-card bg-orange"><h3>Scholarships</h3><p>Merit-based and need-based support for talented students.</p></div>
+        <div class="h-card bg-brown"><h3>Expert Faculty</h3><p>Highly qualified mentors dedicated to student success.</p></div>
+        <div class="h-card bg-orange"><h3>Campus Life</h3><p>Vibrant environment with modern facilities and activities.</p></div>
+        <div class="h-card bg-brown"><h3>Labs & Infrastructure</h3><p>Advanced laboratories for hands-on learning.</p></div>
     </section>
 
-    <section class="section-padding">
+    <section class="about-section">
         <h2>About APSITS</h2>
-        <p class="about-text">APSITS is a leading institution committed to providing quality technical education. The campus offers a peaceful learning environment with modern infrastructure, well-equipped laboratories, and experienced faculty. The institution focuses on building future leaders with strong academic and practical knowledge.</p>
-    </section>
-
-    <section style="background: #fff; padding-bottom: 50px;">
-        <div style="text-align: center;"><h2>Our Departments</h2></div>
-        <div class="courses-grid">
-            <div class="course-card"><h3>CSE</h3><p>Focus on programming, software development, and system design.</p><a href="#" class="learn-btn">Learn More</a></div>
-            <div class="course-card"><h3>AI & ML</h3><p>Learn machine learning, AI systems, and automation.</p><a href="#" class="learn-btn">Learn More</a></div>
-            <div class="course-card"><h3>ECE</h3><p>Electronics, communication systems, and signal processing.</p><a href="#" class="learn-btn">Learn More</a></div>
-            <div class="course-card"><h3>EEE</h3><p>Electrical systems, power generation, and renewable energy.</p><a href="#" class="learn-btn">Learn More</a></div>
-            <div class="course-card"><h3>CIVIL</h3><p>Construction, infrastructure, and structural engineering.</p><a href="#" class="learn-btn">Learn More</a></div>
-            <div class="course-card"><h3>MECH</h3><p>Machine design, production, and manufacturing.</p><a href="#" class="learn-btn">Learn More</a></div>
+        <p>APSITS is a premier engineering institution committed to delivering quality education. We aim to develop technically strong, ethically responsible, and industry-ready engineers.</p>
+        
+        <div class="features-grid">
+            <div class="f-item"><h4>Practical Learning</h4></div>
+            <div class="f-item"><h4>Industry Training</h4></div>
+            <div class="f-item"><h4>Internships</h4></div>
+            <div class="f-item"><h4>Live Projects</h4></div>
         </div>
     </section>
 
-    <section class="placements">
+    <section class="courses">
+        <h2 style="text-align: center; margin-bottom: 40px;">Our Departments</h2>
+        <div class="course-grid">
+            <div class="c-card">
+                <img src="1000229199.jpg" alt="CSE">
+                <div class="c-content"><h3>CSE</h3><p>Focus on programming, software development, and modern technologies.</p><a href="#" class="btn-orange">Learn More</a></div>
+            </div>
+            <div class="c-card">
+                <img src="1000229200.jpg" alt="AI&ML">
+                <div class="c-content"><h3>AI & ML</h3><p>Build smart systems using AI and data-driven solutions.</p><a href="#" class="btn-orange">Learn More</a></div>
+            </div>
+            <div class="c-card">
+                <img src="1000229183.jpg" alt="ECE">
+                <div class="c-content"><h3>ECE</h3><p>Learn electronics, communication, and embedded technologies.</p><a href="#" class="btn-orange">Learn More</a></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: var(--brown); color: white; padding: 60px 10%; text-align: center;">
+        <h2>Learn Today. Lead Tomorrow.</h2>
+        <p>We inspire students to innovate and achieve excellence through discipline and creativity.</p>
+    </section>
+
+    <section style="padding: 60px 5%;">
+        <h2 style="text-align: center;">Student Experiences at APSITS</h2>
+        <div class="video-slider">
+            <div class="video-box"><i class="fas fa-play-circle fa-3x"></i></div>
+            <div class="video-box"><i class="fas fa-play-circle fa-3x"></i></div>
+            <div class="video-box"><i class="fas fa-play-circle fa-3x"></i></div>
+            <div class="video-box"><i class="fas fa-play-circle fa-3x"></i></div>
+        </div>
+    </section>
+
+    <section style="text-align: center; padding: 60px 5%; background: var(--light-grey);">
         <h2>From Campus to Corporate</h2>
-        <p>APSITS ensures strong placement support with top recruiters, preparing students for successful careers.</p>
-        <div class="partner-logos">
-            <span>ACCENTURE</span>
-            <span>WIPRO</span>
-            <span>TCS</span>
-            <span>INFOSYS</span>
+        <div class="placement-logos">
+            <span>ACCENTURE</span> <span>WIPRO</span> <span>TCS</span> <span>INFOSYS</span>
         </div>
     </section>
 
-    <section class="section-padding">
+    <section style="padding: 60px 5%; text-align: center;">
         <h2>Contact Us</h2>
         <p>APSITS College, Proddatur, Andhra Pradesh</p>
-        <p><i class="fas fa-phone"></i> +91 XXXXX XXXXX | <i class="fas fa-envelope"></i> info@apsits.edu</p>
-        <div style="margin-top: 20px;">
-            <a href="#" class="btn-orange">Get Direction</a>
-        </div>
+        <p>📞 Phone: +91 XXXXX XXXXX | 📧 info@apsits.edu</p>
+        <a href="#" class="btn-orange">Get Direction</a>
     </section>
 
     <footer>
         <div class="footer-grid">
-            <div class="footer-links">
-                <h4>Quick Links</h4>
-                <a href="#">Why Choose APSITS</a>
-                <a href="#">Placements</a>
-                <a href="#">Admissions</a>
-            </div>
-            <div class="footer-links">
-                <h4>Facilities</h4>
-                <a href="#">Hostels</a>
-                <a href="#">Digital Infrastructure</a>
-                <a href="#">Health & Wellness</a>
-            </div>
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Disclaimer</a>
-                <a href="#">Cookies Policy</a>
-            </div>
+            <div><h4>Quick Links</h4><a href="#">Why Choose APSITS</a><a href="#">Placements</a><a href="#">Admissions</a></div>
+            <div><h4>Facilities</h4><a href="#">Hostels</a><a href="#">Labs</a><a href="#">Athletics</a></div>
+            <div><h4>Support</h4><a href="#">Feedback</a><a href="#">Reports</a><a href="#">Contact</a></div>
         </div>
-        <div class="footer-bottom">
-            Copyright © 2026 APSITS | Authorized Access Only
+        <div class="legal">
+            <p>Disclaimer | Privacy Policy | Cookies Policy</p>
+            <p>© 2026 APSITS. All Rights Reserved.</p>
         </div>
-    </footer>
-
-</body>
-</html>
-            <p>Industry-focused training and expert guidance drive consistent placement success for our students.</p>
-        </div>
-        <hr style="width: 50%; opacity: 0.2;">
-        <div class="stat-item">
-            <h3>OUTCOME-BASED EDUCATION</h3>
-            <p>Clear learning outcomes guide every course to help students achieve measurable academic success.</p>
-        </div>
-    </section>
-
-    <footer style="background: var(--navy); color: white; text-align: center; padding: 20px;">
-        <p>© 2026 APSITS | Proddatur, Andhra Pradesh</p>
     </footer>
 
 </body>
