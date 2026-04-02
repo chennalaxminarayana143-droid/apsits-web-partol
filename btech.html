@@ -24,213 +24,152 @@
         }
         .logo img { height: 60px; }
         .header-right { display: flex; align-items: center; gap: 15px; }
-        .time-date { font-size: 12px; font-weight: bold; color: var(--black); text-align: right; }
-        .adm-btn { background: var(--black); color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: bold; }
-        .menu-btn { background: var(--orange); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; }
+        
+        .time-date { font-size: 11px; font-weight: bold; color: var(--black); text-align: right; line-height: 1.2; }
+        
+        /* Admissions Button on Header */
+        .header-adm-btn {
+            background: var(--black); color: white; padding: 10px 15px; 
+            border-radius: 5px; text-decoration: none; font-size: 13px; 
+            font-weight: bold; transition: 0.3s;
+        }
+        .header-adm-btn:hover { background: var(--orange); }
 
-        /* 2. SIDE SCROLL HERO */
+        .menu-btn { 
+            background: var(--orange); color: white; border: none; 
+            padding: 10px; border-radius: 5px; cursor: pointer; font-size: 18px;
+        }
+
+        /* 2. OVERLAY MENU */
+        .overlay {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; right: 0; background-color: rgba(26, 26, 26, 0.98);
+            overflow-x: hidden; transition: 0.5s;
+        }
+
+        .overlay-content { position: relative; top: 5%; width: 100%; text-align: center; }
+
+        .overlay a, .dropbtn {
+            padding: 12px; text-decoration: none; font-size: 20px;
+            color: #fff; display: block; transition: 0.3s;
+            background: none; border: none; width: 100%; cursor: pointer;
+        }
+        .overlay a:hover, .dropbtn:hover { color: var(--orange); }
+
+        .overlay .closebtn {
+            position: absolute; top: 20px; right: 45px; font-size: 50px; color: white; text-decoration: none;
+        }
+
+        /* NIRF Dropdown */
+        .dropdown-container { display: none; background-color: #222; }
+        .dropdown-container a { font-size: 18px; color: #bbb; }
+        .active-drop { display: block !important; }
+        .menu-login { border: 1px solid var(--orange); width: 180px !important; margin: 20px auto; border-radius: 5px; }
+
+        /* HERO & SECTIONS */
         .hero-scroll { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; height: 400px; background: #000; scrollbar-width: none; }
         .hero-slide { min-width: 100%; position: relative; scroll-snap-align: start; }
         .hero-slide img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
         .slide-msg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center; width: 80%; }
-
-        /* 3. THREE BOXES */
         .info-grid { display: flex; flex-wrap: wrap; }
         .info-box { flex: 1; min-width: 300px; padding: 50px 30px; }
         .bg-orange { background: var(--orange); color: white; }
         .bg-gray { background: var(--gray); }
         .bg-lite-gray { background: var(--lite-gray); }
-
-        /* 4. WELCOME & 5. CAMPUS IMAGE */
         .welcome { padding: 60px 10%; text-align: center; }
         .campus-img { width: 100%; height: 500px; object-fit: cover; }
-
-        /* 6. HOLISTIC EDUCATION SECTION */
-        .holistic { padding: 50px 10%; text-align: center; color: orange ;}
-        .small-line { width: 300px; height: 2px; background: var(--orange); margin: 15px auto; }
-
-        /* 7. HISTORY SECTION (Black Line Pattern) */
-        .history { background: repeating-linear-gradient(45deg, #1a1a1a, #1a1a1a 10px, #222 10px, #222 20px); color: white; padding: 60px 10%; display: flex; flex-wrap: wrap; text-align: center; gap: 30px; }
-        .history-text { flex: 1; min-width: 300px; }
-        .history-img { flex: 1; min-width: 300px; height: 300px; object-fit: cover; border-radius: 10px; }
-
-        /* DEPARTMENTS */
         .dept-card { padding: 40px; text-align: center; color: white; border-radius: 10px; margin-bottom: 20px; }
         .dept-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
-        .btn-learn { display: inline-block; padding: 10px 20px; background: white; color: black; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 10px; }
-
-        /* WHY STUDY CARDS */
-        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px 5%; }
-        .why-card { padding: 30px; color: white; border-radius: 10px; }
-        .bg-black-gray { background: #333; }
-
-        /* COMPANY LOGOS FLOW */
-        .logos-flow { display: flex; justify-content: space-around; padding: 40px; background: white; flex-wrap: wrap; font-weight: bold; color: #999; }
-
-        /* CONTACT & QUICK LINKS */
+        .btn-learn { display: inline-block; padding: 10px 20px; background: white; color: black; text-decoration: none; font-weight: bold; border-radius: 5px; }
         .orange-footer-sec { background: var(--orange); color: white; padding: 50px 10%; }
-        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
-        .links-grid a { color: white; text-decoration: none; display: block; font-size: 14px; margin-bottom: 5px; }
-
-        footer { background: #111; color: #888; padding: 30px; text-align: center; font-size: 13px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+        .links-grid a { color: white; text-decoration: none; font-size: 14px; }
+        footer { background: #111; color: #888; padding: 20px; text-align: center; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><img src="Picsart_26-04-01_18-36-48-756.jpg" alt="Logo"></div>
+        <div class="logo"><img src="1000229573.jpg" alt="Logo"></div>
         <div class="header-right">
             <div class="time-date">
                 <div id="clock">00:00:00</div>
                 <div id="date" style="color: var(--orange);">DD/MM/YYYY</div>
             </div>
-            <a href="#" class="adm-btn">ADMISSIONS 2026</a>
-            <button class="menu-btn" onclick="toggleMenu()">
-    <i class="fas fa-bars"></i>
-</button>
-
-<div id="sideMenu" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">&times;</a>
-    <div class="overlay-content">
-        <a href="#">About Us</a>
-        <a href="#" style="color: #ff7722; font-weight: bold;">Admissions 2026</a>
-        <a href="#">Grievance Cell</a>
-        <a href="#">Alumni</a>
-        <a href="#">E-Notice</a>
-        
-        <div class="dropdown">
-            <button class="dropbtn">NIRF <i class="fa fa-caret-down"></i></button>
-            <div class="dropdown-container">
-                <a href="#">NIRF 2025</a>
-                <a href="#">NIRF 2024</a>
-                <a href="#">NIRF 2023</a>
-            </div>
-        </div>
-
-        <a href="#">Contact Us</a>
-        <a href="#">Virtual Tour</a>
-        <a href="#">RTI Policy</a>
-        <a href="#">AICTE Faculty List</a>
-        <a href="#" class="login-link">Login <i class="fas fa-sign-in-alt"></i></a>
-    </div>
-</div>
-
-
+            
+            <a href="#" class="header-adm-btn">ADMISSIONS 2026</a>
+            
+            <button class="menu-btn" onclick="openNav()">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
+    <div id="sideMenu" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+            <a href="#">About Us</a>
+            <a href="#">Grievance Cell</a>
+            <a href="#">Alumni</a>
+            <a href="#">E-Notice</a>
+            
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleNirf()">NIRF <i class="fa fa-caret-down"></i></button>
+                <div id="nirfLinks" class="dropdown-container">
+                    <a href="#">NIRF 2025</a>
+                    <a href="#">NIRF 2024</a>
+                    <a href="#">NIRF 2023</a>
+                </div>
+            </div>
+
+            <a href="#">Contact Us</a>
+            <a href="#">Virtual Tour</a>
+            <a href="#">RTI Policy</a>
+            <a href="#">AICTE Faculty List</a>
+            <a href="#" class="menu-login">Login <i class="fas fa-sign-in-alt"></i></a>
+        </div>
+    </div>
+
     <section class="hero-scroll">
         <div class="hero-slide">
-            <img src="college-campus.jpg" alt="Slide 1">
-            <div class="slide-msg"><h1>Build Your Future with APSITS</h1><p>Innovation Starts Here.</p></div>
-        </div>
-        <div class="hero-slide">
-            <img src="Picsart_26-04-01_18-36-48-756.jpg.jpg" alt="Slide 2">
-            <div class="slide-msg"><h1>Practical Learning for Real Success</h1><p>Advanced Labs & Expert Faculty.</p></div>
+            <img src="college-campus.html" alt="Slide 1">
+            <div class="slide-msg"><h1>Build Your Future with APSITS</h1><p>Learn Today. Lead Tomorrow.</p></div>
         </div>
     </section>
 
     <section class="info-grid">
-        <div class="info-box bg-orange">
-            <h3>Scholarship Facility</h3>
-            <p>We support merit with financial aid and scholarships for talented students.</p>
-        </div>
-        <div class="info-box bg-gray">
-            <h3>Skilled Faculty</h3>
-            <p>Learn from industrial experts and highly qualified professors.</p>
-        </div>
-        <div class="info-box bg-lite-gray">
-            <h3>APSITS College Life</h3>
-            <p>Vibrant campus culture with sports, arts, and technology fests.</p>
-        </div>
+        <div class="info-box bg-orange"><h3>Scholarship Facility</h3><p>Support for talented students.</p></div>
+        <div class="info-box bg-gray"><h3>Skilled Faculty</h3><p>Guidance from experts.</p></div>
+        <div class="info-box bg-lite-gray"><h3>Campus Life</h3><p>Vibrant student activities.</p></div>
     </section>
 
     <section class="welcome">
         <h2>Welcome to APSITS College</h2>
-        <p>APSITS leads the way in technical excellence in Proddatur. Our focus is on creating job-ready professionals through rigorous academic standards.</p>
-        <p>We blend tradition with technology to provide a holistic environment for personal and professional growth.</p>
+        <p>Your journey towards technical excellence starts here.</p>
         <a href="#" class="btn-learn" style="background: var(--orange); color: white;">Discover More</a>
     </section>
 
     <img src="college-campus.jpg" class="campus-img" alt="Campus">
 
-    <section class="holistic">
-        <h3>APSITS</h3>
-        <p>Your journey towards engineering excellence starts here.</p>
-        <div class="small-line"></div>
-        <h3>HOLISTIC EDUCATION</h3>
-        <p>Developing both technical skills and leadership qualities.</p>
-        <div class="small-line"></div>
-        <h3>TRUSTED FOR PLACEMENTS</h3>
-        <p>Top companies visit our campus for hiring.</p>
-        <div class="small-line"></div>
-        <h3>OUTCOME-BASED EDUCATION</h3>
-        <p>Targeted learning to ensure every student succeeds.</p>
-    </section>
-
-    <section class="World-class education for global careers. Learn Today. Lead the World Tomorrow.">
-        <div class="history-text">
-            <h2>World-class education for global careers. Learn Today. Lead Tomorrow.</h2>
-            <p>APSITS has a rich history of academic success, founded with the vision to bring world-class technical education to the heart of Andhra Pradesh.</p>
-            <p>Over the years, we have produced thousands of successful alumni working in top global firms.</p>
-            <a href="#" class="btn-learn">Discover More</a>
-        </div>
-        <img src="college-campus.jpg" class="history-img" alt="History">
-    </section>
-
     <section style="padding: 60px 10%;">
-        <h2 style="text-align: center;">Academic Strengths</h2>
+        <h2 style="text-align: center;">Departments</h2>
         <div class="dept-card" style="background: var(--orange);">
             <img src="college-campus.jpg" class="dept-img" alt="CSE">
-            <h3>CSE</h3>
-            <p>Master the world of software and algorithms.</p>
-            <a href="#" class="btn-learn">LEARN MORE</a>
+            <h3>CSE</h3><a href="#" class="btn-learn">LEARN MORE</a>
         </div>
         <div class="dept-card" style="background: var(--black);">
             <img src="college-campus.jpg" class="dept-img" alt="ECE">
-            <h3>ECE</h3>
-            <p>Focus on communication and embedded systems.</p>
-            <a href="#" class="btn-learn">LEARN MORE</a>
-        </div>
-    </section>
-
-    <section class="why-grid">
-        <div class="why-card bg-orange"><h3>Strong Credentials</h3><p>Accredited by major education boards.</p></div>
-        <div class="why-card bg-black-gray"><h3>Industry Curriculum</h3><p>Courses designed by industry experts.</p></div>
-        <div class="why-card bg-orange"><h3>Partnerships</h3><p>Collaborations with MNCs for CoEs.</p></div>
-        <div class="why-card bg-black-gray"><h3>Ideal Campus</h3><p>State-of-the-art infrastructure.</p></div>
-    </section>
-
-    <section style="text-align: center; padding: 40px;">
-        <h2>From Campus to Corporate</h2>
-        <div class="logos-flow">
-            <span>ACCENTURE</span> <span>WIPRO</span> <span>TCS</span> <span>INFOSYS</span> <span>TECH MAHINDRA</span>
+            <h3>ECE</h3><a href="#" class="btn-learn">LEARN MORE</a>
         </div>
     </section>
 
     <section class="orange-footer-sec">
-        <h2>CONTACT US</h2>
-        <p>APSITS College, Main Road, Proddatur, AP</p>
-        <p>Email: info@apsits.edu | Phone: +91 XXXXX XXXXX</p>
-        <div class="small-line" style="background: white;"></div>
         <h2>QUICK LINKS</h2>
         <div class="links-grid">
-            <a href="#"><i class="fas fa-chevron-right"></i> WHY CHOOSE APSITS</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> PLACEMENT STATISTICS</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> MANDATORY DISCLOSURE</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> ADMISSIONS HELP DESK</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> SPORTS FACILITIES</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> TRANSPORT FACILITY</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> HOSTELS</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> BUDGET REPORTS</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> LIBERAL ARTS</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> AUDIT REPORTS</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> ANTI RAGGING UNDERTAKING</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> AICTE STUDENT FEEDBACK</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> AICTE FACULTY FEEDBACK</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> PARENTS/EMPLOYER FEEDBACK</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> ADMINISTRATIVE COMMITTEES</a>
-            <a href="#"><i class="fas fa-chevron-right"></i> DATA TEMPLATE FOR AUTONOMOUS</a>
+            <a href="#">PLACEMENT STATISTICS</a>
+            <a href="#">ADMISSIONS HELP DESK</a>
+            <a href="#">HOSTELS</a>
+            <a href="#">TRANSPORT FACILITY</a>
         </div>
     </section>
 
@@ -247,6 +186,13 @@
         }
         setInterval(updateTime, 1000);
         updateTime();
+
+        function openNav() { document.getElementById("sideMenu").style.width = "100%"; }
+        function closeNav() { 
+            document.getElementById("sideMenu").style.width = "0%"; 
+            document.getElementById("nirfLinks").classList.remove("active-drop");
+        }
+        function toggleNirf() { document.getElementById("nirfLinks").classList.toggle("active-drop"); }
     </script>
 </body>
 </html>
