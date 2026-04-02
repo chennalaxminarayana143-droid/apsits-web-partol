@@ -85,7 +85,36 @@
                 <div id="date" style="color: var(--orange);">DD/MM/YYYY</div>
             </div>
             <a href="#" class="adm-btn">ADMISSIONS 2026</a>
-            <button class="menu-btn"><i class="fas fa-bars"></i></button>
+            <button class="menu-btn" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+</button>
+
+<div id="sideMenu" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleMenu()">&times;</a>
+    <div class="overlay-content">
+        <a href="#">About Us</a>
+        <a href="#" style="color: #ff7722; font-weight: bold;">Admissions 2026</a>
+        <a href="#">Grievance Cell</a>
+        <a href="#">Alumni</a>
+        <a href="#">E-Notice</a>
+        
+        <div class="dropdown">
+            <button class="dropbtn">NIRF <i class="fa fa-caret-down"></i></button>
+            <div class="dropdown-container">
+                <a href="#">NIRF 2025</a>
+                <a href="#">NIRF 2024</a>
+                <a href="#">NIRF 2023</a>
+            </div>
+        </div>
+
+        <a href="#">Contact Us</a>
+        <a href="#">Virtual Tour</a>
+        <a href="#">RTI Policy</a>
+        <a href="#">AICTE Faculty List</a>
+        <a href="#" class="login.html">Login <i class="fas fa-sign-in-alt"></i></a>
+    </div>
+</div>
+
         </div>
     </header>
 
