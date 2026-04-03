@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS ADMIN | Student Management</title>
+    <title>APSITS ADMIN | STUDENT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --orange: #ff7722;
-            --black: #1a1a1a;
-            --white: #ffffff;
-            --overlay: rgba(0, 0, 0, 0.6);
-        }
-
+        :root { --orange: #ff7722; --black: #1a1a1a; --white: #ffffff; }
         body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; }
 
-        /* 1. HEADER */
+        /* HEADER */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 5%; background: var(--white); position: sticky; top: 0; z-index: 1000;
@@ -23,192 +17,179 @@
         }
         .logo img { height: 50px; }
         .header-right { display: flex; align-items: center; gap: 20px; }
-        .time-date { font-size: 12px; font-weight: bold; color: var(--black); text-align: right; }
-        .menu-btn { background: var(--orange); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 18px; }
+        .time-date { font-size: 12px; font-weight: bold; text-align: right; }
 
-        /* 2. STUDENT HERO SECTION (Background Image) */
+        /* HERO SECTION */
         .student-hero {
-            position: relative;
-            height: 80vh;
-            background: url("college-campus.jpg") no-repeat center center/cover;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; color: white;
+            position: relative; height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("college-campus.jpg") center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
         }
-        .student-hero::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--overlay); z-index: 1;
-        }
-        .hero-content { position: relative; z-index: 2; width: 90%; max-width: 800px; }
-        .hero-content h1 { font-size: 3rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
 
-        /* 3. BUTTON GRID */
-        .btn-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 100%; }
+        .btn-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 80%; margin-top: 30px; }
         .admin-btn {
-            background: var(--orange); color: white; padding: 15px 25px;
-            text-decoration: none; font-weight: bold; border-radius: 8px;
-            transition: 0.3s; border: 2px solid transparent; display: flex;
-            flex-direction: column; align-items: center; gap: 10px; font-size: 14px;
+            background: var(--orange); color: white; padding: 20px; text-decoration: none;
+            font-weight: bold; border-radius: 8px; cursor: pointer; border: none;
+            display: flex; flex-direction: column; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .admin-btn i { font-size: 24px; }
-        .admin-btn:hover { background: transparent; border-color: var(--orange); transform: translateY(-5px); }
-        .btn-black { background: var(--black); }
-        .btn-black:hover { border-color: var(--black); }
+        .admin-btn:hover { background: var(--white); color: var(--orange); transform: translateY(-5px); }
 
-        /* 4. FOOTER */
-        footer { background: var(--black); color: #888; padding: 20px; text-align: center; font-size: 13px; }
-
-        /* OVERLAY MENU (Side Nav) */
-        .overlay {
-            height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; right: 0; background-color: rgba(26, 26, 26, 0.98);
-            overflow-x: hidden; transition: 0.5s;
+        /* MODAL / FORM STYLING */
+        .modal {
+            display: none; position: fixed; z-index: 2001; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            justify-content: center; align-items: center;
         }
-        .overlay-content { position: relative; top: 10%; width: 100%; text-align: center; }
-        .overlay a { padding: 15px; text-decoration: none; font-size: 22px; color: white; display: block; transition: 0.3s; }
-        .overlay a:hover { color: var(--orange); }
-        .closebtn { position: absolute; top: 20px; right: 45px; font-size: 50px; color: white; text-decoration: none; }
-
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2rem; }
-            .btn-container { grid-template-columns: 1fr 1fr; }
+        .modal-content {
+            background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 450px;
+            color: var(--black); position: relative;
         }
+        .modal-content h2 { color: var(--orange); margin-top: 0; }
+        .close-form { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
+
+        form input, form select {
+            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;
+        }
+        .submit-btn { background: var(--black); color: white; border: none; width: 100%; padding: 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* ID CARD DESIGN */
+        #idCardResult {
+            margin-top: 20px; padding: 20px; border: 2px solid var(--orange); border-radius: 10px;
+            background: #fff; color: #333; display: none; text-align: left; position: relative;
+            width: 300px; margin-left: auto; margin-right: auto;
+        }
+        .id-header { background: var(--orange); color: white; padding: 5px; text-align: center; border-radius: 5px 5px 0 0; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><img src="Picsart_26-04-01_18-36-48-756.jpg" alt="APSITS Logo"></div>
+        <div class="logo"><img src="Picsart_26-04-01_18-36-48-756.jpg" alt="Logo"></div>
         <div class="header-right">
-            <div class="time-date">
-                <div id="clock">00:00:00</div>
-                <div id="date" style="color: var(--orange);">DD/MM/YYYY</div>
-            </div>
-            <button class="menu-btn" onclick="openNav()"><i class="fas fa-bars"></i></button>
+            <div class="time-date"><div id="clock"></div><div id="date" style="color: var(--orange);"></div></div>
+            <button class="admin-btn" style="padding: 10px; width: 50px;"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
     <section class="student-hero">
-        <div class="hero-content">
-            <h1>Student Administration</h1>
-            <p>Manage registrations, records, and academic progress of APSITS students.</p>
-            
-            <div id="regModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <h2 style="color: var(--orange); border-bottom: 2px solid #eee; padding-bottom: 10px;">New Student Registration</h2>
-        
-        <form id="studentForm">
-            <div class="form-group">
-                <label>Student Name</label>
-                <input type="text" placeholder="Enter Full Name" required>
-            </div>
-
-            <div class="form-group">
-                <label>Student ID</label>
-                <input type="text" placeholder="Ex: APS2026XXX" required>
-            </div>
-
-            <div class="form-group">
-                <label>College</label>
-                <select required>
-                    <option value="" disabled selected>Select College</option>
-                    <option value="Diploma">Diploma</option>
-                    <option value="Engineering">Engineering</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Course</label>
-                <select required>
-                    <option value="" disabled selected>Select Course</option>
-                    <option value="CSE">CSE (Computer Science)</option>
-                    <option value="ECE">ECE (Electronics & Comm.)</option>
-                    <option value="EEE">EEE (Electrical & Electronics)</option>
-                    <option value="MECH">MECH (Mechanical)</option>
-                </select>
-            </div>
-
-            <div style="display: flex; gap: 10px;">
-                <div class="form-group" style="flex: 1;">
-                    <label>Year</label>
-                    <select required>
-                        <option value="1">1st Year</option>
-                        <option value="2">2nd Year</option>
-                        <option value="3">3rd Year</option>
-                        <option value="4">4th Year</option>
-                    </select>
-                </div>
-                <div class="form-group" style="flex: 1;">
-                    <label>Semester</label>
-                    <select required>
-                        <option value="1">Sem 1</option>
-                        <option value="2">Sem 2</option>
-                        <option value="3">Sem 3</option>
-                        <option value="4">Sem 4</option>
-                        <option value="5">Sem 5</option>
-                        <option value="6">Sem 6</option>
-                        <option value="7">Sem 7</option>
-                        <option value="8">Sem 8</option>
-                    </select>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn">REGISTER STUDENT</button>
-            </form>
-           </div>
-          </div>
-
-                </a>
-                <a href="#" class="admin-btn btn-black">
-                    <i class="fas fa-users"></i>
-                    STUDENT DETAILS
-                </a>
-                <a href="#" class="admin-btn">
-                    <i class="fas fa-id-card"></i>
-                    ID CARD GENERATOR
-                </a>
-                <a href="#" class="admin-btn btn-black">
-                    <a href="#" class="admin-btn btn-black">
-                        <i class="fas fa-file-invoice"></i>
-                        FEE REPORTS
-                    </a>
-                </a>
-            </div>
+        <h1>Student Administration</h1>
+        <div class="btn-container">
+            <button class="admin-btn" onclick="openModal('regModal')">
+                <i class="fas fa-user-plus"></i> NEW STUDENT REGISTER
+            </button>
+            <button class="admin-btn" style="background: #333;" onclick="openModal('idModal')">
+                <i class="fas fa-id-card"></i> ID CARD GENERATOR
+            </button>
+            <button class="admin-btn"><i class="fas fa-users"></i> STUDENT DETAILS</button>
         </div>
     </section>
 
-    <footer>
-        <p>APSITS ADM STUDENT &copy; 2026 - Control Center</p>
-        <p>Disclaimer • Privacy Policy • Security Protocol</p>
-    </footer>
-
-    <div id="sideMenu" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="overlay-content">
-            <a href="#">ADMIN DASHBOARD</a>
-            <a href="#">HOME</a>
-            <a href="#">STUDENT LIST</a>
-            <a href="#">ACADEMICS</a>
-            <a href="#">EXAMINATIONS</a>
-            <a href="#" style="color: var(--orange);">LOGOUT</a>
+    <div id="regModal" class="modal">
+        <div class="modal-content">
+            <span class="close-form" onclick="closeModal('regModal')">&times;</span>
+            <h2>Student Registration</h2>
+            <form id="regForm">
+                <input type="text" id="sName" placeholder="Student Name" required>
+                <input type="text" id="sID" placeholder="Student ID (Ex: 23AP1A...)" required>
+                <select id="sCollege" required>
+                    <option value="">Select College</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Engineering">Engineering</option>
+                </select>
+                <select id="sCourse" required>
+                    <option value="">Select Course</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="MECH">MECH</option>
+                </select>
+                <select id="sYear" required>
+                    <option value="">Select Year</option>
+                    <option value="1">1st Year</option>
+                    <option value="2">2nd Year</option>
+                    <option value="3">3rd Year</option>
+                    <option value="4">4th Year</option>
+                </select>
+                <select id="sSem" required>
+                    <option value="">Select Semester</option>
+                    <option value="1">Sem 1</option><option value="2">Sem 2</option>
+                    <option value="3">Sem 3</option><option value="4">Sem 4</option>
+                    <option value="5">Sem 5</option><option value="6">Sem 6</option>
+                    <option value="7">Sem 7</option><option value="8">Sem 8</option>
+                </select>
+                <button type="button" class="submit-btn" onclick="saveStudent()">REGISTER STUDENT</button>
+            </form>
         </div>
     </div>
 
+    <div id="idModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-form" onclick="closeModal('idModal')">&times;</span>
+            <h2>Generate ID Card</h2>
+            <input type="text" id="searchID" placeholder="Enter Student ID to Search">
+            <button class="submit-btn" onclick="generateID()">GENERATE CARD</button>
+
+            <div id="idCardResult">
+                <div class="id-header">APSITS STUDENT CARD</div>
+                <div style="padding: 10px; font-size: 14px;">
+                    <p><strong>Name:</strong> <span id="cardName"></span></p>
+                    <p><strong>ID:</strong> <span id="cardID"></span></p>
+                    <p><strong>Course:</strong> <span id="cardCourse"></span></p>
+                    <p><strong>Year/Sem:</strong> <span id="cardYearSem"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--black); color: #888; padding: 20px; text-align: center;">
+        <p>Copyright © APSITS 2026 - All Rights Reserved</p>
+    </footer>
+
     <script>
-        // Time & Date Updates
+        // Database simulation
+        let students = [];
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function saveStudent() {
+            const data = {
+                name: document.getElementById('sName').value,
+                id: document.getElementById('sID').value,
+                college: document.getElementById('sCollege').value,
+                course: document.getElementById('sCourse').value,
+                year: document.getElementById('sYear').value,
+                sem: document.getElementById('sSem').value
+            };
+            if(data.name && data.id) {
+                students.push(data);
+                alert("Student Registered Successfully!");
+                closeModal('regModal');
+                document.getElementById('regForm').reset();
+            } else { alert("Please fill all details!"); }
+        }
+
+        function generateID() {
+            const searchID = document.getElementById('searchID').value;
+            const student = students.find(s => s.id === searchID);
+            
+            if(student) {
+                document.getElementById('cardName').innerText = student.name;
+                document.getElementById('cardID').innerText = student.id;
+                document.getElementById('cardCourse').innerText = student.course + " (" + student.college + ")";
+                document.getElementById('cardYearSem').innerText = student.year + " Year / " + student.sem + " Sem";
+                document.getElementById('idCardResult').style.display = 'block';
+            } else {
+                alert("Student ID not found! Please register first.");
+            }
+        }
+
         function updateTime() {
             const now = new Date();
             document.getElementById('clock').innerText = now.toLocaleTimeString();
             document.getElementById('date').innerText = now.toLocaleDateString('en-GB');
         }
-        setInterval(updateTime, 1000);
-        updateTime();
-
-        // Navigation Functions
-        function openNav() { document.getElementById("sideMenu").style.width = "100%"; }
-        function closeNav() { document.getElementById("sideMenu").style.width = "0%"; }
+        setInterval(updateTime, 1000); updateTime();
     </script>
 </body>
 </html>
-
