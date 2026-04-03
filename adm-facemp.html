@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS ADMIN | FACULTY/EMPLOYEE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --orange: #ff7722; --black: #1a1a1a; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f4f4f4; }
+
+        /* HEADER */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; background: var(--white); position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-bottom: 2px solid var(--orange);
+        }
+        .logo img { height: 50px; }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .time-date { font-size: 12px; font-weight: bold; text-align: right; }
+
+        /* HERO SECTION */
+        .faculty-hero {
+            position: relative; height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("college-campus.jpg") center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;
+        }
+
+        .btn-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; width: 85%; margin-top: 30px; }
+        
+        .admin-btn {
+            background: var(--orange); color: white; padding: 20px; border-radius: 8px; 
+            cursor: pointer; border: none; display: flex; flex-direction: column; 
+            align-items: center; gap: 10px; transition: 0.3s; font-weight: bold;
+        }
+        .admin-btn:hover { background: var(--white); color: var(--orange); transform: translateY(-5px); }
+        .btn-dark { background: #333; }
+
+        /* MODAL STYLING */
+        .modal {
+            display: none; position: fixed; z-index: 2001; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: white; padding: 30px; border-radius: 10px; width: 90%; max-width: 500px;
+            color: var(--black); position: relative; max-height: 90vh; overflow-y: auto;
+        }
+        .close-form { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
+
+        form input, form select {
+            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;
+        }
+        .submit-btn { background: var(--black); color: white; border: none; width: 100%; padding: 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+
+        /* SALARY TABLE */
+        .salary-info { margin-top: 20px; border-collapse: collapse; width: 100%; display: none; }
+        .salary-info th, .salary-info td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .salary-info th { background-color: var(--orange); color: white; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><img src="Picsart_26-04-01_18-36-48-756.jpg" alt="Logo"></div>
+        <div class="header-right">
+            <div class="time-date"><div id="clock"></div><div id="date" style="color: var(--orange);"></div></div>
+            <button class="admin-btn" style="padding: 10px; width: 50px;"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <section class="faculty-hero">
+        <h1 style="font-size: 3rem; margin: 0;">Faculty & Staff Management</h1>
+        <p style="font-size: 1.2rem; opacity: 0.8;">APSITS Administration Control Center</p>
+        
+        <div class="btn-container">
+            <button class="admin-btn" onclick="openModal('facRegModal')">
+                <i class="fas fa-user-tie"></i> NEW FACULTY REGISTER
+            </button>
+            
+            <button class="admin-btn btn-dark">
+                <i class="fas fa-address-book"></i> FACULTY DETAILS
+            </button>
+
+            <button class="admin-btn" style="background: #27ae60;" onclick="openModal('salaryModal')">
+                <i class="fas fa-money-check-alt"></i> FACULTY SALARIES
+            </button>
+
+            <button class="admin-btn btn-dark" onclick="openModal('facIdModal')">
+                <i class="fas fa-id-badge"></i> ID CARD GENERATOR
+            </button>
+        </div>
+    </section>
+
+    <div id="facRegModal" class="modal">
+        <div class="modal-content">
+            <span class="close-form" onclick="closeModal('facRegModal')">&times;</span>
+            <h2 style="color: var(--orange);">Faculty Registration</h2>
+            <form id="facForm">
+                <input type="text" id="fName" placeholder="Full Name" required>
+                <input type="text" id="fID" placeholder="Employee ID (Ex: APFAC001)" required>
+                <select id="fDept" required>
+                    <option value="">Select Department</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="MECH">MECH</option>
+                    <option value="H&S">H & S</option>
+                </select>
+                <input type="text" id="fDesignation" placeholder="Designation (Ex: Asst. Professor)">
+                <input type="number" id="fSalary" placeholder="Base Salary (Monthly)">
+                <button type="button" class="submit-btn" onclick="saveFaculty()">REGISTER EMPLOYEE</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="salaryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-form" onclick="closeModal('salaryModal')">&times;</span>
+            <h2 style="color: #27ae60;">Salary Management</h2>
+            <input type="text" id="searchFacID" placeholder="Enter Employee ID">
+            <button class="submit-btn" style="background: #27ae60;" onclick="checkSalary()">CHECK SALARY STATUS</button>
+
+            <table id="salaryTable" class="salary-info">
+                <tr><th>Detail</th><th>Information</th></tr>
+                <tr><td>Name</td><td id="resName"></td></tr>
+                <tr><td>ID</td><td id="resID"></td></tr>
+                <tr><td>Designation</td><td id="resDesig"></td></tr>
+                <tr><td>Monthly Salary</td><td id="resSalary" style="font-weight: bold; color: #27ae60;"></td></tr>
+                <tr><td>Status</td><td style="color: #e67e22;">Processing...</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <footer style="background: var(--black); color: #888; padding: 20px; text-align: center;">
+        <p>APSITS ADMIN PORTAL © 2026</p>
+    </footer>
+
+    <script>
+        let facultyList = [];
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function saveFaculty() {
+            const data = {
+                name: document.getElementById('fName').value,
+                id: document.getElementById('fID').value,
+                dept: document.getElementById('fDept').value,
+                desig: document.getElementById('fDesignation').value,
+                salary: document.getElementById('fSalary').value
+            };
+            if(data.name && data.id) {
+                facultyList.push(data);
+                alert("Faculty Member Registered Successfully!");
+                closeModal('facRegModal');
+                document.getElementById('facForm').reset();
+            } else { alert("Please fill mandatory fields!"); }
+        }
+
+        function checkSalary() {
+            const sid = document.getElementById('searchFacID').value;
+            const member = facultyList.find(f => f.id === sid);
+            
+            if(member) {
+                document.getElementById('resName').innerText = member.name;
+                document.getElementById('resID').innerText = member.id;
+                document.getElementById('resDesig').innerText = member.desig;
+                document.getElementById('resSalary').innerText = "₹" + parseInt(member.salary).toLocaleString();
+                document.getElementById('salaryTable').style.display = 'table';
+            } else {
+                alert("Employee ID not found!");
+            }
+        }
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+            document.getElementById('date').innerText = now.toLocaleDateString('en-GB');
+        }
+        setInterval(updateTime, 1000); updateTime();
+    </script>
+</body>
+</html>
+
