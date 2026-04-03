@@ -85,38 +85,38 @@
                 <div id="date" style="color: var(--orange);">DD/MM/YYYY</div>
             </div>
             <a href="#" class="adm-btn">ADMISSIONS 2026</a>
-            <div id="sideMenu" class="overlay">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="overlay-content">
-        <a href="#">HOME</a>
-        <a href="#">ABOUT US</a>
+         <div class="menu-btn" class="overlay">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+           <div class="overlay-content">
+             <a href="#">HOME</a>
+             <a href="#">ABOUT US</a>
 
-        <div class="dropdown">
-            <button class="dropbtn" onclick="toggleDropdown('adm-drop')">ADMISSIONS <i class="fa fa-caret-down"></i></button>
-            <div id="adm-drop" class="dropdown-container">
+             <div class="dropdown">
+             <button class="dropbtn" onclick="toggleDropdown('adm-drop')">ADMISSIONS <i class="fa fa-caret-down"></i></button>
+             <div id="adm-drop" class="dropdown-container">
                 <a href="#">ADMISSION PROCESS</a>
                 <a href="#">FEE STRUCTURE</a>
                 <a href="#">SCHOLARSHIPS</a>
             </div>
-        </div>
+         </div> 
 
-        <div class="dropdown">
+         <div class="dropdown">
             <button class="dropbtn" onclick="toggleDropdown('school-drop')">SCHOOLS <i class="fa fa-caret-down"></i></button>
             <div id="school-drop" class="dropdown-container">
                 <a href="#">SCHOOL OF DIPLOMA</a>
                 <a href="#">SCHOOL OF ENGINEERING</a>
             </div>
+         </div>
+
+          <a href="#">CAMPUS LIFE</a>
+          <a href="#">PLACEMENTS</a>
+          <a href="#">RESEARCH</a>
+          <a href="#">GRIEVANCE CELL</a>
+         <a href="#" class="menu-login">LOGIN <i class="fas fa-sign-in-alt"></i></a>
         </div>
+ </div>
 
-        <a href="#">CAMPUS LIFE</a>
-        <a href="#">PLACEMENTS</a>
-        <a href="#">RESEARCH</a>
-        <a href="#">GRIEVANCE CELL</a>
-        <a href="#" class="menu-login">LOGIN <i class="fas fa-sign-in-alt"></i></a>
-    </div>
-</div>
-
-<script>
+ <script>
     // డ్రాప్‌-డౌన్ టోగుల్ ఫంక్షన్
     function toggleDropdown(id) {
         var dropdown = document.getElementById(id);
@@ -124,15 +124,15 @@
     }
 
     // మెనూ ఓపెన్ & క్లోజ్ ఫంక్షన్లు
-    function openNav() { document.getElementById("sideMenu").style.width = "100%"; }
+    function openNav() { document.getElementById("sideMenu").style.width = "50%"; }
     function closeNav() { 
         document.getElementById("sideMenu").style.width = "0%"; 
         // మెనూ క్లోజ్ చేసినప్పుడు డ్రాప్‌-డౌన్‌లు కూడా క్లోజ్ అయ్యేలా..
         document.querySelectorAll('.dropdown-container').forEach(el => el.classList.remove('active-drop'));
     }
-</script>
+ </script>
 
-<style>
+ <style>
     /* డ్రాప్‌-డౌన్ కోసం అదనపు స్టైల్స్ */
     .dropbtn {
         width: 100%;
@@ -156,7 +156,7 @@
     .active-drop {
         display: block !important;
     }
-</style>
+ </style>
 
     </header>
 
