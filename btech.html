@@ -85,7 +85,7 @@
                 <div id="date" style="color: var(--orange);">DD/MM/YYYY</div>
             </div>
             <a href="#" class="adm-btn">ADMISSIONS 2026</a>
-            <button class="menu-btn" onclick="openNav()" style="background-color: #ff7722; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+            <button class="menu-btn" onclick="openNav()" style="background-color: #ff7722; color: white; border: none; padding: 10px 20px; border-radius: 0px; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px;">
              <i class="fas fa-bars"></i>
             </button>
 
@@ -134,10 +134,10 @@
 
        function toggleDrop(id) {
         var drop = document.getElementById(id);
-        if (drop.style.display === "block") {
-            drop.style.display = "none";
+        if (drop.style.display === "transparent block") {
+            drop.style.display = "Main page";
         } else {
-            drop.style.display = "block";
+            drop.style.display = "transparent block";
         }
        }
     </script>
