@@ -93,10 +93,72 @@
             <h1>Student Administration</h1>
             <p>Manage registrations, records, and academic progress of APSITS students.</p>
             
-            <div class="btn-container">
-                <a href="#" class="admin-btn">
-                    <i class="fas fa-user-plus"></i>
-                    NEW STUDENT REGISTER
+            <div id="regModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2 style="color: var(--orange); border-bottom: 2px solid #eee; padding-bottom: 10px;">New Student Registration</h2>
+        
+        <form id="studentForm">
+            <div class="form-group">
+                <label>Student Name</label>
+                <input type="text" placeholder="Enter Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Student ID</label>
+                <input type="text" placeholder="Ex: APS2026XXX" required>
+            </div>
+
+            <div class="form-group">
+                <label>College</label>
+                <select required>
+                    <option value="" disabled selected>Select College</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Engineering">Engineering</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Course</label>
+                <select required>
+                    <option value="" disabled selected>Select Course</option>
+                    <option value="CSE">CSE (Computer Science)</option>
+                    <option value="ECE">ECE (Electronics & Comm.)</option>
+                    <option value="EEE">EEE (Electrical & Electronics)</option>
+                    <option value="MECH">MECH (Mechanical)</option>
+                </select>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <div class="form-group" style="flex: 1;">
+                    <label>Year</label>
+                    <select required>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>Semester</label>
+                    <select required>
+                        <option value="1">Sem 1</option>
+                        <option value="2">Sem 2</option>
+                        <option value="3">Sem 3</option>
+                        <option value="4">Sem 4</option>
+                        <option value="5">Sem 5</option>
+                        <option value="6">Sem 6</option>
+                        <option value="7">Sem 7</option>
+                        <option value="8">Sem 8</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">REGISTER STUDENT</button>
+            </form>
+           </div>
+          </div>
+
                 </a>
                 <a href="#" class="admin-btn btn-black">
                     <i class="fas fa-users"></i>
