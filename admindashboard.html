@@ -1,249 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Command Center | APSITS</title>
+    <title>APSITS ADMIN | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --saffron: #ff7722;
-            --navy: #002147;
+            --orange: #ff7722;
+            --white: #ffffff;
             --glass: rgba(255, 255, 255, 0.1);
-            --glass-heavy: rgba(255, 255, 255, 0.2);
-            --text: #ffffff;
+            --glass-hover: rgba(255, 255, 255, 0.2);
         }
 
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(rgba(0,33,71,0.85), rgba(0,33,71,0.85)), url('1000229094.jpg');
+            /* మీ బ్యాక్‌గ్రౌండ్ ఇమేజ్ ఇక్కడ అప్లై అవుతుంది */
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url('IMG_20260404_192535.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: var(--text);
+            color: var(--white);
             overflow-x: hidden;
         }
 
-        /* ☰ Sidebar Menu */
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            background-color: var(--navy);
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            border-right: 2px solid var(--saffron);
-        }
-
-        .sidebar a {
-            padding: 15px 32px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-            transition: 0.3s;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar a:hover {
-            background: var(--saffron);
-            padding-left: 45px;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-            cursor: pointer;
-        }
-
-        /* Header */
+        /* HEADER STYLING */
         header {
-            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0,0,0,0.2);
-            border-bottom: 1px solid var(--glass);
+            padding: 15px 5%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--orange);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .menu-icon {
-            font-size: 30px;
+        .logo img { height: 50px; }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+
+        .time-date { text-align: right; font-weight: bold; font-size: 14px; }
+
+        .menu-btn {
+            background: var(--orange);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            color: var(--saffron);
+            font-size: 20px;
+            transition: 0.3s;
         }
+        .menu-btn:hover { background: white; color: var(--orange); }
 
-        .logo-area h2 { margin: 0; letter-spacing: 2px; font-weight: 800; }
-
-        /* Stats Section */
+        /* STATS CARDS */
         .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 20px 5%;
         }
 
-        .stat-box {
+        .stat-card {
             background: var(--glass);
-            padding: 20px;
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-card h3 { margin: 0; font-size: 12px; color: var(--orange); text-transform: uppercase; }
+        .stat-card p { margin: 5px 0 0; font-size: 22px; font-weight: bold; }
+
+        /* MAIN BUTTONS (TRANSPARENT/GLASS STYLE) */
+        .main-menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
+            padding: 20px 5%;
+        }
+
+        .glass-btn {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px 10px;
             border-radius: 15px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass);
-            animation: fadeIn 1s ease-in;
-        }
-
-        .stat-box h3 { font-size: 14px; text-transform: uppercase; color: var(--saffron); margin-bottom: 10px; }
-        .stat-box p { font-size: 28px; font-weight: bold; margin: 0; }
-
-        /* Main Buttons Grid */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .admin-btn {
-            background: var(--glass);
-            border: 1px solid var(--glass);
-            color: white;
-            padding: 30px 10px;
-            border-radius: 20px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
-            backdrop-filter: blur(15px);
-            transition: 0.4s all;
+            cursor: pointer;
+            transition: 0.4s;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            animation: slideUp 0.8s ease-out;
+            color: white;
+            text-decoration: none;
         }
 
-        .admin-btn i { font-size: 30px; }
+        .glass-btn i { font-size: 30px; color: var(--orange); }
 
-        .admin-btn:hover {
-            background: var(--saffron);
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 119, 34, 0.4);
-            border-color: var(--saffron);
+        .glass-btn:hover {
+            background: var(--orange);
+            transform: translateY(-10px);
+            border-color: white;
         }
+        .glass-btn:hover i { color: white; }
 
-        /* Alerts Widget */
-        .alerts-panel {
-            max-width: 1100px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 25px;
-            border-left: 5px solid var(--saffron);
+        .active-orange { background: var(--orange) !important; box-shadow: 0 0 20px var(--orange); }
+
+        /* ALERTS SECTION */
+        .alerts-section {
+            margin: 20px 5%;
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid var(--orange);
+            padding: 15px;
+            border-radius: 5px;
         }
-
         .alert-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between;
+            padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
         }
 
-        .alert-tag { color: var(--saffron); font-weight: bold; }
+        /* SIDE MENU OVERLAY */
+        .overlay {
+            height: 100%; width: 0; position: fixed; z-index: 2000;
+            top: 0; right: 0; background-color: rgba(0, 0, 0, 0.95);
+            overflow-x: hidden; transition: 0.5s;
+        }
+        .overlay-content { position: relative; top: 10%; width: 100%; text-align: center; }
+        .overlay a { padding: 15px; text-decoration: none; font-size: 24px; color: white; display: block; transition: 0.3s; }
+        .overlay a:hover { color: var(--orange); }
+        .closebtn { position: absolute; top: 20px; right: 45px; font-size: 40px; color: white; cursor: pointer; }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        footer { text-align: center; padding: 40px; opacity: 0.6; font-size: 12px; }
-
+        footer { text-align: center; padding: 30px; font-size: 12px; opacity: 0.6; }
     </style>
 </head>
 <body>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">B.Tech Management</a>
-        <a href="#">Diploma Portal</a>
-        <a href="#">Student Database</a>
-        <a href="#">Faculty/Employee</a>
-        <a href="#">Accounts/Finance</a>
-        <a href="#">Exam Cell</a>
-        <a href="#">Canteen Orders</a>
-        <a href="#">Security Logs</a>
-        <a href="index.html" style="color: var(--saffron); margin-top: 50px;">Logout</a>
-    </div>
-
     <header>
-        <div class="menu-icon" onclick="openNav()">&#9776;</div>
-        <div class="logo-area"><h2>APSITS ADMIN</h2></div>
-        <div id="current-time" style="font-size: 14px; font-weight: bold;"></div>
+        <div class="logo"><img src="Picsart_26-04-01_18-36-48-756.jpg" alt="APSITS Logo"></div>
+        <div class="header-right">
+            <div class="time-date">
+                <div id="clock">00:00:00</div>
+                <div id="date" style="color: var(--orange);">DD/MM/YYYY</div>
+            </div>
+            <button class="menu-btn" onclick="openNav()"><i class="fas fa-bars"></i></button>
+        </div>
     </header>
 
-    <section class="stats-container">
-        <div class="stat-box"><h3>Live Students</h3><p>1,240</p></div>
-        <div class="stat-box"><h3>Active Faculty</h3><p>86</p></div>
-        <div class="stat-box"><h3>Today's Attendance</h3><p>92%</p></div>
-        <div class="stat-box"><h3>Pending Tasks</h3><p>05</p></div>
-    </section>
-
-    <div class="grid-container">
-        <a href="btech-clg.html" class="admin-btn"><i>🎓</i><span>B.Tech</span></a>
-        <a href="#" class="admin-btn"><i>📜</i><span>Diploma</span></a>
-        <a href="adm-student.html" class="admin-btn"><i>👨‍🎓</i><span>Student</span></a>
-        <a href="adm-facemp.html" class="admin-btn"><i>💼</i><span>Faculty / Employee</span></a>
-        <a href="#" class="admin-btn"><i>💰</i><span>Accounts</span></a>
-        <a href="#" class="admin-btn"><i>📝</i><span>Exam Cell</span></a>
-        <a href="#" class="admin-btn"><i>🍔</i><span>Canteen</span></a>
-        <a href="#" class="admin-btn"><i>🛡️</i><span>Security</span></a>
+    <div class="stats-container">
+        <div class="stat-card"><h3>Live Students</h3><p>1,240</p></div>
+        <div class="stat-card"><h3>Active Faculty</h3><p>86</p></div>
+        <div class="stat-card"><h3>Attendance</h3><p>92%</p></div>
+        <div class="stat-card"><h3>Pending Tasks</h3><p>05</p></div>
     </div>
 
-    <div class="alerts-panel">
-        <h3 style="margin-top:0;">🚨 Critical System Alerts</h3>
-        <div class="alert-item">
-            <span>Server Sync with JNTUA is successful.</span>
-            <span class="alert-tag">INFO</span>
-        </div>
-        <div class="alert-item">
-            <span>Shortage of attendance in 3rd Year CSE-B.</span>
-            <span class="alert-tag">WARNING</span>
-        </div>
-        <div class="alert-item" style="border:none;">
-            <span>Security Breach Attempt Blocked - Gate 4.</span>
-            <span class="alert-tag" style="color:#ff4444;">CRITICAL</span>
-        </div>
+    <div class="main-menu-grid">
+        <a href="#" class="glass-btn"><i class="fas fa-graduation-cap"></i><span>B.Tech</span></a>
+        <a href="#" class="glass-btn"><i class="fas fa-scroll"></i><span>Diploma</span></a>
+        <a href="adm-student.html" class="glass-btn"><i class="fas fa-user-graduate"></i><span>Student</span></a>
+        <a href="adm-facemp.html" class="glass-btn"><i class="fas fa-briefcase"></i><span>Faculty</span></a>
+        <a href="#" class="glass-btn active-orange"><i class="fas fa-hand-holding-usd"></i><span>Accounts</span></a>
+        <a href="#" class="glass-btn"><i class="fas fa-edit"></i><span>Exam Cell</span></a>
+        <a href="#" class="glass-btn"><i class="fas fa-hamburger"></i><span>Canteen</span></a>
+        <a href="#" class="glass-btn"><i class="fas fa-shield-alt"></i><span>Security</span></a>
+    </div>
+
+    <div class="alerts-section">
+        <h4 style="margin-top:0;"><i class="fas fa-exclamation-triangle"></i> Critical System Alerts</h4>
+        <div class="alert-item"><span>Server Sync with JNTUA is successful.</span> <span style="color:cyan;">INFO</span></div>
+        <div class="alert-item"><span>Shortage of attendance in 3rd Year CSE-B.</span> <span style="color:yellow;">WARNING</span></div>
+        <div class="alert-item"><span>Security Breach Attempt Blocked - Gate 4.</span> <span style="color:red;">CRITICAL</span></div>
     </div>
 
     <footer>
         © 2026 APSITS FOUNDER | PRODDATUR | ALL SYSTEMS OPERATIONAL
     </footer>
 
+    <div id="sideMenu" class="overlay">
+        <span class="closebtn" onclick="closeNav()">&times;</span>
+        <div class="overlay-content">
+            <a href="#">HOME</a>
+            <a href="#">ACADEMICS</a>
+            <a href="#">ADMISSIONS 2026</a>
+            <a href="#">PLACEMENTS</a>
+            <a href="#">RESEARCH</a>
+            <a href="#">GRIEVANCE CELL</a>
+            <a href="#" style="color: var(--orange);">LOGOUT</a>
+        </div>
+    </div>
+
     <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "280px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-        }
-
-        // Clock Update
-        function updateClock() {
+        function updateTime() {
             const now = new Date();
-            document.getElementById('current-time').innerText = now.toLocaleTimeString();
+            document.getElementById('clock').innerText = now.toLocaleTimeString();
+            document.getElementById('date').innerText = now.toLocaleDateString('en-GB');
         }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
+        setInterval(updateTime, 1000);
+        updateTime();
 
+        function openNav() { document.getElementById("sideMenu").style.width = "100%"; }
+        function closeNav() { document.getElementById("sideMenu").style.width = "0%"; }
+    </script>
 </body>
 </html>
