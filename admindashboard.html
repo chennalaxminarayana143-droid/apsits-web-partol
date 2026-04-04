@@ -15,14 +15,17 @@
         }
 
         body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Segoe UI', sans-serif;
-            /* 🚩 ఇక్కడ ఇమేజ్ పేరు సరిగ్గా ఉండాలి */
-            background: url('IMG_20260330_172904.jpg') no-repeat center center fixed;
-            background-size: cover;
+              margin: 0;
+              font-family: 'Segoe
+              UI', sans-serif;
+              /*డార్క్ ఓవర్లే తీసివేసాను,ఇప్పుడు ఇమేజ్ పూర్తి తెలుపు రంగులో ఉంటుంది */
+              background:
+              url('IMG_20260330_172904.jpg')
+              no-repeat center center fixed;
+              background-size: cover;
+              color: var(--black);
+              /*Default text becomes black on white bg */
+              overflow-x: hidden;
         }
 
         /* 1. WHITE HEADER */
