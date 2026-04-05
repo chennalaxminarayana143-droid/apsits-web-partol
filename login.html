@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APSITS Portal - Login</title>
+    <link rel="stylesheet" href="https://script.google.com/macros/s/AKfycbwQDSmX4AJdEQ07VmpYbmfTHXXIK1_2xO6Y9P08lB2EdA0IW8-xExazmioWGynBRTCU/exec">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -127,6 +128,8 @@
             window.location.href = "canteen-dashboard.html";
         } else if (id.startsWith("LIB")) {
             window.location.href = "library.html";
+        } else if (id.startsWith("password")) {
+            window.location.href = "stylesheet";
         } else {
             alert("Invalid ID Number!");
         }
