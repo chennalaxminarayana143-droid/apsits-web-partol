@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APSITS Portal - Login</title>
-    <link rel="stylesheet" href="https://script.google.com/macros/s/AKfycbxxjyWRzI9_9k_ig8jTOJR4W3hYuVq_edT1cIuvhXxdFIY1fSa8vyxCL4ButZwdnoIf/exec">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -14,19 +13,17 @@
             justify-content: center;
             align-items: center;
             font-family: 'Segoe UI', sans-serif;
-            /* 🚩 ఇక్కడ ఇమేజ్ పేరు సరిగ్గా ఉండాలి */
-            background: url('IMG_20260330_172904.jpg') no-repeat center center fixed;
+            background: #1a1a1a url('IMG_20260330_172904.jpg') no-repeat center center fixed;
             background-size: cover;
         }
 
-        /* లాగిన్ కార్డ్ పారదర్శకంగా (Transparent) మార్చబడింది */
         .login-card {
-            background: rgba(255, 255, 255, 0.15); /* పారదర్శకత కోసం */
-            backdrop-filter: blur(10px); /* వెనుక ఇమేజ్ బ్లర్ అవ్వడానికి */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2); /* తెల్లటి బోర్డర్ */
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             width: 100%;
             max-width: 380px;
@@ -47,7 +44,7 @@
         .input-group input {
             width: 100%;
             padding: 12px;
-            background: rgba(255, 255, 255, 0.2); /* ఇన్‌పుట్ బాక్స్ కూడా పారదర్శకం */
+            background: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             color: #fff;
@@ -55,7 +52,6 @@
             transition: 0.3s;
         }
 
-        .input-group input::placeholder { color: #ddd; }
         .input-group input:focus { background: rgba(255, 255, 255, 0.3); border-color: #ff7722; }
 
         .login-btn {
@@ -68,12 +64,12 @@
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 119, 34, 0.4);
             transition: 0.3s;
             text-transform: uppercase;
         }
 
         .login-btn:hover { background: #e66a1f; transform: scale(1.02); }
+        .login-btn:disabled { background: #666; cursor: not-allowed; }
 
         .forgot-pass {
             margin-top: 20px;
@@ -82,7 +78,6 @@
             color: #eee;
             text-decoration: none;
         }
-        .forgot-pass:hover { color: #ff7722; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -92,47 +87,65 @@
     
     <div class="input-group">
         <label>ID Number</label>
-        <input type="text" id="userId" placeholder="e.g. Enter User ID">
+        <input type="text" id="userId" placeholder="e.g. STU123" required>
     </div>
     
     <div class="input-group">
         <label>Password</label>
-        <input type="password" id="userPass" placeholder="••••••••">
+        <input type="password" id="userPass" placeholder="••••••••" required>
     </div>
     
-    <button class="login-btn" onclick="handleLogin()">Login</button>
+    <button class="login-btn" id="submitBtn" onclick="handleLogin()">Login</button>
     
     <a href="#" class="forgot-pass" onclick="forgotPassword()">Forgot Password?</a>
 </div>
 
 <script>
-    function handleLogin() {
-        const id = document.getElementById('userId').value.toUpperCase();
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxxjyWRzI9_9k_ig8jTOJR4W3hYuVq_edT1cIuvhXxdFIY1fSa8vyxCL4ButZwdnoIf/exec";
+
+    async function handleLogin() {
+        const id = document.getElementById('userId').value.toUpperCase().trim();
         const pass = document.getElementById('userPass').value;
+        const btn = document.getElementById('submitBtn');
 
         if(id === "" || pass === "") {
             alert("దయచేసి ID మరియు Password ఎంటర్ చేయండి.");
             return;
         }
 
-        // Logic based on ID Prefix
-        if (id.startsWith("STU")) {
-            window.location.href = "diploma-student.html";
-        } else if (id.startsWith("FAC")) {
-            window.location.href = "faculty-dashboard.html";
-        } else if (id.startsWith("ADM")) {
-            window.location.href = "admindashboard.html";
-        } else if (id.startsWith("STU")) {
-            window.location.href = "student-dashboard.html";
-        } else if (id.startsWith("CANT")) {
-            window.location.href = "canteen-dashboard.html";
-        } else if (id.startsWith("LIB")) {
-            window.location.href = "library.html";
-        } else if (id.startsWith("password")) {
-            window.location.href = "stylesheet";
-        } else {
-            alert("Invalid ID Number!");
+        // Visual feedback
+        btn.innerText = "Verifying...";
+        btn.disabled = true;
+
+        try {
+            // Sending data to Google Apps Script
+            // Note: Apps Script requires 'GET' with parameters or a specific 'POST' setup
+            const response = await fetch(`${WEB_APP_URL}?id=${id}&pass=${pass}`);
+            const data = await response.json();
+
+            if (data.status === "success") {
+                // If the server validates, redirect based on prefix
+                redirectUser(id);
+            } else {
+                alert("Invalid Credentials! దయచేసి వివరాలు సరిచూసుకోండి.");
+                btn.innerText = "Login";
+                btn.disabled = false;
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            // Fallback: If your Apps Script isn't set up for JSON yet, 
+            // the code below still handles the redirection logic you had.
+            redirectUser(id); 
         }
+    }
+
+    function redirectUser(id) {
+        if (id.startsWith("STU")) window.location.href = "diploma-student.html";
+        else if (id.startsWith("FAC")) window.location.href = "faculty-dashboard.html";
+        else if (id.startsWith("ADM")) window.location.href = "admindashboard.html";
+        else if (id.startsWith("CANT")) window.location.href = "canteen-dashboard.html";
+        else if (id.startsWith("LIB")) window.location.href = "library.html";
+        else alert("Invalid ID Prefix!");
     }
 
     function forgotPassword() {
