@@ -3,209 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS STUDENT DASHBOARD</title>
+    <title>APSITS Student Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --saffron: #ff7722;
-            --dark: #1a1a1a;
-            --white: #ffffff;
-            --bg: #f8f9fa;
-        }
+        :root { --orange: #ff7722; --black: #1a1a1a; --grey: #f4f4f4; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--grey); color: #333; overflow-x: hidden; }
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg);
-            overflow-x: hidden;
-        }
-
-        /* 🎬 Opening Animation (White Background) */
-        #loader {
-            position: fixed;
-            width: 100%;
-            height: 100vh;
-            background: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: 0.8s ease-in-out;
-        }
-
-        #loader h1 {
-            color: var(--saffron);
-            font-size: 5rem;
-            font-weight: 800;
-            letter-spacing: 10px;
-            animation: dellAnimate 2s forwards;
-        }
-
-        @keyframes dellAnimate {
-            0% { transform: scale(0.5); opacity: 0; filter: blur(10px); }
-            50% { transform: scale(1.1); opacity: 1; filter: blur(0); }
-            100% { transform: scale(1); opacity: 0; visibility: hidden; }
-        }
-
-        /* Header Area */
+        /* 1. HEADER STYLING */
         header {
-            background: var(--saffron);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            position: relative;
+            background-color: var(--orange); color: var(--white);
+            padding: 10px 5%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .logo img { height: 60px; } /* మీ లోగో ఇమేజ్ */
+        .header-titles { text-align: left; }
+        .header-titles h1 { font-size: 22px; margin: 0; font-weight: 900; letter-spacing: 1px; }
+        .header-titles p { font-size: 13px; margin: 3px 0 0; opacity: 0.9; }
+        
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .time-date { font-size: 13px; font-weight: bold; text-align: right; }
+        #date { color: var(--white); opacity: 0.9; }
+        .menu-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
 
-        .menu-btn {
-            position: absolute;
-            right: 20px;
-            top: 25px;
-            font-size: 30px;
-            cursor: pointer;
-            color: white;
+        /* WELCOME MSG */
+        .welcome-msg { padding: 20px 5%; text-align: center; font-size: 16px; font-weight: bold; color: var(--black); }
+
+        /* 2. ICON GRID */
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; padding: 20px 5%; }
+        .grid-item {
+            background-color: var(--white); padding: 20px; border-radius: 12px;
+            text-align: center; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; gap: 10px;
+            text-decoration: none; color: #333;
         }
+        .grid-item i { font-size: 30px; color: var(--orange); }
+        .grid-item:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
-        .header-title { font-size: 24px; font-weight: 800; margin: 0; }
-        .dept-title { font-size: 14px; opacity: 0.9; margin-top: 5px; }
-        .wish-text { font-size: 16px; margin-top: 10px; font-weight: 600; }
-
-        /* Overlay Menu */
-        .overlay {
-            height: 100%; width: 0; position: fixed; z-index: 2000;
-            top: 0; right: 0; background-color: rgba(0,0,0, 0.95);
-            overflow-x: hidden; transition: 0.5s;
+        /* 3. QUICK STATS */
+        .stats-section { padding: 0 5% 30px; }
+        .stats-header {
+            background-color: var(--black); color: var(--white);
+            padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; font-size: 14px; margin-bottom: 20px;
         }
-        .overlay-content { position: relative; top: 5%; width: 100%; text-align: center; }
-        .overlay a { padding: 10px; text-decoration: none; font-size: 20px; color: #fff; display: block; transition: 0.3s; }
-        .overlay a:hover { color: var(--saffron); }
-        .closebtn { position: absolute; top: 20px; right: 35px; font-size: 50px; color: #fff; cursor: pointer; }
-
-        /* Menu Grid Buttons */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 20px;
-            padding: 30px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 1s ease-out 0.5s;
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .stat-card {
+            background-color: var(--white); padding: 25px 15px; border-radius: 10px;
+            text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
+        .stat-card h2 { margin: 0; font-size: 32px; font-weight: bold; color: var(--orange); }
+        .stat-card p { margin: 10px 0 0; font-size: 13px; color: #777; font-weight: 500; }
 
-        .menu-grid.show { opacity: 1; transform: translateY(0); }
-
-        .menu-card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            cursor: pointer;
-            transition: 0.3s;
-            border-bottom: 4px solid var(--saffron);
+        /* 4. NOTIFICATION */
+        .notif-card {
+            background-color: var(--white); padding: 20px; border-radius: 10px;
+            margin-top: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
+        .notif-title { color: #555; font-size: 12px; font-weight: bold; margin-bottom: 5px; }
+        .notif-title i { color: var(--orange); margin-right: 5px; }
+        .notif-desc { font-weight: bold; font-size: 14px; }
 
-        .menu-card:hover { transform: translateY(-5px); background: var(--saffron); color: white; }
-        .menu-card i { font-size: 30px; display: block; margin-bottom: 10px; }
-        .menu-card h4 { margin: 0; font-size: 14px; }
+        /* 5. FOOTER */
+        footer { text-align: center; padding: 30px; font-size: 11px; color: #aaa; background-color: #f0f0f0; margin-top: 20px; }
 
-        /* Bottom Widgets Section */
-        .status-container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 0 20px;
+        /* 6. PROFILE MODAL STYLING (The Popup) */
+        .modal {
+            display: none; position: fixed; z-index: 2000; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            justify-content: center; align-items: center;
         }
-
-        .status-header {
-            background: var(--dark);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        .modal-content {
+            background: white; padding: 30px; border-radius: 15px;
+            width: 90%; max-width: 400px; text-align: center; position: relative;
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            text-align: center;
-        }
-
-        .stat-box {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .stat-box h3 { margin: 0; color: var(--saffron); font-size: 24px; }
-        .stat-box p { margin: 5px 0 0; font-size: 12px; color: #666; font-weight: 600; }
-
-        footer {
-            background: #eee;
-            padding: 20px;
-            text-align: center;
-            font-size: 12px;
-            color: #666;
-            margin-top: 40px;
+        .modal-content img { width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--orange); object-fit: cover; margin-bottom: 20px; }
+        .modal-content h3 { color: var(--orange); margin: 0 0 10px; font-size: 20px; }
+        .modal-content p { margin: 5px 0; font-size: 14px; color: #555; }
+        .modal-content strong { color: #333; }
+        .close-modal {
+            position: absolute; top: 15px; right: 20px; font-size: 25px; color: #777; cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <div id="loader"><h1>APSITS</h1></div>
-
-    <div id="myNav" class="overlay">
-        <span class="closebtn" onclick="closeNav()">&times;</span>
-        <div class="overlay-content">
-            <a href="#" onclick="closeNav()">🏠 Student Home</a>
-            <hr style="width: 50%; margin: 10px auto; opacity: 0.2;">
-            <a href="#">👤 Profile</a>
-            <a href="#">📅 Attendance</a>
-            <a href="#">🕒 Time Table</a>
-            <a href="#">📊 Results</a>
-            <a href="#">📝 Assignments</a>
-            <a href="#">📚 Materials</a>
-            <a href="#">📢 Announcements</a>
-            <a href="#">📆 Calendar</a>
-            <a href="#">🍔 Canteen</a>
-            <a href="login.html" style="color: #ff4444; margin-top: 20px;">🚪 Logout</a>
-        </div>
-    </div>
-
     <header>
-        <span class="menu-btn" onclick="openNav()">☰</span>
-        <div class="header-title">APSITS STUDENT DASHBOARD</div>
-        <div class="dept-title">JNTUA Affiliated Engineering College</div>
-        <div class="wish-text" id="greeting">Welcome, Student!</div>
+        <div class="header-left">
+            <div class="logo"><img src="Picsart_26-04-01_18-40-01-958.jpg" alt="Logo"></div>
+            <div class="header-titles">
+                <h1>APSITS STUDENT DASHBOARD</h1>
+                <p>JNTUA Affiliated Engineering College</p>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="time-date">
+                <div id="clock">00:00:00</div>
+                <div id="date">DD/MM/YYYY</div>
+            </div>
+            <button class="menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
     </header>
 
-    <div class="menu-grid" id="menuGrid">
-        <div class="menu-card"><i>👤</i><h4>Profile</h4></div>
-        <div class="menu-card"><i>📅</i><h4>Attendance</h4></div>
-        <div class="menu-card"><i>🕒</i><h4>Time Table</h4></div>
-        <div class="menu-card"><i>📊</i><h4>Results</h4></div>
-        <div class="menu-card"><i>📝</i><h4>Assignments</h4></div>
-        <div class="menu-card"><i>📚</i><h4>Materials</h4></div>
-        <div class="menu-card"><i>📢</i><h4>Announcements</h4></div>
-        <div class="menu-card"><i>📆</i><h4>Calendar</h4></div>
-        <div class="menu-card"><i>🍔</i><h4>Canteen</h4></div>
+    <div class="welcome-msg">Hi Student, Good Afternoon!</div>
+
+    <div class="icon-grid">
+        <a href="javascript:void(0)" class="grid-item" onclick="openModal()">
+            <i class="fas fa-user-circle"></i> Profile
+        </a>
+        <a href="#" class="grid-item"><i class="fas fa-calendar-alt"></i> Attendance</a>
+        <a href="#" class="grid-item"><i class="fas fa-table"></i> Time Table</a>
+        <a href="#" class="grid-item"><i class="fas fa-list-ol"></i> Results</a>
+        <a href="#" class="grid-item"><i class="fas fa-edit"></i> Assignments</a>
+        <a href="#" class="grid-item"><i class="fas fa-book"></i> Materials</a>
+        <a href="#" class="grid-item"><i class="fas fa-bullhorn"></i> Announcements</a>
+        <a href="#" class="grid-item"><i class="fas fa-calendar-day"></i> Calendar</a>
+        <a href="#" class="grid-item"><i class="fas fa-hamburger"></i> Canteen</a>
+        <a href="#" class="grid-item"><i class="fas fa-books"></i> Library</a>
     </div>
 
-    <div class="status-container">
-        <div class="status-header">QUICK STATS & NOTIFICATIONS</div>
+    <div class="stats-section">
+        <div class="stats-header">QUICK STATS & NOTIFICATIONS</div>
         <div class="stats-grid">
-            <div class="stat-box"><h3>85%</h3><p>Attendance Avg</p></div>
-            <div class="stat-box"><h3>8.5</h3><p>Current CGPA</p></div>
-            <div class="stat-box"><h3>03</h3><p>Today's Classes</p></div>
-            <div class="stat-box"><h3>02</h3><p>Pending Assignments</p></div>
-            <div class="stat-box" style="grid-column: span 2;">
-                <p style="color:var(--saffron)">📢 New Notification</p>
-                <h4 style="margin:5px 0; font-size:14px;">Internal Exams from Next Monday</h4>
-            </div>
+            <div class="stat-card"><h2>85%</h2><p>Attendance Avg</p></div>
+            <div class="stat-card"><h2>8.5</h2><p>Current CGPA</p></div>
+            <div class="stat-card"><h2>03</h2><p>Today's Classes</p></div>
+            <div class="stat-card"><h2>02</h2><p>Pending Assignments</p></div>
+        </div>
+        <div class="notif-card">
+            <div class="notif-title"><i class="fas fa-bullhorn"></i> New Notification</div>
+            <div class="notif-desc">Internal Exams from Next Monday</div>
         </div>
     </div>
 
@@ -213,27 +139,46 @@
         © 2026 APSITS PRODDATUR | For Students, By Students
     </footer>
 
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img src="Picsart_26-04-01_18-40-01-958.jpg" alt="Student Photo"> <h3>Sai Kiran Kumar</h3> <p><strong>ID:</strong> <strong id="studentId">23AP1A0501</strong></p>
+            <p><strong>Course:</strong> <strong id="studentCourse">B.Tech - CSE</strong></p>
+            <p><strong>Year/Sem:</strong> <strong>1st Year / 2nd Sem</strong></p>
+            <p><strong>Email:</strong> <strong>sai.kiran@apsits.edu</strong></p>
+        </div>
+    </div>
+
     <script>
-        // Opening Animation Control
-        window.onload = function() {
-            setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('menuGrid').classList.add('show');
-                }, 800);
-            }, 2000);
-        };
+        // Time & Date Updates
+        function updateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
 
-        // Menu Logic
-        function openNav() { document.getElementById("myNav").style.width = "100%"; }
-        function closeNav() { document.getElementById("myNav").style.width = "0%"; }
+            document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB', timeOptions);
+            document.getElementById('date').innerText = now.toLocaleDateString('en-GB', dateOptions);
+        }
+        setInterval(updateTime, 1000);
+        updateTime(); // Initial Call
 
-        // Time-based Greeting
-        const hours = new Date().getHours();
-        let wish = hours < 12 ? "Good Morning" : hours < 16 ? "Good Afternoon" : "Good Evening";
-        document.getElementById('greeting').innerText = `Hi Student, ${wish}!`;
+        // Profile Modal Functions
+        const modal = document.getElementById("profileModal");
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal if clicks outside the box
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 </html>
-
