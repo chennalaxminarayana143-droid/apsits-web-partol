@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS - Issue/Return</title>
+    <style>
+        :root {
+            --aps-orange: #f37021;
+            --bg-gray: #f8f9fa;
+            --text-dark: #333;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+        }
+
+        /* Header Style */
+        header {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--aps-orange);
+            box-shadow: var(--shadow);
+        }
+
+        .breadcrumb { font-weight: bold; font-size: 1.1rem; }
+        .breadcrumb span { color: var(--aps-orange); }
+
+        /* Main Layout */
+        .container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            padding: 25px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Toggle Buttons */
+        .mode-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--aps-orange);
+            background: transparent;
+            color: var(--aps-orange);
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .btn.active {
+            background: var(--aps-orange);
+            color: white;
+        }
+
+        /* Form Elements */
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        /* User Profile Preview */
+        .user-preview {
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+        }
+
+        /* Table Style */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th { text-align: left; border-bottom: 2px solid var(--bg-gray); padding: 12px; color: #666; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="breadcrumb">APSITS > <span>Issue & Return</span></div>
+        <div id="clock">10:39:21 | 11/04/2026</div>
+        <div style="background: var(--aps-orange); color: white; padding: 5px 10px; border-radius: 4px;">Menu</div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="mode-toggle">
+                <button class="btn active">ISSUE</button>
+                <button class="btn">RETURN</button>
+            </div>
+
+            <div class="input-group">
+                <label>Scan Digital ID / Enter Member No.</label>
+                <input type="text" placeholder="e.g. APS-2024-001" autofocus>
+            </div>
+
+            <div class="user-preview">
+                <div class="avatar"></div>
+                <h3>John Doe</h3>
+                <p>Dept: Computer Science</p>
+                <p style="color: #d32f2f;"><strong>Fines: ₹50.00</strong></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="input-group">
+                <label>Scan Book ISBN / Barcode</label>
+                <input type="text" placeholder="Scan item to add to list...">
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Accession No.</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Data Structures & Algorithms</td>
+                        <td>BK-9902</td>
+                        <td>25/04/2026</td>
+                        <td><span class="status-badge">Valid</span></td>
+                        <td style="color: var(--aps-orange); cursor: pointer;">Remove</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 30px; text-align: right;">
+                <button class="btn active" style="padding: 15px 40px; font-size: 1.1rem;">CONFIRM TRANSACTION</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
