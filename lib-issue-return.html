@@ -3,189 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS - Issue/Return</title>
+    <title>APSITS Library - Transaction Portal</title>
     <style>
-        :root {
-            --aps-orange: #f37021;
-            --bg-gray: #f8f9fa;
-            --text-dark: #333;
-            --shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: var(--bg-gray);
-            color: var(--text-dark);
-        }
-
-        /* Header Style */
-        header {
-            background: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        :root { --aps-orange: #f37021; --bg: #f4f7f6; --text: #333; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+        
+        /* Header */
+        header { 
+            background: white; padding: 10px 25px; display: flex; 
+            justify-content: space-between; align-items: center; 
             border-bottom: 3px solid var(--aps-orange);
-            box-shadow: var(--shadow);
         }
+        .header-center { font-weight: bold; font-size: 1.2rem; }
 
-        .breadcrumb { font-weight: bold; font-size: 1.1rem; }
-        .breadcrumb span { color: var(--aps-orange); }
+        /* Main Grid */
+        .main-layout { display: grid; grid-template-columns: 320px 1fr; gap: 20px; padding: 20px; }
 
-        /* Main Layout */
-        .container {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 25px;
-            padding: 25px;
-            max-width: 1400px;
-            margin: auto;
-        }
+        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        
+        /* Search Section */
+        .search-container { display: flex; gap: 5px; margin-bottom: 20px; }
+        input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .btn-search { background: var(--aps-orange); color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
+        /* Action Buttons */
+        .action-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .btn-action { padding: 10px; border: 1px solid var(--aps-orange); background: white; color: var(--aps-orange); font-weight: bold; border-radius: 5px; cursor: pointer; }
+        .btn-action:hover { background: var(--aps-orange); color: white; }
 
-        /* Toggle Buttons */
-        .mode-toggle {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+        /* Table */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th { background: #eee; padding: 10px; text-align: left; font-size: 0.9rem; }
+        td { padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
 
-        .btn {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid var(--aps-orange);
-            background: transparent;
-            color: var(--aps-orange);
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-
-        .btn.active {
-            background: var(--aps-orange);
-            color: white;
-        }
-
-        /* Form Elements */
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        label { display: block; margin-bottom: 5px; font-size: 0.9rem; color: #666; }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        /* User Profile Preview */
-        .user-preview {
-            text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 20px;
-            padding-top: 20px;
-        }
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-            background: #eee;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-        }
-
-        /* Table Style */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th { text-align: left; border-bottom: 2px solid var(--bg-gray); padding: 12px; color: #666; }
-        td { padding: 12px; border-bottom: 1px solid #eee; }
-
-        .status-badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
+        /* Modal / Popups */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal-content { background: white; width: 500px; margin: 5% auto; padding: 25px; border-radius: 12px; position: relative; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        .btn-submit { background: #2ecc71; color: white; border: none; width: 100%; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="breadcrumb">APSITS > <span>Issue & Return</span></div>
-        <div id="clock">10:39:21 | 11/04/2026</div>
-        <div style="background: var(--aps-orange); color: white; padding: 5px 10px; border-radius: 4px;">Menu</div>
+        <div class="logo"><strong>[LOGO]</strong></div>
+        <div class="header-center">APSITS LIBRARY > ISSUE/RETURN/RENEW</div>
+        <div class="header-right">
+            <span id="dt">10:39:21 | 11/04/2026</span>
+            <button style="background:var(--aps-orange); color:white; border:none; padding:5px 10px; margin-left:15px; border-radius:4px;">Menu</button>
+        </div>
     </header>
 
-    <div class="container">
+    <div class="main-layout">
         <div class="card">
-            <div class="mode-toggle">
-                <button class="btn active">ISSUE</button>
-                <button class="btn">RETURN</button>
+            <div class="search-container">
+                <input type="text" placeholder="Search Member ID...">
+                <button class="btn-search">🔍</button>
             </div>
-
-            <div class="input-group">
-                <label>Scan Digital ID / Enter Member No.</label>
-                <input type="text" placeholder="e.g. APS-2024-001" autofocus>
-            </div>
-
-            <div class="user-preview">
-                <div class="avatar"></div>
-                <h3>John Doe</h3>
-                <p>Dept: Computer Science</p>
-                <p style="color: #d32f2f;"><strong>Fines: ₹50.00</strong></p>
+            
+            <div id="memberDetails">
+                <div style="text-align:center; margin-bottom:15px;">
+                    <div style="width:80px; height:80px; background:#ddd; border-radius:50%; margin: 0 auto 10px;"></div>
+                    <strong>John Doe</strong><br>
+                    <small>CS - 202401</small>
+                </div>
+                <p><strong>Status:</strong> Active</p>
+                <p><strong>Due Amount:</strong> <span style="color:red">₹50.00</span></p>
+                <button class="btn-action" style="width:100%" onclick="openModal('paymentModal')">PAY NOW</button>
             </div>
         </div>
 
         <div class="card">
-            <div class="input-group">
-                <label>Scan Book ISBN / Barcode</label>
-                <input type="text" placeholder="Scan item to add to list...">
+            <div class="action-buttons">
+                <button class="btn-action" onclick="openModal('issueModal')">ISSUE</button>
+                <button class="btn-action" onclick="openModal('returnModal')">RETURN</button>
+                <button class="btn-action" onclick="openModal('renewalModal')">RENEWAL</button>
             </div>
 
+            <h3>Book History & Dues</h3>
             <table>
                 <thead>
                     <tr>
-                        <th>Book Title</th>
-                        <th>Accession No.</th>
+                        <th>Book Name</th>
+                        <th>Code</th>
                         <th>Due Date</th>
+                        <th>Fine</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Data Structures & Algorithms</td>
-                        <td>BK-9902</td>
-                        <td>25/04/2026</td>
-                        <td><span class="status-badge">Valid</span></td>
-                        <td style="color: var(--aps-orange); cursor: pointer;">Remove</td>
+                        <td>Data Structures</td>
+                        <td>DS-01</td>
+                        <td>20/04/2026</td>
+                        <td>₹0</td>
+                        <td>Issued</td>
                     </tr>
                 </tbody>
             </table>
-
-            <div style="margin-top: 30px; text-align: right;">
-                <button class="btn active" style="padding: 15px 40px; font-size: 1.1rem;">CONFIRM TRANSACTION</button>
-            </div>
         </div>
     </div>
 
+    <div id="issueModal" class="modal">
+        <div class="modal-content">
+            <h3>Issue Book</h3>
+            <div class="form-group"><label>Member ID</label><input type="text" value="APS-2024-001" readonly></div>
+            <div class="form-group"><label>Book Code</label><input type="text" placeholder="Scan or Enter Code"></div>
+            <div class="form-group"><label>Book Name</label><input type="text"></div>
+            <div class="form-group"><label>Author</label><input type="text"></div>
+            <div class="form-group"><label>Authorised By</label><input type="text" value="Admin_Librarian"></div>
+            <button class="btn-submit" onclick="closeModal('issueModal')">CONFIRM ISSUE</button>
+        </div>
+    </div>
+
+    <div id="returnModal" class="modal">
+        <div class="modal-content">
+            <h3>Return Book</h3>
+            <div class="form-group"><label>Condition</label>
+                <select>
+                    <option>OK</option>
+                    <option>NG (Not Good)</option>
+                    <option>Missing</option>
+                    <option>Return Delay</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Raise Fine (₹)</label><input type="number" value="0"></div>
+            <div class="form-group"><label>Description</label><textarea rows="2"></textarea></div>
+            <div class="form-group"><label>Authorised By</label><input type="text"></div>
+            <button class="btn-submit" onclick="closeModal('returnModal')">CONFIRM RETURN</button>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <h3>Choose Payment Method</h3>
+            <button class="btn-action" style="width:100%; margin-bottom:10px;" onclick="showPaymentForm('cash')">CASH</button>
+            <button class="btn-action" style="width:100%;" onclick="showPaymentForm('online')">ONLINE (QR)</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        
+        function showPaymentForm(type) {
+            closeModal('paymentModal');
+            if(type === 'cash') {
+                alert('Showing Cash Form: Amount, Auto-Date, Librarian Auth -> Receipt View');
+            } else {
+                alert('Showing QR Code: UTR Entry, Amount, Librarian Auth -> Receipt View');
+            }
+        }
+    </script>
 </body>
 </html>
-
