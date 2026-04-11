@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS LIBRARY - STOCK AUDIT </title>
+    <style>
+        :root {
+            --primary-orange: #f37021;
+            --bg-light: #f8f9fa;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary-orange);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
+            color: var(--primary-orange);
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .header-title {
+            font-family: serif;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Audit Page Layout */
+        .container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .stat-card h3 {
+            color: var(--primary-orange);
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-card p {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: #555;
+        }
+
+        /* Table Styles */
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            border-bottom: 2px solid var(--bg-light);
+            padding: 15px;
+            text-align: left;
+            color: var(--primary-orange);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .status-found { color: green; font-weight: bold; }
+        .status-missing { color: red; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-section">
+        <div class="logo-text">APS</div>
+    </div>
+    <div class="header-title">APSITS LIBRARY - STOCK AUDIT</div>
+    <div style="text-align: right; font-size: 12px;">
+        10:45:10<br>11/04/2026
+    </div>
+</header>
+
+<div class="container">
+    <h2 style="border-left: 5px solid var(--primary-orange); padding-left: 15px;">Stock Audit (స్టాక్ ఆడిట్)</h2>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Books</h3>
+            <p>12,450</p>
+        </div>
+        <div class="stat-card">
+            <h3>Verified</h3>
+            <p>8,200</p>
+        </div>
+        <div class="stat-card">
+            <h3>Missing</h3>
+            <p style="color: red;">45</p>
+        </div>
+        <div class="stat-card">
+            <h3>Remaining</h3>
+            <p>4,205</p>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn">Start New Scan</button>
+        <button class="btn btn-secondary">Generate PDF Report</button>
+        <input type="text" placeholder="Scan Barcode / Enter ID..." style="padding: 10px; width: 300px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>Title (పుస్తకం పేరు)</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BK-101</td>
+                    <td>Telugu Sahityam</td>
+                    <td>Literature</td>
+                    <td class="status-found">Found ✅</td>
+                </tr>
+                <tr>
+                    <td>BK-102</td>
+                    <td>Operating Systems</td>
+                    <td>Computer Science</td>
+                    <td class="status-missing">Missing ❌</td>
+                </tr>
+                <tr>
+                    <td>BK-103</td>
+                    <td>Data Structures</td>
+                    <td>Computer Science</td>
+                    <td class="status-found">Found ✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+
