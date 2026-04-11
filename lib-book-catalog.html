@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APSITS Library - Book Catalog</title>
+    <style>
+        :root {
+            --primary-orange: #f37021;
+            --soft-white: #f8f9fa;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--soft-white);
+        }
+
+        /* Header Styles */
+        header {
+            background: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-orange);
+            box-shadow: var(--shadow);
+        }
+
+        .logo-section img { height: 50px; }
+        .title-section h2 { color: #333; margin: 0; font-size: 1.2rem; }
+        .info-section { text-align: right; font-size: 0.9rem; }
+        .menu-btn { background: var(--primary-orange); color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; margin-left: 15px; }
+
+        /* Stats Section */
+        .stats-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px 30px;
+            justify-content: center;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            width: 200px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card h3 { color: var(--primary-orange); margin: 0; font-size: 0.9rem; }
+        .stat-card p { font-size: 1.8rem; font-weight: bold; margin: 10px 0 0; }
+
+        /* Controls */
+        .controls {
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #searchBar {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .add-btn { background: var(--primary-orange); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+
+        /* Table Styles */
+        .sheet-container { padding: 20px 30px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th { background: var(--primary-orange); color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+        .delete-btn { color: red; cursor: pointer; border: none; background: none; font-weight: bold; }
+
+        /* Popup Form */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center; align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            position: relative;
+        }
+
+        .modal-content input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .submit-btn { width: 100%; background: var(--primary-orange); color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-section">
+        <img src="https://via.placeholder.com/100x50?text=APS" alt="APSITS Logo">
+    </div>
+    <div class="title-section">
+        <h2>APSITS LIBRARY > BOOK CATALOG</h2>
+    </div>
+    <div class="info-section">
+        <div id="currentTime"></div>
+        <button class="menu-btn">☰ PARTICULARS</button>
+    </div>
+</header>
+
+<div class="stats-container">
+    <div class="stat-card">
+        <h3>TOTAL BOOKS</h3>
+        <p id="totalCount">0</p>
+    </div>
+    <div class="stat-card">
+        <h3>TODAY BOOKS</h3>
+        <p id="todayCount">0</p>
+    </div>
+</div>
+
+<div class="controls">
+    <input type="text" id="searchBar" onkeyup="searchBooks()" placeholder="Search (Code/Name/Author)...">
+    <button class="add-btn" onclick="openModal()">+ Add New Book</button>
+</div>
+
+<div class="sheet-container">
+    <table id="bookTable">
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Rack No</th>
+                <th>Book Code</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="bookList">
+            </tbody>
+    </table>
+</div>
+
+<div class="modal" id="bookModal">
+    <div class="modal-content">
+        <h3 style="color: var(--primary-orange);">Add New Book Details</h3>
+        <input type="text" id="rackNo" placeholder="Rack No.">
+        <input type="text" id="bookCode" placeholder="Book Code">
+        <input type="text" id="bookName" placeholder="Book Name">
+        <input type="text" id="authorName" placeholder="Author Name">
+        <input type="text" id="publisher" placeholder="Publisher">
+        <button class="submit-btn" onclick="saveBook()">Save to Catalog</button>
+        <button style="background: #ccc;" class="submit-btn" onclick="closeModal()">Cancel</button>
+    </div>
+</div>
+
+<script>
+    let books = [];
+
+    // Date and Time Update
+    function updateTime() {
+        const now = new Date();
+        document.getElementById('currentTime').innerText = now.toLocaleString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Modal Controls
+    function openModal() { document.getElementById('bookModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('bookModal').style.display = 'none'; }
+
+    // Save Book Logic
+    function saveBook() {
+        const book = {
+            id: Date.now(),
+            rack: document.getElementById('rackNo').value,
+            code: document.getElementById('bookCode').value,
+            name: document.getElementById('bookName').value,
+            author: document.getElementById('authorName').value,
+            publisher: document.getElementById('publisher').value,
+            dateAdded: new Date().toLocaleDateString()
+        };
+
+        if(book.code && book.name) {
+            books.push(book);
+            renderTable();
+            closeModal();
+            clearForm();
+        } else {
+            alert("Please fill Book Code and Name");
+        }
+    }
+
+    function clearForm() {
+        document.getElementById('rackNo').value = '';
+        document.getElementById('bookCode').value = '';
+        document.getElementById('bookName').value = '';
+        document.getElementById('authorName').value = '';
+        document.getElementById('publisher').value = '';
+    }
+
+    // Display Data
+    function renderTable(data = books) {
+        const list = document.getElementById('bookList');
+        list.innerHTML = '';
+        
+        data.forEach((book, index) => {
+            const row = `<tr>
+                <td>${index + 1}</td>
+                <td>${book.rack}</td>
+                <td>${book.code}</td>
+                <td>${book.name}</td>
+                <td>${book.author}</td>
+                <td><button class="delete-btn" onclick="deleteBook(${book.id})">Delete</button></td>
+            </tr>`;
+            list.innerHTML += row;
+        });
+
+        document.getElementById('totalCount').innerText = books.length;
+        const today = new Date().toLocaleDateString();
+        document.getElementById('todayCount').innerText = books.filter(b => b.dateAdded === today).length;
+    }
+
+    // Delete Logic
+    function deleteBook(id) {
+        if(confirm("Are you sure to delete this book?")) {
+            books = books.filter(b => b.id !== id);
+            renderTable();
+        }
+    }
+
+    // Search Logic
+    function searchBooks() {
+        const query = document.getElementById('searchBar').value.toLowerCase();
+        const filtered = books.filter(b => 
+            b.code.toLowerCase().includes(query) || 
+            b.name.toLowerCase().includes(query) || 
+            b.author.toLowerCase().includes(query)
+        );
+        renderTable(filtered);
+    }
+</script>
+
+</body>
+</html>
+
