@@ -1,162 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="te">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APSITS Library - Transaction Portal</title>
+    <title>APSITS Library Management</title>
     <style>
-        :root { --aps-orange: #f37021; --bg: #f4f7f6; --text: #333; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-        
-        /* Header */
-        header { 
-            background: white; padding: 10px 25px; display: flex; 
-            justify-content: space-between; align-items: center; 
-            border-bottom: 3px solid var(--aps-orange);
+        * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f4f7f6; color: #333; }
+
+        /* Header Styles */
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        .header-center { font-weight: bold; font-size: 1.2rem; }
+        .header-center { text-align: center; flex-grow: 1; }
+        .header-right { text-align: right; font-size: 0.9em; }
 
-        /* Main Grid */
-        .main-layout { display: grid; grid-template-columns: 320px 1fr; gap: 20px; padding: 20px; }
+        /* Layout Container */
+        .main-container { display: flex; padding: 20px; gap: 20px; height: calc(100vh - 150px); }
 
-        .card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        /* Left Sidebar Box */
+        .sidebar {
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .action-btns { display: flex; gap: 5px; margin-bottom: 15px; }
+        .action-btns button { flex: 1; padding: 10px 5px; cursor: pointer; border: none; border-radius: 4px; background: #00796b; color: white; font-weight: bold; font-size: 12px;}
         
-        /* Search Section */
-        .search-container { display: flex; gap: 5px; margin-bottom: 20px; }
-        input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-        .btn-search { background: var(--aps-orange); color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
+        .search-section { margin-top: 15px; border-top: 1px dashed #ccc; pt: 10px;}
+        .search-bar { display: flex; margin: 10px 0; }
+        .search-bar input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px 0 0 4px; }
+        .search-bar button { padding: 8px; background: #333; color: white; border: none; border-radius: 0 4px 4px 0; cursor: pointer; }
 
-        /* Action Buttons */
-        .action-buttons { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .btn-action { padding: 10px; border: 1px solid var(--aps-orange); background: white; color: var(--aps-orange); font-weight: bold; border-radius: 5px; cursor: pointer; }
-        .btn-action:hover { background: var(--aps-orange); color: white; }
+        .member-details { margin-top: 15px; text-align: center; }
+        .member-photo { width: 100px; height: 100px; background: #eee; border-radius: 50%; margin: 0 auto 10px; border: 2px solid #00796b; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .member-info p { margin: 5px 0; text-align: left; font-size: 14px; border-bottom: 1px solid #f9f9f9; padding-bottom: 2px;}
 
-        /* Table */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th { background: #eee; padding: 10px; text-align: left; font-size: 0.9rem; }
-        td { padding: 10px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        /* Right Content Box */
+        .content-area {
+            flex-grow: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+            overflow-y: auto;
+        }
 
-        /* Modal / Popups */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
-        .modal-content { background: white; width: 500px; margin: 5% auto; padding: 25px; border-radius: 12px; position: relative; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-weight: bold; font-size: 0.85rem; margin-bottom: 4px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        
-        .btn-submit { background: #2ecc71; color: white; border: none; width: 100%; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; margin-top: 10px; }
+        /* Form Styling */
+        .form-container { display: none; }
+        .form-active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .form-group { display: flex; flex-direction: column; }
+        label { font-weight: bold; font-size: 13px; margin-bottom: 5px; }
+        input, select, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .submit-btn { margin-top: 20px; padding: 10px 20px; background: #2e7d32; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;}
+
+        /* Data Sheet Table */
+        .data-sheet { margin: 0 20px 20px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+
+        .qr-placeholder { width: 150px; height: 150px; background: #ccc; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; border: 1px solid #999; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo"><strong>[LOGO]</strong></div>
-        <div class="header-center">APSITS LIBRARY > ISSUE/RETURN/RENEW</div>
-        <div class="header-right">
-            <span id="dt">10:39:21 | 11/04/2026</span>
-            <button style="background:var(--aps-orange); color:white; border:none; padding:5px 10px; margin-left:15px; border-radius:4px;">Menu</button>
-        </div>
-    </header>
+<header>
+    <div class="logo"><strong>[LOGO]</strong></div>
+    <div class="header-center">
+        <h2>APSITS LIBRARY > ISSUE/RETURN</h2>
+    </div>
+    <div class="header-right">
+        <div id="date-time"></div>
+        <button style="background:none; border:1px solid white; color:white; padding:2px 8px; cursor:pointer; margin-top:5px;">Menu ☰</button>
+    </div>
+</header>
 
-    <div class="main-layout">
-        <div class="card">
-            <div class="search-container">
-                <input type="text" placeholder="Search Member ID...">
-                <button class="btn-search">🔍</button>
+<div class="main-container">
+    <div class="sidebar">
+        <div class="action-btns">
+            <button onclick="showForm('issue')">ISSUE</button>
+            <button onclick="showForm('return')">RETURN</button>
+            <button onclick="showForm('renew')">RENEW</button>
+        </div>
+        
+        <div class="search-section">
+            <div class="search-bar">
+                <input type="text" placeholder="Enter Member ID...">
+                <button onclick="searchMember()">🔍</button>
             </div>
-            
-            <div id="memberDetails">
-                <div style="text-align:center; margin-bottom:15px;">
-                    <div style="width:80px; height:80px; background:#ddd; border-radius:50%; margin: 0 auto 10px;"></div>
-                    <strong>John Doe</strong><br>
-                    <small>CS - 202401</small>
+            <div class="member-details" id="member-profile">
+                <div class="member-photo">Photo</div>
+                <div class="member-info">
+                    <p><strong>ID:</strong> <span id="m-id">-</span></p>
+                    <p><strong>Name:</strong> <span id="m-name">-</span></p>
+                    <p><strong>College:</strong> <span id="m-coll">-</span></p>
+                    <p><strong>Dept:</strong> <span id="m-dept">-</span></p>
                 </div>
-                <p><strong>Status:</strong> Active</p>
-                <p><strong>Due Amount:</strong> <span style="color:red">₹50.00</span></p>
-                <button class="btn-action" style="width:100%" onclick="openModal('paymentModal')">PAY NOW</button>
             </div>
         </div>
+    </div>
 
-        <div class="card">
-            <div class="action-buttons">
-                <button class="btn-action" onclick="openModal('issueModal')">ISSUE</button>
-                <button class="btn-action" onclick="openModal('returnModal')">RETURN</button>
-                <button class="btn-action" onclick="openModal('renewalModal')">RENEWAL</button>
-            </div>
-
-            <h3>Book History & Dues</h3>
+    <div class="content-area" id="main-content">
+        <div id="history-view" class="form-active">
+            <h3>Member History & Dues</h3>
             <table>
                 <thead>
-                    <tr>
-                        <th>Book Name</th>
-                        <th>Code</th>
-                        <th>Due Date</th>
-                        <th>Fine</th>
-                        <th>Status</th>
-                    </tr>
+                    <tr><th>Book Name</th><th>Code</th><th>Due Date</th><th>Status</th></tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Data Structures</td>
-                        <td>DS-01</td>
-                        <td>20/04/2026</td>
-                        <td>₹0</td>
-                        <td>Issued</td>
-                    </tr>
+                    <tr><td colspan="4" style="text-align:center;">Search a member to see details</td></tr>
                 </tbody>
             </table>
+            <button class="submit-btn" style="background:#d32f2f" onclick="showForm('pay')">PAY NOW</button>
         </div>
-    </div>
 
-    <div id="issueModal" class="modal">
-        <div class="modal-content">
-            <h3>Issue Book</h3>
-            <div class="form-group"><label>Member ID</label><input type="text" value="APS-2024-001" readonly></div>
-            <div class="form-group"><label>Book Code</label><input type="text" placeholder="Scan or Enter Code"></div>
-            <div class="form-group"><label>Book Name</label><input type="text"></div>
-            <div class="form-group"><label>Author</label><input type="text"></div>
-            <div class="form-group"><label>Authorised By</label><input type="text" value="Admin_Librarian"></div>
-            <button class="btn-submit" onclick="closeModal('issueModal')">CONFIRM ISSUE</button>
-        </div>
-    </div>
-
-    <div id="returnModal" class="modal">
-        <div class="modal-content">
-            <h3>Return Book</h3>
-            <div class="form-group"><label>Condition</label>
-                <select>
-                    <option>OK</option>
-                    <option>NG (Not Good)</option>
-                    <option>Missing</option>
-                    <option>Return Delay</option>
-                </select>
+        <div id="issue-form" class="form-container">
+            <h3>Book Issue Form</h3>
+            <div class="form-grid">
+                <div class="form-group"><label>Member ID</label><input type="text"></div>
+                <div class="form-group"><label>Name</label><input type="text"></div>
+                <div class="form-group"><label>Book Code</label><input type="text"></div>
+                <div class="form-group"><label>Book Name</label><input type="text"></div>
+                <div class="form-group"><label>Author</label><input type="text"></div>
+                <div class="form-group"><label>Authorised By</label><input type="text"></div>
             </div>
-            <div class="form-group"><label>Raise Fine (₹)</label><input type="number" value="0"></div>
-            <div class="form-group"><label>Description</label><textarea rows="2"></textarea></div>
-            <div class="form-group"><label>Authorised By</label><input type="text"></div>
-            <button class="btn-submit" onclick="closeModal('returnModal')">CONFIRM RETURN</button>
+            <button class="submit-btn">Submit Issue</button>
+        </div>
+
+        <div id="return-form" class="form-container">
+            <h3>Book Return Form</h3>
+            <div class="form-grid">
+                <div class="form-group"><label>Member ID</label><input type="text"></div>
+                <div class="form-group"><label>Book Code</label><input type="text"></div>
+                <div class="form-group"><label>Condition</label>
+                    <select><option>OK</option><option>NG</option><option>Missing</option><option>Return Delay</option></select>
+                </div>
+                <div class="form-group"><label>Raise Fine</label><input type="number" placeholder="₹"></div>
+                <div class="form-group"><label>Description</label><textarea rows="2"></textarea></div>
+                <div class="form-group"><label>Authorised By</label><input type="text"></div>
+            </div>
+            <button class="submit-btn">Confirm Return</button>
+        </div>
+
+        <div id="renew-form" class="form-container">
+            <h3>Book Renewal Form</h3>
+            <div class="form-grid">
+                <div class="form-group"><label>Member ID</label><input type="text"></div>
+                <div class="form-group"><label>Renew Fees</label><input type="text" value="₹10" readonly></div>
+                <div class="form-group"><label>Issued Date</label><input type="date"></div>
+                <div class="form-group"><label>Return Date</label><input type="date"></div>
+                <div class="form-group"><label>Authorised By</label><input type="text"></div>
+            </div>
+            <button class="submit-btn">Submit Renewal & Print Receipt</button>
+        </div>
+
+        <div id="pay-form" class="form-container">
+            <h3>Online Payment</h3>
+            <div class="qr-placeholder">QR Code Scan</div>
+            <div class="form-grid">
+                <div class="form-group"><label>UTR Number</label><input type="text"></div>
+                <div class="form-group"><label>Member ID</label><input type="text"></div>
+                <div class="form-group"><label>Amount</label><input type="text"></div>
+                <div class="form-group"><label>Authorised By</label><input type="text"></div>
+            </div>
+            <button class="submit-btn">Confirm Payment & Share</button>
         </div>
     </div>
+</div>
 
-    <div id="paymentModal" class="modal">
-        <div class="modal-content">
-            <h3>Choose Payment Method</h3>
-            <button class="btn-action" style="width:100%; margin-bottom:10px;" onclick="showPaymentForm('cash')">CASH</button>
-            <button class="btn-action" style="width:100%;" onclick="showPaymentForm('online')">ONLINE (QR)</button>
-        </div>
-    </div>
+<div class="data-sheet">
+    <h4>Recent Transactions Sheet</h4>
+    <table>
+        <tr><th>Type</th><th>Member Name</th><th>Book Code</th><th>Date</th><th>Status</th><th>Authorised By</th></tr>
+        <tr><td>Issue</td><td>Suresh Kumar</td><td>B102</td><td>11-04-2026</td><td>Active</td><td>Admin</td></tr>
+    </table>
+</div>
 
-    <script>
-        function openModal(id) { document.getElementById(id).style.display = 'block'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        
-        function showPaymentForm(type) {
-            closeModal('paymentModal');
-            if(type === 'cash') {
-                alert('Showing Cash Form: Amount, Auto-Date, Librarian Auth -> Receipt View');
-            } else {
-                alert('Showing QR Code: UTR Entry, Amount, Librarian Auth -> Receipt View');
-            }
-        }
-    </script>
+<script>
+    // Real-time Clock
+    function updateTime() {
+        const now = new Date();
+        document.getElementById('date-time').innerText = now.toLocaleString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // Toggle Forms
+    function showForm(type) {
+        // Hide all forms
+        document.querySelectorAll('.form-container, #history-view').forEach(el => {
+            el.classList.remove('form-active');
+            el.style.display = 'none';
+        });
+
+        // Show selected form
+        const target = document.getElementById(type + '-form') || document.getElementById('history-view');
+        target.style.display = 'block';
+        setTimeout(() => target.classList.add('form-active'), 10);
+    }
+
+    // Dummy Search Function
+    function searchMember() {
+        document.getElementById('m-id').innerText = "APS202601";
+        document.getElementById('m-name').innerText = "Ramesh Babu";
+        document.getElementById('m-coll').innerText = "APSITS";
+        document.getElementById('m-dept').innerText = "Computer Science";
+        showForm('history'); // Show history view on search
+    }
+</script>
+
 </body>
 </html>
